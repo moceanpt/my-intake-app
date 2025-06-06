@@ -1,0 +1,82 @@
+[
+  {
+    "id": "5386acb2-4f49-40d4-9b57-cc9d877f1684",
+    "submittedAt": "2025-06-05T13:28:16.596Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "diab": false,
+      "auto": false,
+      "cancer": false,
+      "surgery": "",
+      "joint": "",
+      "implant": false,
+      "fracture": "",
+      "preg": false
+    },
+    "hc": {
+      "digestive": [
+        "__clear"
+      ],
+      "sleep": [],
+      "circ": [
+        "__clear"
+      ],
+      "cog": [],
+      "energy": []
+    },
+    "hcNotes": {
+      "digestive": "",
+      "sleep": "",
+      "circ": "",
+      "cog": "",
+      "energy": ""
+    },
+    "hcOpen": {
+      "digestive": true,
+      "sleep": false,
+      "circ": true,
+      "cog": false,
+      "energy": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "len": "<20",
+      "types": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "unwind": [],
+      "water": "",
+      "caf": "0",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "approach": [],
+      "stressEat": "same",
+      "supp": ""
+    }
+  }
+]

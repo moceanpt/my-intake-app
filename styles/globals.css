@@ -1,0 +1,52 @@
+/* -------------------- Tailwind directives -------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------- Global tweaks -------------------------- */
+@layer base {
+  body {
+    /* soft gray page background + legible default text colour */
+    @apply bg-gray-50 text-slate-800 font-sans antialiased;
+  }
+}
+
+/* make an always-available “chip-active” helper */
+@layer components {
+  .chip-active {
+    @apply bg-blue-600 text-white border-blue-600;
+  }
+}
+
+/* Form-control polish */
+input,
+select,
+textarea {
+  @apply border border-slate-300 rounded py-1 px-2 text-sm;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-blue-500/40 border-blue-500;
+}
+
+/* Generic button hover / disabled */
+button:hover {
+  filter: brightness(1.05);
+}
+button:disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+
+/* Make sure chip buttons keep their Tailwind colours intact */
+button.bg-blue-600 {
+  @apply text-white shadow-none; /* keep solid blue on hover */
+}
+
+/* Allow any Tailwind gap / margin utilities on chips to work */
+button[class*="gap-"],
+button[class*="mb-"],
+button[class*="space-y-"] {
+  margin: revert !important;
+}
