@@ -1,0 +1,88 @@
+// ----------  Datasource & Codegen  ----------
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ----------  Enums & Look-ups  ----------
+enum RiskLevel {
+  safe
+  caution
+  review
+}
+
+// ----------  Core models  ----------
+model IntakeSubmission {
+  submissionId      String       @id @default(uuid())
+  clientId          String
+  submittedAt       DateTime     @default(now())
+
+  // JSON blobs for flex fields
+  goals             Json         // string[]
+  healthScores      Json         // { DIG: Int, ... }
+  lifestyle         Json
+  radarData         Json
+  smartPrompts      Json?
+  lifestyleSummary  String?
+
+  riskLevel         RiskLevel    @default(safe)
+
+  surgeries         Surgery[]
+  implants          Implant[]
+  symptoms          Symptom[]
+
+  @@index([clientId])
+}
+
+model Surgery {
+  id            Int              @id @default(autoincrement())
+  submission    IntakeSubmission @relation(fields:[submissionId], references:[submissionId])
+  submissionId  String
+  year          Int
+  bodyRegion    String
+  notes         String?
+}
+
+model Implant {
+  id            Int              @id @default(autoincrement())
+  submission    IntakeSubmission @relation(fields:[submissionId], references:[submissionId])
+  submissionId  String
+  implantCode   String
+  year          Int
+  side          String?
+}
+
+model Symptom {
+  id            Int              @id @default(autoincrement())
+  submission    IntakeSubmission @relation(fields:[submissionId], references:[submissionId])
+  submissionId  String
+  categoryCode  String
+  chipCode      String
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model IntakeSubmission {
+  id               String   @id @default(uuid())
+  clientId         String
+  submittedAt      DateTime @default(now())
+
+  symptomChips     Json     // { MUS:[..], ORG:[..] }
+  lifestyleAnswers Json
+  stressScores     Json
+  supportScores    Json
+  pdfUrl           String?
+
+  @@index([clientId])
+}

@@ -5,10 +5,10 @@ import Progress      from '../components/ui/Progress';
 /* step screens */
 import ReasonsStep     from '../components/steps/ReasonsStep';
 import SnapshotStep    from '../components/steps/SnapshotStep';
-import DiscomfortStep  from '../components/steps/DiscomfortStep';
 import HistoryStep     from '../components/steps/HistoryStep';
 import HealthCheckStep from '../components/steps/HealthCheckStep';
 import LifestyleStep   from '../components/steps/LifestyleStep';
+import ResultSheet from '../components/ui/ResultSheet'
 
 export default function Intake() {
   /* ---------- full form state ---------- */
@@ -44,9 +44,16 @@ export default function Intake() {
                   
                     notes: '', none: false,
                   },
-    hc:       { digestive:[], sleep:[], circ:[], cog:[], energy:[] },
-    hcNotes:  { digestive:'', sleep:'', circ:'', cog:'', energy:'' },
-    hcOpen:   { digestive:false, sleep:false, circ:false, cog:false, energy:false },
+                  hc: {
+                    msk:  [],         // Musculoskeletal
+                    org:  [],         // Organ
+                    circ: [],         // Circulatory
+                    ene:  [],         // Energy & Emotional
+                    art:  [],         // Articular joints
+                    nerv: [],         // Nervous
+                  },
+                  hcNotes:  { msk:'', org:'', circ:'', ene:'', art:'', nerv:'' },
+                  hcOpen:   { msk:false, org:false, circ:false, ene:false, art:false, nerv:false },
     life: {
       /* 1 ─ Move */
       moveDays:   '0-1',
@@ -54,6 +61,7 @@ export default function Intake() {
       moveTypes:  [],
       steps:      '',
       moveBarrier:'',
+      supplements: [], 
   
       /* 2 ─ Work & rest */
       work:       'desk',
@@ -92,54 +100,109 @@ export default function Intake() {
   
   });
 
-  /* ---------- light-weight helpers ---------- */
-  const setVal  = (path, v) => setData(p => {
-    const draft = structuredClone(p);
-    let cur = draft;
+  /* helpers ------------------------------------------------ */
+const setVal = (path, v) =>
+  setData(prev => {
+    const copy = structuredClone(prev);
+    let cur = copy;
     path.slice(0, -1).forEach(k => (cur = cur[k]));
     cur[path.at(-1)] = typeof v === 'function' ? v(cur[path.at(-1)]) : v;
-    return draft;
+    return copy;
   });
-  const toggle  = (path, v)   => setVal(path, prev => {
-    const s = new Set(prev);
-    s.has(v) ? s.delete(v) : s.add(v);
-    return [...s];
-  });
+
+const toggle = (path, v) => setVal(path, prev => {
+  const s = new Set(prev);
+  s.has(v) ? s.delete(v) : s.add(v);
+  return [...s];
+});
 
   /* ---------- step array ---------- */
   const steps = [
-    <ReasonsStep     key={0} data={data} set={setData} />,
-    <SnapshotStep    key={1} data={data} setVal={setVal} />,
-    <DiscomfortStep  key={2} data={data} setVal={setVal} />,
-    <HistoryStep     key={3} data={data} setVal={setVal} />,
-    <HealthCheckStep key={4} data={data} setVal={setVal} toggle={toggle} />,
-    <LifestyleStep   key={5} data={data} setVal={setVal} toggle={toggle} />,
+    <ReasonsStep     key="0" data={data} set={setData} setVal={setVal} />,
+    <SnapshotStep    key="1" data={data} setVal={setVal} />,
+    <HistoryStep     key="2" data={data} setVal={setVal} />,
+    <HealthCheckStep key="3" data={data} setVal={setVal} toggle={toggle} />,
+    <LifestyleStep   key="4" data={data} setVal={setVal} toggle={toggle} />,
   ];
-  const [step, setStep] = useState(0);
+  const [step,   setStep]   = useState(0);
+  const [busy,   setBusy]   = useState(false);
+  const [result, setResult] = useState(null); 
 
-  /* ---------- render ---------- */
+
+  /* ------------------------------------------------------ */
+/* SUBMIT HANDLER – keep the closing brace right here ⬇︎  */
+/* ------------------------------------------------------ */
+const submit = async () => {
+  setBusy(true);
+  try {
+    // 1) save
+    const save = await fetch('/api/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const { id } = await save.json();
+
+    // 2) score
+    const score = await fetch('/api/score', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hc: data.hc, life: data.life }),
+    });
+    const payload = await score.json();          // { stress, support, focus }
+    setResult(payload);                          // show result screen
+  } catch (err) {
+    console.error(err);
+    alert('Sorry, please try again.');
+  } finally {
+    setBusy(false);
+  }
+};   
+
+/* ──────────────── RESULT VIEW ──────────────── */
+if (result) {
   return (
     <main className="p-6 max-w-xl mx-auto">
-      <Head><title>MOCEAN Intake</title></Head>
-
-      <Progress step={step} total={steps.length} />
-      {steps[step]}
-
-      <div className="flex justify-between mt-6">
-        {step > 0 && (
-          <button className="px-4 py-2 bg-gray-200 rounded"
-                  onClick={() => setStep(s => s - 1)}>Back</button>
-        )}
-        {step < steps.length - 1 ? (
-          <button className="px-4 py-2 bg-blue-600 text-white rounded"
-                  onClick={() => setStep(s => s + 1)}>Next</button>
-        ) : (
-          <button className="px-4 py-2 bg-green-600 text-white rounded"
-                  onClick={() => alert(JSON.stringify(data, null, 2))}>
-            Submit
-          </button>
-        )}
-      </div>
+      <ResultSheet result={result} />
     </main>
   );
+}
+
+/* ──────────────── WIZARD VIEW ──────────────── */
+return (
+  <main className="p-6 max-w-xl mx-auto">
+    <Head><title>MOCEAN Intake</title></Head>
+
+    <Progress step={step} total={steps.length} />
+    {steps[step]}
+
+    <div className="flex justify-between mt-6">
+      {step > 0 && (
+        <button
+          className="px-4 py-2 bg-gray-200 rounded"
+          onClick={() => setStep(s => s - 1)}
+        >
+          Back
+        </button>
+      )}
+
+      {step < steps.length - 1 ? (
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded"
+          onClick={() => setStep(s => s + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        <button
+          className="px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50"
+          onClick={submit}
+          disabled={busy}
+        >
+          {busy ? 'Submitting…' : 'Submit'}
+        </button>
+      )}
+    </div>
+  </main>
+);
 }

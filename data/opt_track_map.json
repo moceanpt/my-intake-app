@@ -1,0 +1,8 @@
+{
+    "msk": { "primary": "Physical Optimization", "booster": "MOCEAN Therapy" },
+    "org": { "primary": "Gut Optimization",      "booster": "Lymphatic Drainage" },
+    "circ":{ "primary": "Circulation Optimization" },
+    "ene": { "primary": "Energy Optimization",   "booster": "Infrared Sauna" },
+    "art": { "primary": "Physical Optimization" },
+    "nerv":{ "primary": "Brain Optimization",    "booster": "Stress Optimization" }
+  }

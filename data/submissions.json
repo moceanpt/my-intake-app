@@ -78,5 +78,4307 @@
       "stressEat": "same",
       "supp": ""
     }
+  },
+  {
+    "id": "3a0cf133-5819-48bf-b20d-5f7ca7df2b1f",
+    "submittedAt": "2025-06-10T00:51:27.841Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": true,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension",
+        "Low-back tightness or spasms",
+        "Muscle cramps or restless legs"
+      ],
+      "org": [],
+      "circ": [
+        "Varicose veins or leg cramps",
+        "Frequent cold sores / slow immune recovery",
+        "Swelling / puffiness / limb heaviness"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks",
+        "Mood swings or emotional eating",
+        "Low motivation / lack of joy",
+        "Feeling overwhelmed or burned out"
+      ],
+      "art": [],
+      "nerv": [
+        "Brain-fog / memory lapses",
+        "Trouble focusing / high distractibility",
+        "Headaches / migraines"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": false,
+      "circ": true,
+      "ene": true,
+      "art": false,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "2-3",
+      "moveLen": "20-40",
+      "moveTypes": [
+        "Strength / weights",
+        "Cardio / HIIT"
+      ],
+      "steps": "4-7k",
+      "moveBarrier": "motivation",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "1",
+      "soda": "2-4",
+      "alc": "occas",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free",
+        "Low-carb / Keto"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Cold plunge",
+        "Infrared heat",
+        "Massage / soft-tissue work"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "microBreaks": "2-3",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "726aa17c-abf0-4a2d-bd6b-2b90913b1521",
+    "submittedAt": "2025-06-10T01:13:13.279Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": true,
+      "cancerType": "",
+      "surgery": true,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension",
+        "Low-back tightness or spasms",
+        "Muscle cramps or restless legs",
+        "Slow recovery after workouts"
+      ],
+      "org": [
+        "Heartburn / reflux",
+        "Metabolic Syndrome (high cholesterol, high sugar)",
+        "Constipation or diarrhea",
+        "Food sensitivities / sugar-carb cravings"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Dizzy or light-headed on standing",
+        "Frequent cold sores / slow immune recovery",
+        "Varicose veins or leg cramps",
+        "Swelling / puffiness / limb heaviness"
+      ],
+      "ene": [
+        "Overheating easily or night sweats",
+        "Low morning drive / low libido",
+        "Sleep disturbances (insomnia, restless legs)",
+        "Feeling overwhelmed or burned out",
+        "Difficulty managing stress",
+        "Waking up tired / unrefreshed",
+        "Diagnosed CFS / fibromyalgia / post-infection",
+        "Mood swings or emotional eating"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Ankle / foot pain during gait"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil",
+        "Magnesium",
+        "Probiotic / digestive enzymes"
+      ],
+      "work": "mix",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "half",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free",
+        "Low-carb / Keto"
+      ],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [
+        "Creative outlet (music, art)",
+        "Time in nature",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Massage / soft-tissue work",
+        "Foam rolling",
+        "Wearable tech (HRV, WHOOP, Apple Watch)"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "381eea0c-e425-4a28-9368-36237d1c805e",
+    "submittedAt": "2025-06-10T01:42:54.838Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": true,
+      "cancerType": "",
+      "surgery": true,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension",
+        "Low-back tightness or spasms",
+        "Muscle cramps or restless legs",
+        "Slow recovery after workouts"
+      ],
+      "org": [
+        "Heartburn / reflux",
+        "Metabolic Syndrome (high cholesterol, high sugar)",
+        "Constipation or diarrhea",
+        "Food sensitivities / sugar-carb cravings"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Dizzy or light-headed on standing",
+        "Frequent cold sores / slow immune recovery",
+        "Varicose veins or leg cramps",
+        "Swelling / puffiness / limb heaviness"
+      ],
+      "ene": [
+        "Overheating easily or night sweats",
+        "Low morning drive / low libido",
+        "Sleep disturbances (insomnia, restless legs)",
+        "Feeling overwhelmed or burned out",
+        "Difficulty managing stress",
+        "Waking up tired / unrefreshed",
+        "Diagnosed CFS / fibromyalgia / post-infection",
+        "Mood swings or emotional eating"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Ankle / foot pain during gait"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil",
+        "Magnesium",
+        "Probiotic / digestive enzymes"
+      ],
+      "work": "mix",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "half",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free",
+        "Low-carb / Keto"
+      ],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [
+        "Creative outlet (music, art)",
+        "Time in nature",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Massage / soft-tissue work",
+        "Foam rolling",
+        "Wearable tech (HRV, WHOOP, Apple Watch)"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "b5a600d3-3d2d-4fb0-a48f-283876c41bfe",
+    "submittedAt": "2025-06-10T01:56:39.055Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "d3bfddd3-14dd-4363-ac15-2970b8f9df76",
+    "submittedAt": "2025-06-10T01:59:57.872Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "1606fd54-dac5-4be7-af6a-dfd7f60e824d",
+    "submittedAt": "2025-06-10T02:01:37.317Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "c7d0d508-41ee-4086-abce-1bace04fec6b",
+    "submittedAt": "2025-06-10T02:04:21.044Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "c9979162-6160-4e85-8aab-971465eca8a3",
+    "submittedAt": "2025-06-10T02:04:25.253Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "9d950b80-825d-403e-a3be-6b29dde8cd6f",
+    "submittedAt": "2025-06-10T02:04:34.204Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "8074b48c-fb94-4289-890f-3599b9ed5224",
+    "submittedAt": "2025-06-10T02:17:08.119Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "91dd5051-4d3f-4a5a-ab81-96da58f879da",
+    "submittedAt": "2025-06-10T02:18:24.800Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": true,
+      "neuro": true,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "electro": "yes",
+      "refreshed": "yes",
+      "shiftPattern": "day",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "7e328072-b9c5-4ffb-af67-5d18cd8e1aaf",
+    "submittedAt": "2025-06-10T02:19:11.225Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas",
+        "Heartburn / reflux"
+      ],
+      "circ": [
+        "Lab-high inflammation (CRP, ESR)",
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Varicose veins or leg cramps"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes"
+      ],
+      "art": [
+        "Stiff knees / hips on waking"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Breathwork / meditation"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Cold plunge"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "13c0db64-0541-4234-ad5e-19ebe02940c1",
+    "submittedAt": "2025-06-10T02:19:37.098Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas",
+        "Heartburn / reflux"
+      ],
+      "circ": [
+        "Lab-high inflammation (CRP, ESR)",
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Varicose veins or leg cramps"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes"
+      ],
+      "art": [
+        "Stiff knees / hips on waking"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Breathwork / meditation"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Cold plunge"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "c88173aa-88c3-46c8-bbb8-3de0c9afb1af",
+    "submittedAt": "2025-06-10T02:21:26.403Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension"
+      ],
+      "org": [
+        "Bloating / gas",
+        "Heartburn / reflux"
+      ],
+      "circ": [
+        "Lab-high inflammation (CRP, ESR)",
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Varicose veins or leg cramps"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes"
+      ],
+      "art": [
+        "Stiff knees / hips on waking"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Plant-based"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Breathwork / meditation"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Cold plunge"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "1f5eb497-ad8d-4070-a47d-d6c6e26ad68c",
+    "submittedAt": "2025-06-10T02:29:51.596Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": true,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [
+        "Bloating / gas"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks"
+      ],
+      "art": [
+        "Stiff knees / hips on waking"
+      ],
+      "nerv": [
+        "Brain-fog / memory lapses",
+        "Burning or electric nerve pain"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Cold plunge",
+        "Massage / soft-tissue work"
+      ],
+      "otherMove": "",
+      "lateMeal": "no"
+    }
+  },
+  {
+    "id": "f639d0c2-8efc-4345-b0fe-40d0aab6f580",
+    "submittedAt": "2025-06-10T02:43:32.020Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": true,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension",
+        "Muscle cramps or restless legs",
+        "Low-back tightness or spasms"
+      ],
+      "org": [
+        "Constipation or diarrhea",
+        "Food sensitivities / sugar-carb cravings",
+        "Fatigue right after meals"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Varicose veins or leg cramps",
+        "Swelling / puffiness / limb heaviness",
+        "Frequent cold sores / slow immune recovery"
+      ],
+      "ene": [
+        "Persistent fatigue / energy crashes",
+        "Trouble falling asleep / busy mind",
+        "Wake up in the middle of the night",
+        "Low motivation / lack of joy",
+        "Feeling overwhelmed or burned out"
+      ],
+      "art": [
+        "Shoulder pinch or limited overhead reach",
+        "Joint pain that limits daily activities",
+        "Stiff knees / hips on waking"
+      ],
+      "nerv": [
+        "Difficulty regulating body temperature",
+        "Trouble focusing / high distractibility",
+        "Headaches / migraines",
+        "Tinnitus or ear pressure"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [
+        "Strength / weights",
+        "Cardio / HIIT"
+      ],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [
+        "Breathwork / meditation"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Sauna"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "yes",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "62e33723-9237-4f33-b09e-10cc41284c00",
+    "submittedAt": "2025-06-10T10:10:02.506Z",
+    "reasons": [
+      "Something else",
+      "Lasting pain relief",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "Persistent neck / shoulder tension",
+        "Low-back tightness or spasms",
+        "Slow recovery after workouts"
+      ],
+      "org": [
+        "Constipation or diarrhea",
+        "Food sensitivities / sugar-carb cravings",
+        "Liver / skin changes (itchy skin, dark urine, jaundice)",
+        "Chemical or alcohol sensitivity"
+      ],
+      "circ": [
+        "Cold or numb hands / feet (Raynaud’s)",
+        "Varicose veins or leg cramps",
+        "Swelling / puffiness / limb heaviness"
+      ],
+      "ene": [
+        "Overheating easily or night sweats",
+        "Low morning drive / low libido",
+        "Need caffeine to function",
+        "Trouble falling asleep / busy mind",
+        "Anxiety or panic attacks",
+        "Mood swings or emotional eating",
+        "Low motivation / lack of joy"
+      ],
+      "art": [
+        "Stiff knees / hips on waking",
+        "Shoulder pinch or limited overhead reach"
+      ],
+      "nerv": [
+        "Headaches / migraines",
+        "Trouble focusing / high distractibility"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [
+        "Strength / weights",
+        "Cardio / HIIT"
+      ],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral",
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Stretch / breathwork",
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [
+        "Journaling / prayer",
+        "Breathwork / meditation"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Cold plunge",
+        "Infrared heat"
+      ],
+      "otherMove": "",
+      "shiftPattern": "day",
+      "refreshed": "no",
+      "electro": "no",
+      "lateMeal": "yes"
+    }
+  },
+  {
+    "id": "3d631a82-32ff-4c03-9c70-f6089b170535",
+    "submittedAt": "2025-06-10T14:13:16.018Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 7,
+      "energy": 8,
+      "sleep": 1,
+      "mood": 3,
+      "stress": 7,
+      "pain": 3,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": true,
+      "thyroid": false,
+      "steroid": false,
+      "auto": true,
+      "autoType": "",
+      "cancer": true,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": true,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": true,
+      "asthma": false,
+      "kidney": false,
+      "liver": true,
+      "bleed": true,
+      "thinner": false,
+      "preg": true,
+      "postpartum": true,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_SlowRecovery",
+        "MSK_Cramps",
+        "MSK_LowBackTight"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_IBS",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Orthostatic",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SkinFlares"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_MidNightWake",
+        "ENE_Burnout",
+        "ENE_LowMotivation"
+      ],
+      "art": [
+        "ART_AnklePain",
+        "ART_ShoulderPinch",
+        "ART_Clicking"
+      ],
+      "nerv": [
+        "NERV_TempDysreg",
+        "NERV_Headache",
+        "NERV_Tinnitus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [
+        "Cardio / HIIT"
+      ],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Cold plunge",
+        "Massage / soft-tissue work"
+      ],
+      "otherMove": "",
+      "lateMeal": "yes",
+      "electro": "no",
+      "shiftPattern": "day",
+      "refreshed": "no"
+    }
+  },
+  {
+    "id": "dc910b64-d66f-4a60-9969-0e6e385b12e8",
+    "submittedAt": "2025-06-10T14:16:54.062Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 7,
+      "energy": 8,
+      "sleep": 1,
+      "mood": 3,
+      "stress": 7,
+      "pain": 3,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": true,
+      "thyroid": false,
+      "steroid": false,
+      "auto": true,
+      "autoType": "",
+      "cancer": true,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": true,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": true,
+      "asthma": false,
+      "kidney": false,
+      "liver": true,
+      "bleed": true,
+      "thinner": false,
+      "preg": true,
+      "postpartum": true,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_SlowRecovery",
+        "MSK_Cramps",
+        "MSK_LowBackTight"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_IBS",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Orthostatic",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SkinFlares"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_MidNightWake",
+        "ENE_Burnout",
+        "ENE_LowMotivation"
+      ],
+      "art": [
+        "ART_AnklePain",
+        "ART_ShoulderPinch",
+        "ART_Clicking"
+      ],
+      "nerv": [
+        "NERV_TempDysreg",
+        "NERV_Headache",
+        "NERV_Tinnitus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [
+        "Cardio / HIIT"
+      ],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [
+        "Quiet time / prayer / meditation"
+      ],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [
+        "Gluten-free"
+      ],
+      "otherApproach": "",
+      "stressEat": "snack",
+      "stressReset": [
+        "Journaling / prayer",
+        "Exercise"
+      ],
+      "stressScore": 5,
+      "recovery": [
+        "Infrared heat",
+        "Cold plunge",
+        "Massage / soft-tissue work"
+      ],
+      "otherMove": "",
+      "lateMeal": "yes",
+      "electro": "no",
+      "shiftPattern": "day",
+      "refreshed": "no"
+    }
+  },
+  {
+    "id": "081789be-393c-4114-b4fc-88f23ebee720",
+    "submittedAt": "2025-06-10T14:18:02.312Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight",
+        "MSK_Cramps",
+        "MSK_SlowRecovery",
+        "MSK_Weakness",
+        "MSK_StrengthLoss",
+        "MSK_RecurrentStrain"
+      ],
+      "org": [
+        "ORG_Reflux",
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin",
+        "ORG_ChemSens"
+      ],
+      "circ": [
+        "CIRC_Raynaud",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SkinFlares",
+        "CIRC_HighBP",
+        "CIRC_SlowHealing",
+        "CIRC_AutoInflam",
+        "CIRC_LowImmunity",
+        "CIRC_Orthostatic"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_LowDrive",
+        "ENE_CaffeineNeed",
+        "ENE_CFS",
+        "ENE_MorningGroggy",
+        "ENE_Unrefreshed",
+        "ENE_InsomniaRestless",
+        "ENE_MidNightWake",
+        "ENE_MoodSwings",
+        "ENE_LowMotivation",
+        "ENE_Burnout",
+        "ENE_StressManage"
+      ],
+      "art": [
+        "ART_ShoulderPinch",
+        "ART_AnklePain",
+        "ART_Clicking",
+        "ART_WeatherFlare",
+        "ART_RecentSprain",
+        "ART_Swelling"
+      ],
+      "nerv": [
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus",
+        "NERV_Concussion",
+        "NERV_PinsNeedles",
+        "NERV_ScreenHigh"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "d0b28838-4977-4fd9-b13d-a7a3344f1fca",
+    "submittedAt": "2025-06-10T14:27:05.949Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight",
+        "MSK_SlowRecovery",
+        "MSK_Weakness",
+        "MSK_StrengthLoss"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_LiverSkin",
+        "ORG_ChemSens",
+        "ORG_Bloat"
+      ],
+      "circ": [
+        "CIRC_Orthostatic",
+        "CIRC_Varicose",
+        "CIRC_LowImmunity",
+        "CIRC_SkinFlares"
+      ],
+      "ene": [
+        "ENE_SleepTrouble",
+        "ENE_MoodSwings",
+        "ENE_LowMotivation",
+        "ENE_Burnout",
+        "ENE_Disconnect",
+        "ENE_Unrefreshed",
+        "ENE_LowDrive"
+      ],
+      "art": [
+        "ART_StiffKneeHip",
+        "ART_ShoulderPinch",
+        "ART_AnklePain",
+        "ART_Clicking",
+        "ART_WeatherFlare"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus",
+        "NERV_Concussion"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "6ae836c4-b38a-4d4e-a36b-6f44ee3c9a4b",
+    "submittedAt": "2025-06-10T18:33:18.084Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": true,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_SlowRecovery",
+        "MSK_Weakness",
+        "MSK_Cramps"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SkinFlares",
+        "CIRC_SlowHealing"
+      ],
+      "ene": [
+        "ENE_InsomniaRestless",
+        "ENE_Burnout",
+        "ENE_CaffeineNeed",
+        "ENE_LowDrive"
+      ],
+      "art": [
+        "ART_AnklePain",
+        "ART_Clicking",
+        "ART_WeatherFlare",
+        "ART_RecentSprain"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "326019b9-70ea-4630-8c88-9f69912aba1f",
+    "submittedAt": "2025-06-10T20:09:19.389Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": true,
+      "autoType": "",
+      "cancer": true,
+      "cancerType": "",
+      "surgery": true,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": true,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight",
+        "MSK_Cramps",
+        "MSK_SlowRecovery"
+      ],
+      "org": [
+        "ORG_Bloat",
+        "ORG_Reflux",
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Raynaud",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SlowHealing",
+        "CIRC_AutoInflam",
+        "CIRC_SkinFlares"
+      ],
+      "ene": [
+        "ENE_Fatigue",
+        "ENE_SleepTrouble",
+        "ENE_Anxiety",
+        "ENE_MoodSwings",
+        "ENE_LowMotivation",
+        "ENE_Burnout",
+        "ENE_InsomniaRestless",
+        "ENE_LowDrive"
+      ],
+      "art": [
+        "ART_JointSurgery",
+        "ART_StiffKneeHip",
+        "ART_ShoulderPinch",
+        "ART_AnklePain",
+        "ART_Clicking"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus",
+        "NERV_Concussion"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "827c5944-e18a-4f12-b4b2-5d1cb33bed07",
+    "submittedAt": "2025-06-10T20:17:42.868Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight"
+      ],
+      "org": [
+        "ORG_Reflux",
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_ChemSens",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Raynaud",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_HighBP",
+        "CIRC_SlowHealing"
+      ],
+      "ene": [
+        "ENE_Fatigue",
+        "ENE_MidNightWake",
+        "ENE_Burnout",
+        "ENE_LowMotivation",
+        "ENE_Unrefreshed",
+        "ENE_CFS",
+        "ENE_BodyComp"
+      ],
+      "art": [
+        "ART_StiffKneeHip",
+        "ART_ShoulderPinch"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus",
+        "NERV_Concussion"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "9023f3dd-95ae-44a0-876f-89ed1fa1658f",
+    "submittedAt": "2025-06-10T20:49:36.483Z",
+    "reasons": [
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight",
+        "MSK_Cramps",
+        "MSK_SlowRecovery",
+        "MSK_Weakness"
+      ],
+      "org": [
+        "ORG_FoodSens",
+        "ORG_LiverSkin",
+        "ORG_ChemSens",
+        "ORG_PostMealFatigue",
+        "ORG_ConstDiarr"
+      ],
+      "circ": [
+        "CIRC_Raynaud",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_SkinFlares",
+        "CIRC_HighBP"
+      ],
+      "ene": [
+        "ENE_MidNightWake",
+        "ENE_MoodSwings",
+        "ENE_Anxiety",
+        "ENE_Fatigue",
+        "ENE_Overheat",
+        "ENE_LowDrive",
+        "ENE_CaffeineNeed"
+      ],
+      "art": [
+        "ART_ShoulderPinch",
+        "ART_AnklePain",
+        "ART_Clicking",
+        "ART_WeatherFlare"
+      ],
+      "nerv": [
+        "NERV_NervePain",
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "64244adc-46e7-41dd-921f-150311002e47",
+    "submittedAt": "2025-06-11T13:16:33.039Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_LowBackTight",
+        "MSK_Cramps",
+        "MSK_SlowRecovery"
+      ],
+      "org": [
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Varicose",
+        "CIRC_Orthostatic",
+        "CIRC_LowImmunity",
+        "CIRC_Swelling",
+        "CIRC_HighBP"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_LowDrive",
+        "ENE_CaffeineNeed",
+        "ENE_InsomniaRestless",
+        "ENE_Unrefreshed",
+        "ENE_MorningGroggy",
+        "ENE_StressManage",
+        "ENE_Burnout",
+        "ENE_LowMotivation",
+        "ENE_MoodSwings"
+      ],
+      "art": [
+        "ART_AnklePain",
+        "ART_Clicking",
+        "ART_ShoulderPinch"
+      ],
+      "nerv": [
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus",
+        "NERV_Concussion",
+        "NERV_TempDysreg"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "4cfa2fb6-44a7-45e1-a39f-0a39789d0b08",
+    "submittedAt": "2025-06-11T13:20:34.186Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Stress relief & relaxation"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_LowImmunity",
+        "CIRC_Swelling",
+        "CIRC_Varicose",
+        "CIRC_Orthostatic"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_MidNightWake",
+        "ENE_Burnout",
+        "ENE_CaffeineNeed",
+        "ENE_Unrefreshed",
+        "ENE_CFS"
+      ],
+      "art": [
+        "ART_Clicking",
+        "ART_WeatherFlare",
+        "ART_RecentSprain",
+        "ART_Swelling"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_TempDysreg",
+        "NERV_Focus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "c76276f4-e695-4249-8699-470230a7587e",
+    "submittedAt": "2025-06-11T13:22:48.603Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Stress relief & relaxation"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_NeckTension",
+        "MSK_LowBackTight"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_LowImmunity",
+        "CIRC_Swelling",
+        "CIRC_Varicose",
+        "CIRC_Orthostatic"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_MidNightWake",
+        "ENE_Burnout",
+        "ENE_CaffeineNeed",
+        "ENE_Unrefreshed",
+        "ENE_CFS"
+      ],
+      "art": [
+        "ART_Clicking",
+        "ART_WeatherFlare",
+        "ART_RecentSprain",
+        "ART_Swelling"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_TempDysreg",
+        "NERV_Focus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "cdd7c9d3-1dfc-4f2c-bf88-7fb5db0cf1a3",
+    "submittedAt": "2025-06-11T13:25:30.939Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [
+        "MSK_LowBackTight",
+        "MSK_NeckTension",
+        "MSK_Cramps",
+        "MSK_SlowRecovery"
+      ],
+      "org": [
+        "ORG_ConstDiarr",
+        "ORG_FoodSens",
+        "ORG_PostMealFatigue",
+        "ORG_LiverSkin"
+      ],
+      "circ": [
+        "CIRC_Raynaud",
+        "CIRC_Varicose",
+        "CIRC_Swelling",
+        "CIRC_HighBP",
+        "CIRC_SkinFlares"
+      ],
+      "ene": [
+        "ENE_Overheat",
+        "ENE_LowDrive",
+        "ENE_CaffeineNeed",
+        "ENE_Burnout",
+        "ENE_LowMotivation",
+        "ENE_InsomniaRestless",
+        "ENE_MidNightWake",
+        "ENE_SleepTrouble",
+        "ENE_Unrefreshed"
+      ],
+      "art": [
+        "ART_JointSurgery",
+        "ART_StiffKneeHip",
+        "ART_ShoulderPinch",
+        "ART_AnklePain"
+      ],
+      "nerv": [
+        "NERV_BrainFog",
+        "NERV_Focus",
+        "NERV_Headache",
+        "NERV_Tinnitus"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": true,
+      "org": true,
+      "circ": true,
+      "ene": true,
+      "art": true,
+      "nerv": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
   }
 ]

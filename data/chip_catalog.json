@@ -1,0 +1,81 @@
+{
+    "msk": {
+      "MSK_NeckTension": 1,
+      "MSK_LowBackTight": 1,
+      "MSK_Cramps": 1,
+      "MSK_SlowRecovery": 1,
+      "MSK_Weakness": 1.5,
+      "MSK_StrengthLoss": 2,
+      "MSK_RecurrentStrain": 1.5,
+      "MSK_TendonChronic": 1.5
+    },
+    "org": {
+      "ORG_Bloat": 1,
+      "ORG_Reflux": 1,
+      "ORG_ConstDiarr": 1,
+      "ORG_FoodSens": 1,
+      "ORG_PostMealFatigue": 1,
+      "ORG_LiverSkin": 1.5,
+      "ORG_ChemSens": 1,
+      "ORG_Antibiotic": 1,
+      "ORG_Metabolic": 2,
+      "ORG_IBS": 1.5
+    },
+    "circ": {
+      "CIRC_Raynaud": 1,
+      "CIRC_Varicose": 1,
+      "CIRC_Swelling": 1,
+      "CIRC_SkinFlares": 1,
+      "CIRC_SlowHealing": 1.5,
+      "CIRC_AutoInflam": 1.5,
+      "CIRC_HighCRP": 2,
+      "CIRC_Orthostatic": 1,
+      "CIRC_LowImmunity": 1,
+      "CIRC_HighBP": 2,
+      "CIRC_ColdIntolerance": 1
+    },
+    "ene": {
+      "ENE_Fatigue": 2,
+      "ENE_Overheat": 1,
+      "ENE_LowDrive": 1.5,
+      "ENE_CaffeineNeed": 1,
+      "ENE_CFS": 2,
+      "ENE_BodyComp": 1,
+      "ENE_SleepTrouble": 1,
+      "ENE_MidNightWake": 1,
+      "ENE_InsomniaRestless": 1.5,
+      "ENE_Unrefreshed": 1,
+      "ENE_MorningGroggy": 1,
+      "ENE_Apnea": 1.5,
+      "ENE_Anxiety": 1,
+      "ENE_MoodSwings": 1,
+      "ENE_LowMotivation": 1,
+      "ENE_Burnout": 1.5,
+      "ENE_StressManage": 1,
+      "ENE_Disconnect": 1,
+      "ENE_EmotionalReactive": 1
+    },
+    "art": {
+      "ART_StiffKneeHip": 1,
+      "ART_ShoulderPinch": 1,
+      "ART_AnklePain": 1,
+      "ART_Clicking": 1,
+      "ART_WeatherFlare": 1,
+      "ART_RecentSprain": 1.5,
+      "ART_Swelling": 1,
+      "ART_LimitsADL": 1.5,
+      "ART_JointSurgery": 2
+    },
+    "nerv": {
+      "NERV_BrainFog": 1,
+      "NERV_Focus": 1,
+      "NERV_Headache": 1,
+      "NERV_Tinnitus": 1,
+      "NERV_Concussion": 1.5,
+      "NERV_PinsNeedles": 1,
+      "NERV_ScreenHigh": 1,
+      "NERV_Balance": 1,
+      "NERV_NervePain": 1.5,
+      "NERV_TempDysreg": 1
+    }
+  }

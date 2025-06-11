@@ -1,0 +1,6 @@
+[
+    { "key": "move_freq",   "value": "0-1",  "pts": 2, "pillars": ["msk", "ene", "art"] },
+    { "key": "move_freq",   "value": "2-3",  "pts": 1, "pillars": ["msk", "ene", "art"] },
+    { "key": "sleep_hours", "value": "<5",   "pts": 2, "pillars": ["ene", "nerv"] },
+    { "key": "water",       "value": "<4",   "pts": 1, "pillars": ["circ", "org"] }
+  ]
