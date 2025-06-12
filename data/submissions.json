@@ -4380,5 +4380,5417 @@
       "recovery": [],
       "otherMove": ""
     }
+  },
+  {
+    "id": "45160d68-1fbd-4646-a898-1cc5dd7f7d4b",
+    "submittedAt": "2025-06-11T16:00:46.328Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_9",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "emotion_symptoms_2",
+        "sleep_symptoms_2",
+        "energy_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_7",
+        "circulation_symptoms_1",
+        "circulation_symptoms_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_8",
+        "organ_symptoms_3",
+        "organ_symptoms_4"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_1",
+        "muscle_symptoms_2",
+        "muscle_symptoms_3"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "46f5bfe7-8075-4622-8659-800dc68b7885",
+    "submittedAt": "2025-06-11T16:05:46.133Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "energy_symptoms_2",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "sleep_symptoms_2",
+        "emotion_symptoms_1",
+        "emotion_symptoms_0",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_2",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "bp_recent_0",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil",
+        "Magnesium"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna"
+      ],
+      "leisure_screen_time": "< 1 h"
+    }
+  },
+  {
+    "id": "e6938b69-c8fe-478e-887a-b80c8422e67b",
+    "submittedAt": "2025-06-11T16:07:59.089Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "energy_symptoms_2",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "sleep_symptoms_2",
+        "emotion_symptoms_1",
+        "emotion_symptoms_0",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_2",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "bp_recent_0",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Omega-3 / Fish oil",
+        "Magnesium"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna"
+      ],
+      "leisure_screen_time": "< 1 h"
+    }
+  },
+  {
+    "id": "95d56504-9d32-4136-b563-fe43b42352db",
+    "submittedAt": "2025-06-11T16:09:09.376Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "fc4fdccf-e56c-4ce2-8478-bd3b69239ca8",
+    "submittedAt": "2025-06-11T16:12:28.614Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "e61e2ab1-a577-4d2a-b90a-b64d296e5df1",
+    "submittedAt": "2025-06-11T16:14:50.323Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "de7eddf3-0a85-43e9-9d80-39a59e833484",
+    "submittedAt": "2025-06-11T16:17:15.915Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation"
+      ],
+      "stress_scale": "2",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "f37a85cf-5e58-4cde-b198-85216d85c1c3",
+    "submittedAt": "2025-06-11T16:19:16.617Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation"
+      ],
+      "stress_scale": "2",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "0b9ebeba-3577-4a72-8a5a-0ca5bce09320",
+    "submittedAt": "2025-06-11T16:25:14.319Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_0",
+        "emotion_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_6",
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation"
+      ],
+      "stress_scale": "3",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna"
+      ],
+      "leisure_screen_time": "< 1 h"
+    }
+  },
+  {
+    "id": "b9a94430-51b9-4a57-863f-4e9d6af4ca9b",
+    "submittedAt": "2025-06-11T16:26:48.206Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "2919c301-b851-4340-959a-6095f3b87f41",
+    "submittedAt": "2025-06-11T16:36:21.950Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_7"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_1",
+        "circulation_symptoms_0"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_0",
+        "emotion_symptoms_0"
+      ],
+      "nervous_system": [
+        "nervous_symptoms_0"
+      ],
+      "articular_joint": [
+        "joint_symptoms_1",
+        "joint_symptoms_2",
+        "joint_symptoms_3"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "musculoskeletal": true,
+      "organ_digest_hormone_detox": true,
+      "circulation": true,
+      "energy_sleep_emotion": true,
+      "nervous_system": true,
+      "articular_joint": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "830800af-ca55-43e9-a13f-c4fbe9854282",
+    "submittedAt": "2025-06-11T16:38:05.353Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_9",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "emotion_symptoms_0",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "energy_symptoms_0",
+        "energy_symptoms_1"
+      ],
+      "circulation": [
+        "bp_recent_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "circulation_symptoms_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "37c005d3-861a-4d21-826a-a40950128385",
+    "submittedAt": "2025-06-11T16:40:47.121Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "emotion_symptoms_0",
+        "emotion_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_8",
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_2",
+        "muscle_symptoms_1"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "ba7a8d2e-72d9-4343-a84c-3d33851e3db7",
+    "submittedAt": "2025-06-11T16:46:33.756Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "bp_recent_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "4f64c56d-e198-4bcd-884c-7c2ce6dd841e",
+    "submittedAt": "2025-06-11T16:48:56.882Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_7",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "72912d1c-0fdf-45d2-a02c-9879e07735d2",
+    "submittedAt": "2025-06-11T16:49:46.080Z",
+    "reasons": [
+      "Better posture & alignment",
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_1",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_6",
+        "circulation_symptoms_0",
+        "bp_recent_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Some days",
+      "diet_approach": [
+        "Plant-based"
+      ],
+      "stress_reset": [],
+      "stress_scale": "3",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna"
+      ],
+      "leisure_screen_time": "< 1 h"
+    }
+  },
+  {
+    "id": "e5bb34aa-ebb0-419f-9b34-b2a74bf7d0d0",
+    "submittedAt": "2025-06-11T17:00:44.158Z",
+    "reasons": [
+      "Calm digestion & gut health",
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "Yes",
+      "diet_approach": [
+        "Plant-based"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation"
+      ],
+      "stress_scale": "01",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna"
+      ],
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "7ddf8877-30d1-440f-bfbb-f0b29afa6664",
+    "submittedAt": "2025-06-11T17:02:00.295Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "6176b44a-b254-454a-b7ab-07698949adf0",
+    "submittedAt": "2025-06-11T17:34:23.184Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_1",
+        "circulation_symptoms_0",
+        "circulation_symptoms_6"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_7",
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "No",
+      "diet_approach": [
+        "Plant-based"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "social_support": "Yes",
+      "stress_scale": "3",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "030bd4a9-4dad-403e-bdfe-7b9ffa448d90",
+    "submittedAt": "2025-06-11T17:35:34.245Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_1",
+        "circulation_symptoms_0",
+        "circulation_symptoms_6"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_7",
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "No",
+      "diet_approach": [
+        "Plant-based"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "social_support": "Yes",
+      "stress_scale": "3",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "23b526e7-0891-4b1c-a0ae-96921f75181e",
+    "submittedAt": "2025-06-11T17:36:59.843Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Calm digestion & gut health"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_1",
+        "circulation_symptoms_0",
+        "circulation_symptoms_6"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_7",
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "Mostly home-cooked",
+      "late_meal": "No",
+      "diet_approach": [
+        "Plant-based"
+      ],
+      "stress_eating": "Lose appetite",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "social_support": "Yes",
+      "stress_scale": "3",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "leisure_screen_time": "1–3 h"
+    }
+  },
+  {
+    "id": "f341fc59-f7ce-4376-92f7-bde34c10d96a",
+    "submittedAt": "2025-06-11T19:33:46.043Z",
+    "reasons": [
+      "Build strength & resilience"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_1",
+        "sleep_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_7",
+        "bp_recent_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_2",
+        "muscle_symptoms_1"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "a04b675d-b7af-4c0f-9cca-f453f23582b7",
+    "submittedAt": "2025-06-11T19:35:47.654Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "sleep_symptoms_1",
+        "emotion_symptoms_1"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "bp_recent_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "dfba39c4-7878-4720-9ae0-4fd3c799cd4a",
+    "submittedAt": "2025-06-11T19:38:15.588Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_7",
+        "circulation_symptoms_1",
+        "bp_recent_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3",
+        "organ_symptoms_0"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "6ed409df-f887-4bde-bb17-42aedc8530b9",
+    "submittedAt": "2025-06-11T19:39:49.915Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "sleep_symptoms_0",
+        "emotion_symptoms_0",
+        "energy_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_6",
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "048c68d2-c6ac-482b-9929-8a83938cc403",
+    "submittedAt": "2025-06-11T20:57:41.785Z",
+    "reasons": [
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_2",
+        "energy_symptoms_1",
+        "energy_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "circulation_symptoms_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_7",
+        "muscle_symptoms_1"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "4cb338a1-8781-45c5-a187-476494c52ee6",
+    "submittedAt": "2025-06-11T22:44:07.320Z",
+    "reasons": [
+      "Build strength & resilience",
+      "Better posture & alignment"
+    ],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_1",
+        "bp_recent_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_1",
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "570f7cda-1bc7-43ca-b64a-1abbc83c1cf1",
+    "submittedAt": "2025-06-11T23:03:12.210Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0",
+        "emotion_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "bp_recent_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "1bbde157-b5d3-4c7a-b101-ad988132dde8",
+    "submittedAt": "2025-06-11T23:31:23.525Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2",
+        "joint_symptoms_3",
+        "joint_symptoms_4"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "energy_symptoms_1",
+        "energy_symptoms_2",
+        "sleep_symptoms_0",
+        "sleep_symptoms_2",
+        "sleep_symptoms_1",
+        "emotion_symptoms_0",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2",
+        "emotion_symptoms_3"
+      ],
+      "circulation": [
+        "circulation_symptoms_1",
+        "circulation_symptoms_2",
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "circulation_symptoms_8",
+        "bp_recent_1"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_3",
+        "organ_symptoms_4"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_2",
+        "muscle_symptoms_1",
+        "muscle_symptoms_3"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "e3a95bd9-2f83-49d1-8f30-d62d1562751b",
+    "submittedAt": "2025-06-11T23:56:00.806Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1",
+        "nervous_symptoms_2"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_3"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_1",
+        "emotion_symptoms_2",
+        "energy_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "circulation_symptoms_7",
+        "bp_recent_2",
+        "circulation_symptoms_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2",
+        "organ_symptoms_4"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [
+        "Vitamin D or D+K",
+        "Multivitamin / Mineral"
+      ],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "sugary_dessert_freq": "Almost never",
+      "eat_out_ratio": "About half & half",
+      "late_meal": "Yes",
+      "diet_approach": [
+        "Plant-based",
+        "Gluten-free"
+      ],
+      "stress_eating": "Snack / comfort-eat",
+      "whole_grain_fibre": "Rarely",
+      "healthy_fats": "Rarely",
+      "stress_reset": [
+        "Breathwork / meditation",
+        "Journaling / prayer"
+      ],
+      "stress_scale": "10",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "recovery_tools": [
+        "Sauna",
+        "Infrared heat"
+      ],
+      "leisure_screen_time": "> 3 h"
+    }
+  },
+  {
+    "id": "9b0976b8-7cc4-45c2-990a-b8f4cb591421",
+    "submittedAt": "2025-06-12T00:01:58.038Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0",
+        "nervous_symptoms_1"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1",
+        "joint_symptoms_2"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_1",
+        "emotion_symptoms_2"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_7",
+        "circulation_symptoms_8",
+        "circulation_symptoms_2"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_1",
+        "organ_symptoms_2"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1",
+        "muscle_symptoms_2"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "e7fae8a1-4e63-4f16-ab91-0ca7a90254df",
+    "submittedAt": "2025-06-12T04:23:11.163Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0",
+        "joint_symptoms_1"
+      ],
+      "energy_sleep_emotion": [
+        "sleep_symptoms_0",
+        "sleep_symptoms_1",
+        "energy_symptoms_0",
+        "emotion_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0",
+        "circulation_symptoms_6",
+        "bp_recent_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0",
+        "organ_symptoms_8",
+        "organ_symptoms_1"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0",
+        "muscle_symptoms_1"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "intentional_move_days": "0–1 day/wk",
+      "session_length": "20–40 min",
+      "move_types": [
+        "Strength / Cardio"
+      ],
+      "daily_steps": "4–7k",
+      "move_barrier": "Time",
+      "resistance_sessions": "0–1",
+      "hiit_sessions": "0",
+      "balance_routine": "Rarely",
+      "sitting_hours": "8 h+",
+      "post_stretch": "Almost never",
+      "work_rhythm": "Mostly seated",
+      "shift_pattern": "Night",
+      "sleep_hours": "< 5 h",
+      "refreshed_am": "No",
+      "prebed_screen": "Rarely / never",
+      "microbreaks": "0–1",
+      "unwind_methods": [
+        "Screen time"
+      ],
+      "bedtime_variability": "No",
+      "water_habit": "< 4",
+      "coffee_tea": "2–3",
+      "sugary_drinks": "≤1/wk",
+      "alcohol": "Never",
+      "electrolytes": "No",
+      "start_with_water": "Yes",
+      "thirsty_during_day": "Sometimes",
+      "add_salt_meals": "Never",
+      "sports_drinks": "Never",
+      "track_hydration": "Yes",
+      "stress_reset": [
+        "Healthy tools",
+        "Still figuring this out"
+      ],
+      "stress_scale": "5",
+      "social_support": "Yes",
+      "mental_stimulation": "< 1 h",
+      "mindfulness_minutes": "5–10",
+      "work_life_balance": "Good",
+      "purpose_meaning": "1",
+      "laughter_daily": "Few times",
+      "seen_therapist": "No",
+      "recovery_tools": [
+        "None"
+      ],
+      "leisure_screen_time": "< 1 h",
+      "rest_days": "1",
+      "active_recovery_sessions": "0",
+      "time_outdoors": "< 15 min",
+      "morning_sun": "Yes",
+      "annual_checkup": "No",
+      "bedroom_environment": "Optimal",
+      "digital_shutdown": "Some nights"
+    }
+  },
+  {
+    "id": "cc476392-6c46-4506-9ee2-e46bed4681e7",
+    "submittedAt": "2025-06-12T13:27:22.844Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": [],
+      "nervous_system": [
+        "nervous_symptoms_0"
+      ],
+      "articular_joint": [
+        "joint_symptoms_0"
+      ],
+      "energy_sleep_emotion": [
+        "energy_symptoms_0",
+        "sleep_symptoms_0"
+      ],
+      "circulation": [
+        "circulation_symptoms_0"
+      ],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_0"
+      ],
+      "musculoskeletal": [
+        "muscle_symptoms_0"
+      ]
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false,
+      "nervous_system": true,
+      "articular_joint": true,
+      "energy_sleep_emotion": true,
+      "circulation": true,
+      "organ_digest_hormone_detox": true,
+      "musculoskeletal": true
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": "",
+      "digital_shutdown": "Never",
+      "bedroom_environment": "Optimal",
+      "annual_checkup": "Yes",
+      "morning_sun": "Yes",
+      "time_outdoors": "< 15 min",
+      "active_recovery_sessions": "0",
+      "rest_days": "1",
+      "leisure_screen_time": "< 1 h",
+      "recovery_tools": [
+        "None"
+      ],
+      "seen_therapist": "Yes",
+      "laughter_daily": "Rarely",
+      "purpose_meaning": "2",
+      "work_life_balance": "Good",
+      "mindfulness_minutes": "< 5",
+      "mental_stimulation": "< 1 h",
+      "social_support": "Yes",
+      "stress_scale": "1",
+      "stress_reset": [
+        "Healthy tools"
+      ]
+    }
+  },
+  {
+    "id": "3dad578e-f201-4e85-835f-ea3605fe77f2",
+    "submittedAt": "2025-06-12T13:34:44.262Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": []
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
+  },
+  {
+    "id": "fd8b76bb-dfa1-4dc4-807e-39577baf785a",
+    "submittedAt": "2025-06-12T14:14:22.729Z",
+    "reasons": [],
+    "snapshot": {
+      "overall": 5,
+      "energy": 5,
+      "sleep": 5,
+      "mood": 5,
+      "stress": 5,
+      "pain": 5,
+      "digestion": 5,
+      "clarity": 5
+    },
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": false,
+      "bp": false,
+      "clots": false,
+      "pacer": false,
+      "diab": false,
+      "thyroid": false,
+      "steroid": false,
+      "auto": false,
+      "autoType": "",
+      "cancer": false,
+      "cancerType": "",
+      "surgery": false,
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "seizure": false,
+      "neuro": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "preg": false,
+      "postpartum": false,
+      "notes": "",
+      "none": false
+    },
+    "hc": {
+      "msk": [],
+      "org": [],
+      "circ": [],
+      "ene": [],
+      "art": [],
+      "nerv": []
+    },
+    "hcNotes": {
+      "msk": "",
+      "org": "",
+      "circ": "",
+      "ene": "",
+      "art": "",
+      "nerv": ""
+    },
+    "hcOpen": {
+      "msk": false,
+      "org": false,
+      "circ": false,
+      "ene": false,
+      "art": false,
+      "nerv": false
+    },
+    "life": {
+      "moveDays": "0-1",
+      "moveLen": "<20",
+      "moveTypes": [],
+      "steps": "",
+      "moveBarrier": "",
+      "supplements": [],
+      "work": "desk",
+      "sleep": "5-7",
+      "screen": "nightly",
+      "unwind": [],
+      "otherUnwind": "",
+      "water": "",
+      "caf": "0",
+      "soda": "none",
+      "alc": "never",
+      "meals": "3",
+      "produce": "2-3",
+      "protein": "some",
+      "sugar": "few",
+      "cookRatio": "cook",
+      "lastMeal": "",
+      "dietApproach": [],
+      "otherApproach": "",
+      "stressEat": "same",
+      "stressReset": [],
+      "stressScore": 5,
+      "recovery": [],
+      "otherMove": ""
+    }
   }
 ]

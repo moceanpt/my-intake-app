@@ -9,6 +9,9 @@ import HistoryStep     from '../components/steps/HistoryStep';
 import HealthCheckStep from '../components/steps/HealthCheckStep';
 import LifestyleStep   from '../components/steps/LifestyleStep';
 import ResultSheet from '../components/ui/ResultSheet'
+import { calcLifestyleScore } from '@/lib/score';
+import LifestyleResultSheet from '@/components/ui/LifestyleResultSheet';
+import ResultView from '@/components/ResultView';
 
 export default function Intake() {
   /* ---------- full form state ---------- */
@@ -161,11 +164,7 @@ const submit = async () => {
 
 /* ──────────────── RESULT VIEW ──────────────── */
 if (result) {
-  return (
-    <main className="p-6 max-w-xl mx-auto">
-      <ResultSheet result={result} />
-    </main>
-  );
+  return <ResultView data={result} />;
 }
 
 /* ──────────────── WIZARD VIEW ──────────────── */
