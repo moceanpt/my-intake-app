@@ -1,161 +1,220 @@
-import { Fragment } from 'react';
+/* components/steps/HistoryStep.jsx
+   ───────────────────────────────────────────── */
+   import { useMemo } from 'react';
 
-export default function HistoryStep({ data, setVal }) {
-  const h = data.history;
+   /* ------------------------------------------------------------------ */
+   /* 1 · SECTION BLUEPRINT – change text here, not in the JSX below     */
+   /* ------------------------------------------------------------------ */
+   const SECTIONS = [
+     {
+       id: 'heart',
+       title: 'Do you currently have, or have you ever had, a heart or blood-vessel condition?',
+       
+       items: [
+         ['heart',  'Heart disease / stent'],
+         ['bp',     'High blood pressure'],
+         ['clots',  'History of clots / stroke'],
+         ['pacer',  'Pacemaker / ICD / heart-valve implant'],
+       ],
+     },
+     {
+       id: 'metabolic',
+       title: 'Do you have, or have you ever had, a metabolic or hormone condition?',
+       items: [
+         ['diab1',     'Diabetes – type 1'],
+         ['diab2',     'Diabetes – type 2'],
+         ['prediab',   'Pre-diabetes'],
+         ['hypo',      'Hypothyroidism / Hashimoto’s'],
+         ['hyper',     'Hyperthyroidism / Graves’'],
+         ['pcos',      'Endometriosis and/or PCOS'],
+         ['hormone',   'Low testosterone / HRT / menopause support'],
+         ['steroid',   'Long-term corticosteroid use (> 3 mo)'],
+         ['metaOther', 'Other endocrine / hormone issue', /* ← free-text */ true],
+       ],
+     },
+     {
+       id: 'immune',
+       title: 'Have you ever been diagnosed with an immune or auto-immune condition?',
+       items: [
+         ['ra',   'Rheumatoid arthritis'],
+         ['sle',  'Systemic lupus'],
+         ['psa',  'Psoriasis / psoriatic arthritis'],
+         ['axspa','Ankylosing spondylitis / axial SpA'],
+         ['ibd',  'Inflammatory bowel (Crohn’s / UC)'],
+         ['celiac','Celiac disease'],
+         ['ms',   'Multiple sclerosis'],
+         ['sj',   'Sjögren’s syndrome'],
+         ['immOther','Other auto-immune', true],
+       ],
+     },
+     { id:'cancer',  title:'Have you ever been diagnosed with cancer?',  items:[['cancer','Type & year',true]] },
+          
+     {
+       id:'surgery',
+       title:'Have you had any major surgeries or implanted hardware?',
+      items:[
+         ['majorSx','Major surgery — Year',true],
+         ['joint',  'Joint replacement / metal hardware'],
+         ['spinal', 'Spinal fusion or disc implant'],
+         ['device', 'Other implanted device — Type & year',true],
+       ],
+     },
+     {
+       id:'neuro',
+       title: 'Do you have any neurological conditions or history?',
+       
+       items:[
+         ['seizure','Seizure disorder'],
+         ['neuroPathy', 'Neuropathy / nerve damage'],
+         ['tbi',    'Concussion / TBI history'],
+       ],
+     },
+     {
+       id:'respRenal',
+       title: 'Do you have any respiratory, kidney or liver conditions?',
+       
+       items:[
+         ['asthma','Asthma / COPD'],
+         ['ckd',   'Chronic kidney disease'],
+         ['liver', 'Liver disease / hepatitis'],
+       ],
+     },
+     {
+       id:'blood',
+       title:'Do you have any bleeding or clotting disorders?',
+       
+       items:[
+         ['bleed',  'Bleeding / clotting disorder'],
+         ['thinner','Currently on blood thinners'],
+       ],
+     },
+     {
+       id:'boneSkin',
+       title: 'Do you have any bone density or skin sensitivity issues?',
+      
+       items:[
+         ['osteo','Osteoporosis / osteopenia — Year',true],
+         ['photoNerve','Photosensitive migraines / seizures'],
+         ['photoSkin','Photosensitive skin condition'],
+       ],
+     },
+     {
+       id:'preg',
+       title: 'Are you currently pregnant or post-partum?',
+      
+       items:[
+         ['preg','Currently pregnant'],
+         ['pp',  'Post-partum (< 6 months)'],
+       ],
+     },
+   ];
+   
+   /* ------------------------------------------------------------------ */
+   /* 2 · COMPONENT                                                      */
+   /* ------------------------------------------------------------------ */
+   export default function HistoryStep({ data, setVal }) {
+     /* shorthand into the part of state this page owns */
+     const hx = data.history;
+   
+     /* -------------------------------------------------- helpers ----- */
+     const set = (k, v) => setVal(['history', k], v);
+   
+     /** yes / no radio    hx[<section id>] === true / false / undefined */
+     const YesNo = ({ sid }) => (
+       <div className="flex gap-6 mt-1 mb-2 text-sm">
+         {['No', 'Yes'].map((lbl, i) => (
+           <label key={lbl} className="flex items-center gap-1">
+             <input
+               type="radio"
+               name={`hx-${sid}`}
+               checked={hx[sid] === !!i}
+               onChange={() => set(sid, !!i)}
+             />
+             {lbl}
+           </label>
+         ))}
+       </div>
+     );
+   
+     /** row with a checkbox (and optional free-text field) */
+     const CheckRow = ({ k, label, free }) => (
+       <>
+         <label className="flex items-center gap-2 text-sm mb-1">
+           <input
+             type="checkbox"
+             checked={!!hx[k]}
+             onChange={() => set(k, !hx[k])}
+           />
+           {label}
+         </label>
+         {free && hx[k] && (
+           <input
+             className="border rounded w-full mb-2 p-1 text-sm"
+             placeholder="Details / year"
+             value={typeof hx[k] === 'string' ? hx[k] : ''}
+             onChange={e => set(k, e.target.value)}
+           />
+         )}
+       </>
+     );
+   
+     /* build the UI once – useMemo so JSX isn’t rebuilt on every keystroke */
+     const sections = useMemo(() => (
+       SECTIONS.map(sec => (
+         <div key={sec.id} className="mb-6">
+           <h3 className="font-semibold">{sec.title}</h3>
 
-  /* ――― small helpers ――― */
-  const flip = (key) => setVal(['history', key], !h[key]);
-  const write = (key) => (e) => setVal(['history', key], e.target.value);
+           <p className="text-sm">{sec.question}</p>
+   
+           {/* yes / no choice */}
+           <YesNo sid={sec.id} />
+   
+           {/* checklist appears only when “Yes” */}
+           {hx[sec.id] && (
+            <>
+              {/* hint line */}
+              <p className="text-xs text-gray-500 italic mb-1">
+                (check all that apply)
+              </p>
 
-  /* “None of the above” toggles everything else off */
-  const toggleNone = () => {
-    const cleared = Object.fromEntries(
-      Object.keys(h).map((k) => [k, typeof h[k] === 'boolean' ? false : ''])
-    );
-    cleared.none = !h.none;
-    setVal(['history'], cleared);
-  };
-
-  /* reusable checkbox row */
-  const Box = ({ k, label }) => (
-    <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" checked={h[k]} onChange={() => flip(k)} />
-      {label}
-    </label>
-  );
-
-  return (
-    <section className="space-y-6">
-      <h2 className="text-lg font-medium mb-2">
-        Health Background <span className="text-xs font-normal">(diagnoses / safety flags only)</span>
-      </h2>
-
-      {/* 1 — Heart & Vascular */}
-      <div>
-        <h3 className="font-semibold mb-1">Heart &amp; Vascular</h3>
-        <div className="space-y-1">
-          <Box k="heart"  label="Heart disease or stent" />
-          <Box k="bp"     label="High blood pressure" />
-          <Box k="clots"  label="History of blood clots / stroke" />
-          <Box k="pacer"  label="Pacemaker / defibrillator / heart-valve implant" />
-        </div>
-      </div>
-
-      {/* 2 — Metabolic & Hormone */}
-      <div>
-        <h3 className="font-semibold mb-1">Metabolic &amp; Hormone</h3>
-        <div className="space-y-1">
-          <Box k="diab"    label="Diabetes (type 1 / 2 / pre-diabetes)" />
-          <Box k="thyroid" label="Thyroid disorder" />
-          <Box k="steroid" label="Long-term steroid use" />
-        </div>
-      </div>
-
-      {/* 3 — Immune */}
-      <div>
-        <h3 className="font-semibold mb-1">Immune &amp; Auto-immune</h3>
-        <Box k="auto" label="Auto-immune diagnosis (RA, lupus, psoriasis…)" />
-        {h.auto && (
-          <input
-            type="text"
-            className="border rounded w-full mt-1 p-1 text-sm"
-            placeholder="Type of condition"
-            value={h.autoType}
-            onChange={write('autoType')}
-          />
-        )}
-      </div>
-
-      {/* 4 — Cancer */}
-      <div>
-        <h3 className="font-semibold mb-1">Cancer</h3>
-        <Box k="cancer" label="Past or current cancer diagnosis" />
-        {h.cancer && (
-          <input
-            type="text"
-            className="border rounded w-full mt-1 p-1 text-sm"
-            placeholder="Type & year"
-            value={h.cancerType}
-            onChange={write('cancerType')}
-          />
-        )}
-      </div>
-
-      {/* 5 — Surgeries & Implants */}
-      <div>
-        <h3 className="font-semibold mb-1">Surgeries &amp; Implants</h3>
-        <div className="space-y-1">
-          <Box k="surgery" label="Major surgery" />
-          {h.surgery && (
-            <input
-              type="text"
-              className="border rounded w-full mt-1 p-1 text-sm"
-              placeholder="Year & body area"
-              value={h.surgeryDetail}
-              onChange={write('surgeryDetail')}
-            />
+              {/* actual checklist */}
+              <div className="pl-4 border-l space-y-1">
+                {sec.items.map(([k, label, free]) => (
+                  <CheckRow key={k} k={k} label={label} free={free} />
+                ))}
+              </div>
+            </>
           )}
-          <Box k="joint"  label="Joint replacement / metal hardware" />
-          <Box k="spinal" label="Spinal fusion or disc implant" />
-        </div>
-      </div>
-
-      {/* 6 — Neurological */}
-      <div>
-        <h3 className="font-semibold mb-1">Neurological</h3>
-        <div className="space-y-1">
-          <Box k="seizure" label="Seizure disorder" />
-          <Box k="neuro"   label="Neuropathy / nerve damage" />
-          <Box k="tbi"     label="Concussion / TBI history" />
-        </div>
-      </div>
-
-      {/* 7 — Respiratory & Renal / Hepatic */}
-      <div>
-        <h3 className="font-semibold mb-1">Respiratory &amp; Renal / Hepatic</h3>
-        <div className="space-y-1">
-          <Box k="asthma" label="Asthma / COPD" />
-          <Box k="kidney" label="Chronic kidney disease" />
-          <Box k="liver"  label="Liver disease / hepatitis" />
-        </div>
-      </div>
-
-      {/* 8 — Blood & Healing */}
-      <div>
-        <h3 className="font-semibold mb-1">Blood &amp; Healing</h3>
-        <div className="space-y-1">
-          <Box k="bleed"   label="Bleeding / clotting disorder" />
-          <Box k="thinner" label="On blood thinners" />
-        </div>
-      </div>
-
-      {/* 9 — Pregnancy */}
-      <div>
-        <h3 className="font-semibold mb-1">Pregnancy (if applicable)</h3>
-        <div className="space-y-1">
-          <Box k="preg"       label="Currently pregnant" />
-          <Box k="postpartum" label="Post-partum (&lt; 6 months)" />
-        </div>
-      </div>
-
-      {/* None of the above */}
-      <label className="flex items-center gap-2 text-sm pt-3 border-t">
-        <input type="checkbox" checked={h.none} onChange={toggleNone} />
-        <span className={h.none ? 'font-semibold' : ''}>None of the above</span>
-      </label>
-
-      {/* Optional notes */}
-      <div className="mt-4">
-        <label className="block text-sm mb-1">
-          Anything else your MOCEAN team should know for your safety? <span className="text-xs">(optional)</span>
-        </label>
-        <textarea
-          rows={2}
-          className="border rounded w-full p-1 text-sm"
-          value={h.notes}
-          onChange={write('notes')}
-        />
-      </div>
-    </section>
-  );
-}
+         </div>
+       ))
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     ), [hx]);   //  ← rebuild only when history slice changes
+   
+     /* -------------------------------------------------- render ------ */
+     return (
+       <section className="space-y-6">
+         <h2 className="text-lg font-medium">
+           Health Background&nbsp;
+           <span className="text-xs font-normal">
+             (diagnoses / safety flags only)
+           </span>
+         </h2>
+   
+         {sections}
+   
+         {/* optional free-text notes */}
+         <div className="mt-4">
+           <label className="block text-sm mb-1">
+             Anything else your MOCEAN team should know?{' '}
+             <span className="text-xs">(optional)</span>
+           </label>
+           <textarea
+             rows={2}
+             className="border rounded w-full p-1 text-sm"
+             value={hx.notes ?? ''}
+             onChange={e => set('notes', e.target.value)}
+           />
+         </div>
+       </section>
+     );
+   }

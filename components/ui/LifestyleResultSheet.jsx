@@ -48,8 +48,28 @@ export default function LifestyleResultSheet({ life = {}, score }) {
     <section className="space-y-6">
       <h2 className="text-lg font-semibold">Lifestyle Score Breakdown</h2>
 
-      <div className="max-w-md mx-auto">
-        <Radar data={data} options={{ maintainAspectRatio: false, aspectRatio: 1 }} />
+      {/*  ➜ 400 × 400 (desktop) · 300 × 300 (mobile) */}
+      <div className="mx-auto w-full h-[400px] max-w-[400px] sm:h-[300px] sm:max-w-[300px]">
+      <Radar
+          data={data}
+          options={{
+            maintainAspectRatio: false,
+            aspectRatio: 1,
+            scales: {
+              r: {
+                min: 0,
+                max: 100,            // ■ clamp to 0-100 so no negatives appear
+                ticks: {
+                  stepSize: 20,      // 0 · 20 · 40 · 60 · 80 ·100
+                  callback: v => (v % 20 === 0 ? v : ''),
+                },
+                grid: { color: '#e2e8f0' }, // light gray rings
+                pointLabels: { font: { size: 12 } },
+              },
+            },
+            plugins: { legend: { display: false } }, // hide legend (1 dataset)
+          }}
+        />
       </div>
 
       <table className="w-full text-sm border">

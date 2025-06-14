@@ -1,21 +1,16 @@
-/** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
-  // ➊  Where Tailwind should look for class names
   content: [
     './pages/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
-    './Components/**/*.{js,jsx,ts,tsx}',
-    './styles/**/*.{css}',
+    './styles/**/*.{css}', 
   ],
-
-  // ➋  Design-token tweaks
   theme: {
     extend: {
       colors: {
-        ...colors,     // ← puts gray-50, slate-700, etc. back
-        coast: {       // ← your custom palette
+        ...colors, // ✅ includes gray-50, slate, etc.
+        coast: {
           50:  '#f1fafc',
           100: '#e0f4f7',
           200: '#c7e9ef',
@@ -30,7 +25,5 @@ module.exports = {
       },
     },
   },
-
-  // ➌  Plugins (leave empty for now)
   plugins: [],
-}
+};

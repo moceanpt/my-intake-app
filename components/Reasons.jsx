@@ -1,9 +1,8 @@
-/* components/Reasons.jsx ----------------------------------------- */
-import { Fragment } from 'react';
-import Chip from './ui/Chip';        // <- adjust path if needed
+// components/Reasons.jsx
+import Chip from './ui/Chip';
 
 const ALL = [
-  'Lasting pain relief',
+  'Pain relief / injury care',
   'Better posture & alignment',
   'Build strength & resilience',
   'Calm digestion & gut health',
@@ -17,29 +16,29 @@ const ALL = [
 
 export default function Reasons({ choices, setChoices }) {
   const toggle = (item) => {
-    setChoices((prev) => {
-      const arr = typeof prev === 'function' ? prev([]) : [...prev];
-      const i = arr.indexOf(item);
-      if (i > -1) arr.splice(i, 1);
-      else if (arr.length < 3) arr.push(item);
+    setChoices((prev = []) => {
+      const arr = [...prev];
+      const idx = arr.indexOf(item);
+      if (idx > -1) arr.splice(idx, 1);
+      else arr.push(item); 
       return arr;
     });
   };
 
-  const limitHit = choices.length >= 3;
+  const limitHit = false;  
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {ALL.map((item) => (
-        <Fragment key={item}>
-          <Chip
-            label={item}
-            active={choices.includes(item)}
-            disabled={limitHit && !choices.includes(item)}
-            onClick={() => toggle(item)}
-          />
-        </Fragment>
-      ))}
+    <div className="flex flex-col gap-2">
+    {ALL.map((item) => (
+      <Chip
+        key={item}
+        label={item}
+        active={choices.includes(item)}
+        disabled={false}
+        onClick={() => toggle(item)}
+        className=""  // Additional per-chip styling here if needed
+      />
+    ))}
     </div>
   );
 }

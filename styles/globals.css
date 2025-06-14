@@ -6,15 +6,19 @@
 /* -------------------- Global tweaks -------------------------- */
 @layer base {
   body {
-    /* soft gray page background + legible default text colour */
-    @apply bg-gray-50 text-slate-800 font-sans antialiased;
+    background-color: #f8fafc; /* slate-50 */
+    color: #0f172a;            /* slate-800 */
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 /* make an always-available “chip-active” helper */
 @layer components {
   .chip-active {
-    @apply bg-blue-600 text-white border-blue-600;
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    border: 1px solid #2563eb;
   }
 }
 
@@ -22,29 +26,37 @@
 input,
 select,
 textarea {
-  @apply border border-slate-300 rounded py-1 px-2 text-sm;
+  border: 1px solid #cbd5e1; /* slate-300 */
+  border-radius: 0.25rem; /* rounded */
+  padding: 0.25rem 0.5rem; /* py-1 px-2 */
+  font-size: 0.875rem; /* text-sm */
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  @apply outline-none ring-2 ring-blue-500/40 border-blue-500;
+  outline: none;
+  ring: 2px solid rgba(59, 130, 246, 0.4); /* ring-blue-500/40 */
+  border-color: #3b82f6; /* blue-500 */
 }
 
 /* Generic button hover / disabled */
 button:hover {
   filter: brightness(1.05);
 }
+
 button:disabled {
-  @apply opacity-60 cursor-not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* Make sure chip buttons keep their Tailwind colours intact */
+/* Ensure blue buttons keep solid color */
 button.bg-blue-600 {
-  @apply text-white shadow-none; /* keep solid blue on hover */
+  color: white;
+  box-shadow: none;
 }
 
-/* Allow any Tailwind gap / margin utilities on chips to work */
+/* Let chip layout classes like gap/margin work */
 button[class*="gap-"],
 button[class*="mb-"],
 button[class*="space-y-"] {

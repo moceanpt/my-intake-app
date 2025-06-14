@@ -1,21 +1,19 @@
-/* components/ui/Chip.jsx
-   ---------------------- */
-   export default function Chip({ label, active, disabled, onClick }) {
+/* components/ui/Chip.jsx */
+export default function Chip({ label, active, disabled, onClick, className = '' }) {
     return (
       <button
         type="button"
         onClick={onClick}
         disabled={disabled}
-        /* ✅ inline styles give us blue without Tailwind classes */
         style={
           active
-            ? { background: '#2563eb', color: '#fff', borderColor: '#2563eb' } // blue-600
+            ? { background: '#2563eb', color: '#fff', borderColor: '#2563eb' }
             : undefined
         }
         className={[
-          'px-3 py-1 rounded-full text-sm transition select-none',
-          'border',
+        'inline-flex px-3 py-1 text-sm rounded border text-left transition',
           disabled && !active ? 'opacity-40 cursor-not-allowed' : '',
+          className
         ].join(' ')}
       >
         {label}

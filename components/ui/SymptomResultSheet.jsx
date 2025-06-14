@@ -68,7 +68,8 @@ export default function SymptomResultSheet({ symptoms = {}, support = {} }) {
   return (
     <section className="space-y-6">
       <h2 className="text-lg font-semibold">Health Snapshot</h2>
-      <div className="max-w-md mx-auto">
+      {/*  ➜ 400 × 400 (desktop) · 300 × 300 (mobile) */}
+       <div className="mx-auto w-full h-[400px] max-w-[400px] sm:h-[300px] sm:max-w-[300px]">
         <Radar data={data} options={{ maintainAspectRatio: false, aspectRatio: 1 }} />
       </div>
       <table className="w-full text-sm border">

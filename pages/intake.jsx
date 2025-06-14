@@ -19,33 +19,67 @@ export default function Intake() {
     reasons: [],
     snapshot: { overall:5, energy:5, sleep:5, mood:5,
                 stress:5, pain:5, digestion:5, clarity:5 },
-    discomfort: { hasPain:'no', pain:0, areas:[], otherArea:'',
+    discomfort: { hasPain:'no', pain:0, areas:[], otherArea:'', numb:'no',
                   onset:'<1wk', progress:'same',
                   seen:'no', provider:'', trigger:'unsure', notes:'' },
                   history: {
-                    heart: false,         // heart disease / stent
-                    bp: false,            // high blood pressure
-                    clots: false,         // blood clots / stroke
-                    pacer: false,         // pacemaker / valve implant
+                    /* --- section Yes/No answers (undefined = not answered yet) --- */
+                    heart:      false,
+                    metabolic:  false,
+                    immune:     false,
+                    cancer:     false,
+                    surgery:    false,
+                    neuro:      false,   
+                    respRenal:  false,
+                    blood:      false,
+                    boneSkin:   false,
+                    preg:       false,
                   
-                    diab: false, thyroid: false, steroid: false,
+                    /* ---------- Heart & Vascular checklist ---------- */
+                    heart:  false,
+                    bp:     false,
+                    clots:  false,
+                    pacer:  false,
                   
-                    auto: false,   autoType: '',
+                    /* ---------- Metabolic & Hormone ---------- */
+                    diab1: false, diab2: false, prediab:false,
+                    hypo:false, hyper:false, pcos:false,
+                    hormone:false,          // low-T / HRT / menopause support
+                    steroid:false,
+                    metaOther:'',           // free-text
                   
-                    cancer: false, cancerType: '',
+                    /* ---------- Immune & Auto-immune ---------- */
+                    ra:false, lupus:false, psoriasis:false, axspa:false,
+                    ibd:false, celiac:false, ms:false, sjogren:false,
+                    immOther:'',
                   
-                    surgery: false, surgeryDetail: '',   // major surgery
-                    joint: false,  spinal: false,
+                    /* ---------- Cancer ---------- */
+                    cancer:false,
+                    cancerType:'',
                   
-                    seizure: false, neuro: false, tbi: false,
+                    /* ---------- Surgery / Implants ---------- */
+                    surgery:false,  surgeryDetail:'',
+                    joint:false,    spinal:false,
+                    otherImplant:false, implantDetail:'',
                   
-                    asthma: false, kidney: false, liver: false,
+                    /* ---------- Neurological ---------- */
+                    seizure:false, neuroPathy:false, tbi:false,
                   
-                    bleed: false,  thinner: false,
+                    /* ---------- Respiratory / Renal / Hepatic ---------- */
+                    asthma:false, kidney:false, liver:false,
                   
-                    preg: false, postpartum: false,
+                    /* ---------- Blood & Healing ---------- */
+                    bleed:false, thinner:false,
                   
-                    notes: '', none: false,
+                    /* ---------- Bone & Skin sensitivity ---------- */
+                    osteo:false,   osteoYear:'',
+                    photoNerve:false, photoSkin:false,
+                  
+                    /* ---------- Pregnancy ---------- */
+                    preg:false, postpartum:false,
+                  
+                    /* ---------- Misc ---------- */
+                    notes:'',
                   },
                   hc: {
                     msk:  [],         // Musculoskeletal
@@ -57,6 +91,34 @@ export default function Intake() {
                   },
                   hcNotes:  { msk:'', org:'', circ:'', ene:'', art:'', nerv:'' },
                   hcOpen:   { msk:false, org:false, circ:false, ene:false, art:false, nerv:false },
+                  hcSlider: {
+                    musculoskeletal            : { main: 10 },
+                    organ_digest_hormone_detox : { main: 10 },
+                    circulation                : { main: 10 },
+                  
+                    hc: {
+                      msk:  [],
+                      org:  [],
+                      circ: [],
+                      art:  [],
+                      nerv: [],
+                      /* new */
+                      energy: [],
+                      sleep:  [],
+                      mood:   [],
+                    },
+                    hcNotes: {
+                      msk:'', org:'', circ:'', art:'', nerv:'',
+                      /* new */
+                      energy:'', sleep:'', mood:'',
+                    },
+                    
+                    /* combined 3-slider pillar */
+                    energy_sleep_emotion       : { energy: 10, sleep: 10, mood: 10 }, // ✅
+                  
+                    articular_joint            : { main: 10 },
+                    nervous_system             : { main: 10 },
+                  },
     life: {
       /* 1 ─ Move */
       moveDays:   '0-1',
@@ -125,7 +187,13 @@ const toggle = (path, v) => setVal(path, prev => {
     <SnapshotStep    key="1" data={data} setVal={setVal} />,
     <HistoryStep     key="2" data={data} setVal={setVal} />,
     <HealthCheckStep key="3" data={data} setVal={setVal} toggle={toggle} />,
-    <LifestyleStep   key="4" data={data} setVal={setVal} toggle={toggle} />,
+    <LifestyleStep
+        key="4"
+        data={data}
+        setVal={setVal}
+        toggle={toggle}
+        onComplete={() => setStep((s) => s + 1)}
+      />,
   ];
   const [step,   setStep]   = useState(0);
   const [busy,   setBusy]   = useState(false);
@@ -169,17 +237,21 @@ if (result) {
 
 /* ──────────────── WIZARD VIEW ──────────────── */
 return (
-  <main className="p-6 max-w-xl mx-auto">
-    <Head><title>MOCEAN Intake</title></Head>
+  <main className="max-w-lg w-full mx-auto px-4 py-6">
+    <Head>
+      <title>MOCEAN Intake</title>
+    </Head>
 
     <Progress step={step} total={steps.length} />
     {steps[step]}
 
-    <div className="flex justify-between mt-6">
+    {/* navigation buttons */}
+    <div className="mt-6 flex justify-between gap-6">
       {step > 0 && (
         <button
-          className="px-4 py-2 bg-gray-200 rounded"
-          onClick={() => setStep(s => s - 1)}
+          type="button"
+          className="w-28 px-3 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          onClick={() => setStep((s) => s - 1)}
         >
           Back
         </button>
@@ -187,18 +259,20 @@ return (
 
       {step < steps.length - 1 ? (
         <button
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => setStep(s => s + 1)}
+          type="button"
+          className="w-28 px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          onClick={() => setStep((s) => s + 1)}
         >
           Next
         </button>
       ) : (
         <button
-          className="px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50"
+          type="button"
+          className="w-28 px-3 py-2 rounded bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
           onClick={submit}
           disabled={busy}
         >
-          {busy ? 'Submitting…' : 'Submit'}
+          {busy ? 'Wait…' : 'Submit'}
         </button>
       )}
     </div>

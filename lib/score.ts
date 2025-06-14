@@ -27,12 +27,12 @@ export function calcSymptomsScore(hc: Record<string, any> = {}): PillarScoreMap 
 }
 
 export function calcLifestyleScore(life = {}) {
-  const lifestylePillars = Array.from(new Set(
-    Object.values(questionSchema.lifestyle).flat().map(q => q.lifestyle_pillar)
+  const pillars = Array.from(new Set(
+    Object.values(questionSchema.lifestyle).flat().map(q => q.pillar)
   ));
 
-  const out = Object.fromEntries(lifestylePillars.map(p => [p, 0]));
-  const maxPts = Object.fromEntries(lifestylePillars.map(p => [p, 0]));
+  const out = Object.fromEntries(pillars.map(p => [p, 0]));
+  const maxPts = Object.fromEntries(pillars.map(p => [p, 0]));
 
   Object.values(questionSchema.lifestyle).forEach(section =>
     section.forEach(q => {
@@ -45,7 +45,7 @@ export function calcLifestyleScore(life = {}) {
         .filter(n => !isNaN(n));
       if (ptsArr.length === 0) return;
 
-      const pillar = q.lifestyle_pillar;
+      const pillar = q.pillar;
       maxPts[pillar] += Math.max(...ptsArr);
 
       if (q.type === 'single' && typeof val === 'string') {
@@ -64,7 +64,7 @@ export function calcLifestyleScore(life = {}) {
     })
   );
 
-  return Object.fromEntries(lifestylePillars.map(p => {
+  return Object.fromEntries(pillars.map(p => {
     const raw = out[p];
     const maxRaw = maxPts[p];
     const pct = maxRaw > 0 ? 100 - Math.round((raw / maxRaw) * 100) : 100;
