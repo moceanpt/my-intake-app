@@ -4,7 +4,6 @@ import Progress      from '../components/ui/Progress';
 
 /* step screens */
 import ReasonsStep     from '../components/steps/ReasonsStep';
-import SnapshotStep    from '../components/steps/SnapshotStep';
 import HistoryStep     from '../components/steps/HistoryStep';
 import HealthCheckStep from '../components/steps/HealthCheckStep';
 import LifestyleStep   from '../components/steps/LifestyleStep';
@@ -17,8 +16,7 @@ export default function Intake() {
   /* ---------- full form state ---------- */
   const [data, setData] = useState({
     reasons: [],
-    snapshot: { overall:5, energy:5, sleep:5, mood:5,
-                stress:5, pain:5, digestion:5, clarity:5 },
+    
     discomfort: { hasPain:'no', pain:0, areas:[], otherArea:'', numb:'no',
                   onset:'<1wk', progress:'same',
                   seen:'no', provider:'', trigger:'unsure', notes:'' },
@@ -112,7 +110,7 @@ export default function Intake() {
                       /* new */
                       energy:'', sleep:'', mood:'',
                     },
-                    
+
                     /* combined 3-slider pillar */
                     energy_sleep_emotion       : { energy: 10, sleep: 10, mood: 10 }, // ✅
                   
@@ -184,11 +182,10 @@ const toggle = (path, v) => setVal(path, prev => {
   /* ---------- step array ---------- */
   const steps = [
     <ReasonsStep     key="0" data={data} set={setData} setVal={setVal} />,
-    <SnapshotStep    key="1" data={data} setVal={setVal} />,
-    <HistoryStep     key="2" data={data} setVal={setVal} />,
-    <HealthCheckStep key="3" data={data} setVal={setVal} toggle={toggle} />,
+    <HistoryStep     key="1" data={data} setVal={setVal} />,
+    <HealthCheckStep key="2" data={data} setVal={setVal} toggle={toggle} />,
     <LifestyleStep
-        key="4"
+        key="3"
         data={data}
         setVal={setVal}
         toggle={toggle}
