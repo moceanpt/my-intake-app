@@ -7,7 +7,9 @@ export type MoceanPillar =
   | 'muscle'
   | 'organ'
   | 'circulation'
-  | 'emotion'
+  | 'energy'      
+  | 'sleep'       
+  | 'mood' 
   | 'articular'
   | 'nervous';
 
@@ -119,8 +121,9 @@ const questionSchema: QuestionSchema = {
           'Lab-high inflammation (CRP, ESR)',
           'Dizzy or light-headed on standing',
           'Frequent cold sores / slow immune recovery',
-          'High blood pressure',
+          'High / Low Blood pressure',
           'Cold intolerance',
+          'Snoring / possible sleep-apnoea',
         ],
         pillar: 'circulation',
         risk_logic: '1 per checked',
@@ -128,41 +131,28 @@ const questionSchema: QuestionSchema = {
       
     ],
 
-    energy_sleep_emotion: [
-      {
-        id: 'energy_symptoms',
-        prompt: 'Energy – check any that apply:',
-        type: 'multi',
-        options: [
-          'Persistent fatigue / energy crashes',
-          'Overheating easily or night-sweats',
-          'Low morning drive / low libido',
-          'Low stamina for daily tasks',
+    /* ──────────────────⚡ ENERGY ────────────────── */
+        energy: [
+          {
+            id: 'energy_symptoms',
+            prompt: 'Energy – select any that apply:',
+            type:  'multi',
+            options: [
+              'Persistent fatigue / energy crashes',
+              'Overheating easily or night-sweats',
+              'Low morning drive / low libido',
+              'Low stamina for daily tasks',
+              'Insomnia / trouble falling asleep',
+              'Wake up in the middle of the night',
+              'Wake unrefreshed / difficulty waking',
+              'Feeling overwhelmed or burned-out',
+              'Anxiety or panic attacks',
+              'Mood swings / emotional eating',
+            ],
+          },
         ],
-      },
-      {
-        id: 'sleep_symptoms',
-        prompt: 'Sleep – check any that apply:',
-        type: 'multi',
-        options: [
-          'Insomnia / trouble falling asleep',
-          'Wake up in the middle of the night',
-          'Wake unrefreshed / difficulty waking',
-          'Snoring / possible sleep-apnoea',
-        ],
-      },
-      {
-        id: 'mood_symptoms',
-        prompt: 'Mood – check any that apply:',
-        type: 'multi',
-        options: [
-          'Low / irritable baseline',
-          'Feeling overwhelmed or burned-out',
-          'Anxiety or panic attacks',
-          'Mood swings / emotional eating',
-        ],
-      },
-    ],
+
+  
   
     articular_joint: [
       {

@@ -27,17 +27,27 @@ function PillarSlider({ id, value, onChange, question, low, high }) {
         <span>{low}</span>
         <span>{high}</span>
       </div>
-    </div>
+{/* ─── new tick bar ─── */}
+     <div className="mt-0.5 flex justify-between text-[10px] leading-none
+                     text-gray-400 px-0.5 select-none">
+       {Array.from({ length: 11 }, (_, i) => (
+         <span key={i}>{i}</span>
+       ))}
+     </div>    
+    
+      </div>
   );
 }
 
 /* friendly card titles */
 const SECTION_LABEL = {
   musculoskeletal:             'Musculoskeletal',
-  organ_digest_hormone_detox:  'Digestion · Detox',
+  organ_digest_hormone_detox:  'Organ · Digestion',
   circulation:                 'Circulation',
-  energy_sleep_emotion:        'Energy · Sleep · Mood', 
-  articular_joint:             'Joints',
+  energy:                      'Energy · Emotion',
+  sleep:                       'Sleep',
+  mood:                        'Mood',
+  articular_joint:             'Articular Joints',
   nervous_system:              'Nervous System',
 };
 
@@ -61,13 +71,39 @@ const SLIDER_META = {
         low:'Cold limbs / swelling', high:'Warm, steady' },
     ],
   },
-  energy_sleep_emotion: {
+  energy: {
     items: [
-      { id:'energy', q:'Energy level?',  low:'Exhausted',   high:'Boundless' },
-      { id:'sleep',  q:'Sleep quality?', low:'Restless',    high:'Deep & rested' },
-      { id:'mood',   q:'Usual mood?',    low:'Low / irrit.',high:'Positive' },
+      {
+        id: 'main',
+        q: 'Energy level?',
+        low: 'Exhausted',
+        high: 'Boundless',
+      },
     ],
   },
+
+  sleep: {
+    items: [
+      {
+        id: 'main',
+        q: 'Sleep quality?',
+        low: 'Restless',
+        high: 'Deep & rested',
+      },
+    ],
+  },
+
+  mood: {
+    items: [
+      {
+        id: 'main',
+        q: 'Usual mood?',
+        low: 'Low / irritable',
+        high: 'Positive & uplifted',
+      },
+    ],
+  },
+
   articular_joint: {
     items: [
       { id:'main', q:'Overall joint comfort & mobility?',
@@ -128,11 +164,21 @@ function EnergySection({ data, setVal, toggle }) {
             <span>{ENERGY_META[subKey].low}</span>
             <span>{ENERGY_META[subKey].high}</span>
           </div>
+
+          {/* ─── new tick bar ─── */}
+     <div className="mt-0.5 flex justify-between text-[10px] leading-none
+                     text-gray-400 px-0.5 select-none">
+       {Array.from({ length: 11 }, (_, i) => (
+         <span key={i}>{i}</span>
+       ))}
+     </div>
         </div>
 
         {autoOpen && (
           <>
-            <p className="text-xs text-gray-500 -mt-1">(check all that apply)</p>
+            <p className="text-xs text-gray-500 -mt-1">
+             Please select all symptoms you’re experiencing
+           </p>
             <div className="flex flex-wrap gap-2 mb-2">
               {q.options.map((lbl,i) => {
                 const code = `${q.id}_${i}`;
@@ -192,12 +238,10 @@ const GenericSection = ({ cat, questions }) => {
     hcSlider[cat] ??
     Object.fromEntries(meta.items.map(it => [it.id, 10]));
 
-  const anyChip = hc[cat]?.length > 0;
-
-    /* TRUE  ⇢ any slider ≤ 7  OR  the user manually opened */
-    const autoOpen      = Object.values(slideVals).some(v => v <= 7);
-    const manuallyOpen  = hcOpen[cat] ?? false;
-    const isOpen        = autoOpen || manuallyOpen;
+    const anyChip = hc[cat]?.length > 0;
+    
+        /* open only when any slider is ≤ 7  (no manual switch) */
+        const isOpen = Object.values(slideVals).some(v => v <= 7);
 
     return (
       <div className="border rounded p-4 space-y-3">
@@ -216,22 +260,13 @@ const GenericSection = ({ cat, questions }) => {
           />
         ))}
 
-        {/* manual show / hide switch (visible only if autoOpen false) */}
-        {!autoOpen && (
-          <label className="flex items-center gap-2 text-xs">
-            <input
-              type="checkbox"
-              checked={manuallyOpen}
-              onChange={() => setOpen(cat, !manuallyOpen)}
-            />
-            <span>{isOpen ? 'Hide details' : 'Show details'}</span>
-          </label>
-        )}
-
+       
         {/* chips + note */}
         {isOpen && (
           <>
-            <p className="text-xs text-gray-500 -mt-1">(check all that apply)</p>
+            <p className="text-xs text-gray-500 -mt-1">
+                 Please select all symptoms you’re experiencing
+            </p>
 
             {questions.map((q, idx) => (
               <div key={q.id} className="space-y-1 mb-2">
@@ -273,7 +308,7 @@ const GenericSection = ({ cat, questions }) => {
 return (
   <section className="space-y-6">
     <h2 className="text-lg font-medium mb-2">
-      5. MOCEAN Health Check
+      MOCEAN Health Check
     </h2>
 
     {/* one card per pillar */}

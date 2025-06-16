@@ -79,44 +79,42 @@ export default function Intake() {
                     /* ---------- Misc ---------- */
                     notes:'',
                   },
-                  hc: {
-                    msk:  [],         // Musculoskeletal
-                    org:  [],         // Organ
-                    circ: [],         // Circulatory
-                    ene:  [],         // Energy & Emotional
-                    art:  [],         // Articular joints
-                    nerv: [],         // Nervous
-                  },
-                  hcNotes:  { msk:'', org:'', circ:'', ene:'', art:'', nerv:'' },
-                  hcOpen:   { msk:false, org:false, circ:false, ene:false, art:false, nerv:false },
-                  hcSlider: {
-                    musculoskeletal            : { main: 10 },
-                    organ_digest_hormone_detox : { main: 10 },
-                    circulation                : { main: 10 },
-                  
+                  /* ---------- Health-Check slices ---------- */
                     hc: {
-                      msk:  [],
-                      org:  [],
-                      circ: [],
-                      art:  [],
-                      nerv: [],
-                      /* new */
-                      energy: [],
-                      sleep:  [],
-                      mood:   [],
-                    },
-                    hcNotes: {
-                      msk:'', org:'', circ:'', art:'', nerv:'',
-                      /* new */
-                      energy:'', sleep:'', mood:'',
+                      musculoskeletal            : [],
+                      organ_digest_hormone_detox : [],
+                      circulation                : [],
+                      energy                     : [],   // ⚡ NEW
+                      articular_joint            : [],
+                      nervous_system             : [],
                     },
 
-                    /* combined 3-slider pillar */
-                    energy_sleep_emotion       : { energy: 10, sleep: 10, mood: 10 }, // ✅
-                  
-                    articular_joint            : { main: 10 },
-                    nervous_system             : { main: 10 },
-                  },
+                    hcNotes: {
+                      musculoskeletal            : '',
+                      organ_digest_hormone_detox : '',
+                      circulation                : '',
+                      energy                     : '',
+                      articular_joint            : '',
+                      nervous_system             : '',
+                    },
+
+                    hcOpen: {
+                      musculoskeletal            : false,
+                      organ_digest_hormone_detox : false,
+                      circulation                : false,
+                      energy                     : false,
+                      articular_joint            : false,
+                      nervous_system             : false,
+                    },
+
+                    hcSlider: {
+                      musculoskeletal            : { main: 10 },
+                      organ_digest_hormone_detox : { main: 10 },
+                      circulation                : { main: 10 },
+                      energy                     : { main: 10 },   // ⚡
+                      articular_joint            : { main: 10 },
+                      nervous_system             : { main: 10 },
+                    },   // ← **comma** before life
     life: {
       /* 1 ─ Move */
       moveDays:   '0-1',
@@ -227,9 +225,17 @@ const submit = async () => {
   }
 };   
 
+/* ----------------------------------------------
+   helper: return from ResultView to Health-Check
+---------------------------------------------- */
+const goBackToHealth = () => {
+  setResult(null);   // hide ResultView
+  setStep(2);        // 2 = index of the Health-Check step
+};
+
 /* ──────────────── RESULT VIEW ──────────────── */
 if (result) {
-  return <ResultView data={result} />;
+  return <ResultView data={result} onBack={goBackToHealth} />;
 }
 
 /* ──────────────── WIZARD VIEW ──────────────── */

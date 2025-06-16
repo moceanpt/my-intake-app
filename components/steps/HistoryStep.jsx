@@ -195,10 +195,7 @@
        <section className="space-y-6">
          <h2 className="text-lg font-medium">
            Health Background&nbsp;
-           <span className="text-xs font-normal">
-             (diagnoses / safety flags only)
-           </span>
-         </h2>
+                    </h2>
    
          {sections}
    
