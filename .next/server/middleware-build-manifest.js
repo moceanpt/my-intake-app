@@ -24,10 +24,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/intake.js"
     ],
-    "/staff/review/[id]": [
+    "/staff/enter/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/staff/review/[id].js"
+      "static/chunks/pages/staff/enter/[id].js"
     ]
   },
   "ampFirstPages": []

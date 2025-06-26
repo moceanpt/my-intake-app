@@ -1,4 +1,4 @@
-/Users/moceanpt/my-intake-app/pages/staff/enter/[id].jsx
+// pages/staff/enter/[id].jsx  
 
 import { useRouter } from "next/router";
 import AssessmentEntryStep from "@/components/steps/AssessmentEntryStep";
