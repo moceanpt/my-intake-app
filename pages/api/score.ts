@@ -1,90 +1,79 @@
- // pages/api/score.ts
+// pages/api/score.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/prisma';
-import {
-  calcLifestyleScore,
-  normalizeScore              // ← still used for lifestyle 0-10
-} from '@/lib/score';
+import prisma                     from '@/lib/prisma';
+import { generatePlan }           from '@/lib/generatePlan';
 
-import {
-  calcStrainCounts,
-  toStrainPct,
-  toRadar10,                // ← the new helpers you added
-  PILLAR_KEYS               // inferred union of pillar names
-} from '@/lib/score';
-
-import tracks from '@/data/opt_track_map.json';
-
-/* map long pillar → 3-letter track in tracks.json */
-const PILLAR_TO_CODE: Record<string, keyof typeof tracks> = {
-  musculoskeletal:           'msk',
-  organ_digest_hormone_detox:'org',
-  circulation:               'circ',
-  energy:                    'ene',
-  sleep:                     'ene',
-  mood:                      'ene',
-  articular_joint:           'art',
-  nervous_system:            'nerv',
-};
-
+/**
+ * POST /api/score
+ *
+ * Body may contain
+ * ──────────────────────────────────────────────────────────────
+ * {
+ *   hc:          Record<string,string[]>   // health-check chips
+ *   life:        Record<string,any>        // lifestyle answers
+ *   snapshot?:   Record<string,number>     // quick-slider page
+ *   metrics?:    Record<string,number>     // OCR metrics
+ *   frequency?:  number                    // binaural Hz
+ *   submissionId?: string                  // load saved intake
+ * }
+ *
+ * Response: PlanResult  (see generatePlan.ts)
+ * ──────────────────────────────────────────────────────────────
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  /* ── POST only ─────────────────────────────────────────────── */
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'POST only' });
   }
 
-  /* ----------------------------------------------------------- */
-  /* 1 ▸ pull hc / life from body or database (same as before)   */
-  /* ----------------------------------------------------------- */
-  let { hc, life, submissionId } = req.body;
+  try {
+    /* ── pull payload or load from DB ────────────────────────── */
+    let {
+      hc,
+      life,
+      snapshot   = {},
+      metrics    = {},
+      frequency,
+      submissionId,
+    } = req.body ?? {};
 
-  if (!hc || !life) {
-    if (!submissionId) {
-      return res.status(400).json({ error: 'missing intake data' });
+    /* Load saved submission if hc / life not provided */
+    if ((!hc || !life) && submissionId) {
+      const saved = await prisma.intakeSubmission.findUnique({
+        where: { id: submissionId },
+      });
+      if (!saved)
+        return res.status(404).json({ error: 'submission not found' });
+
+      hc   = saved.hc   as any;
+      life = saved.life as any;
+      // (snapshot / metrics could also be stored & retrieved here)
     }
-    const sub = await prisma.intakeSubmission.findUnique({
-      where: { id: submissionId },
+
+    if (!hc || !life) {
+      return res
+        .status(400)
+        .json({ error: 'missing hc / life and no submissionId supplied' });
+    }
+
+    /* ── generate the blended radar + full plan ──────────────── */
+    const plan = generatePlan({
+      hc,
+      life,
+      snapshot,
+      metrics,
+      frequency,
     });
-    if (!sub) return res.status(404).json({ error: 'not found' });
-    hc = sub.hc as any;
-    life = sub.life as any;
+
+    /* ── send it back ────────────────────────────────────────── */
+    return res.status(200).json(plan);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[api/score] fatal:', err);
+    return res.status(500).json({ error: 'internal error' });
   }
-
-  /* ----------------------------------------------------------- */
-  /* 2 ▸ LIFESTYLE  ⟶ 0-10 radar (unchanged)                    */
-  /* ----------------------------------------------------------- */
-  const rawLifestyle   = calcLifestyleScore(life);  // 0 – 100 %
-  const lifestyleRadar = normalizeScore(rawLifestyle); // 0 – 10
-
-  /* ----------------------------------------------------------- */
-  /* 3 ▸ HEALTH-CHECK                                           */
-  /*     raw → % strain → 0-10 radar                            */
-  /* ----------------------------------------------------------- */
-  const rawCounts    = calcStrainCounts(hc);     // how many chips
-  const strainPct    = toStrainPct(rawCounts);   // 0 – 100 %
-  const healthRadar  = toRadar10(strainPct);     // 10 good → 0 bad
-
-  /* ----------------------------------------------------------- */
-  /* 4 ▸ Pick top-2 focus tracks                                */
-  /*     (highest strain percentage = biggest opportunity)      */
-  /* ----------------------------------------------------------- */
-  const focus = (Object.entries(strainPct) as [string, number][])
-    .sort((a, b) => b[1] - a[1])        // highest % first
-    .slice(0, 2)
-    .map(([pillar]) => {
-      const code = PILLAR_TO_CODE[pillar] ?? '';
-      return tracks[code]?.primary ?? `Focus on ${pillar}`;
-    });
-
-  /* ----------------------------------------------------------- */
-  /* 5 ▸ respond                                                */
-  /* ----------------------------------------------------------- */
-  return res.status(200).json({
-    health:    healthRadar,     // 0-10 scores for the radar
-    lifestyle: lifestyleRadar,  // 0-10 lifestyle radar
-    focus,                      // 2 personalised track titles
-  });
 }

@@ -29,7 +29,7 @@
          ['pcos',      'Endometriosis and/or PCOS'],
          ['hormone',   'Low testosterone / HRT / menopause support'],
          ['steroid',   'Long-term corticosteroid use (> 3 mo)'],
-         ['metaOther', 'Other endocrine / hormone issue', /* ← free-text */ true],
+         ['metaOther', 'Other endocrine / hormone issue'],
        ],
      },
      {
@@ -44,19 +44,19 @@
          ['celiac','Celiac disease'],
          ['ms',   'Multiple sclerosis'],
          ['sj',   'Sjögren’s syndrome'],
-         ['immOther','Other auto-immune', true],
+         ['immOther','Other auto-immune'],
        ],
      },
-     { id:'cancer',  title:'Have you ever been diagnosed with cancer?',  items:[['cancer','Type & year',true]] },
+     { id:'cancer',  title:'Have you ever been diagnosed with cancer?' },
           
      {
        id:'surgery',
        title:'Have you had any major surgeries or implanted hardware?',
       items:[
-         ['majorSx','Major surgery — Year',true],
+         ['majorSx','Major surgery'],
          ['joint',  'Joint replacement / metal hardware'],
          ['spinal', 'Spinal fusion or disc implant'],
-         ['device', 'Other implanted device — Type & year',true],
+         ['device', 'Other'],
        ],
      },
      {
@@ -93,7 +93,7 @@
        title: 'Do you have any bone density or skin sensitivity issues?',
       
        items:[
-         ['osteo','Osteoporosis / osteopenia — Year',true],
+         ['osteo','Osteoporosis / osteopenia'],
          ['photoNerve','Photosensitive migraines / seizures'],
          ['photoSkin','Photosensitive skin condition'],
        ],
@@ -179,10 +179,10 @@
 
               {/* actual checklist */}
               <div className="pl-4 border-l space-y-1">
-                {sec.items.map(([k, label, free]) => (
-                  <CheckRow key={k} k={k} label={label} free={free} />
-                ))}
-              </div>
+              {(sec.items || []).map(([k, label]) => (
+                <CheckRow key={k} k={k} label={label} />
+              ))}
+            </div>
             </>
           )}
          </div>

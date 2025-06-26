@@ -1,127 +1,135 @@
 /* ------------------------------------------------------------------
    lib/generatePlan.ts
-   High-level: intake → radar → optimisation targets → plan object
+   ------------------------------------------------------------------
+   ▸ builds             ① subjective radar  (sliders + chips)
+                        ② objective radar   (per-device modules)
+                        ③ lifestyle radar   (Move / Rest …)
+   ▸ derives optimisation buckets            (band-scored)
 ------------------------------------------------------------------- */
 
 import {
-    calcStrainCounts,
-    toStrainPct,
-    toRadar10,
+    buildSubjectiveRadar,
     calcLifestyleScore,
+    normalizeScore,
   } from './score';
   
-  /* ---------- inbound shape (same keys your /api/intake stores) ---- */
+  import { scoreObjective }    from './objective';       // NEW registry
+  import { band }              from './objective/utils'; // shared helper
+  
+  /* ---------- inbound ------------------------------------------------ */
   export interface PlanInput {
-    hc: Record<string, string[]>;        // health-check chips
-    life: Record<string, any>;           // lifestyle answers
-    snapshot?: Record<string, number>;   // quick slider page
-    history?: Record<string, any>;
-    discomfort?: Record<string, any>;
-    reasons?: string[];
-    metrics?: Record<string, number>;    // OCR’d device metrics
-    frequency?: number;                  // binaural frequency Hz
+    hc        : Record<string, string[]>;               // symptom chips
+    hcSlider ?: Record<string, { main: number }>;       // slider values
+    life      : Record<string, any>;                    // lifestyle answers
+    snapshot ?: Record<string, number>;                 // quick slider page
+    metrics  ?: Record<string, number>;                 // InBody / HRV …
+    frequency?: number;                                 // binaural Hz
   }
   
-  /* ---------- outbound structure sent to Result page -------------- */
+  /* ---------- outbound ----------------------------------------------- */
   export interface PlanResult {
-    radar: Record<string, number>;       // 0-10 health spokes
-    lifestyle: Record<string, number>;   // 0-10 lifestyle spokes
-    optimisation: string[];              // highest-priority buckets
-    services: string[];                  // “MOCEAN Therapy”, etc.
-    goals: { goal: string; tips: string[] }[];
-    frequency?: number;
-    note?: string;                       // “C note” etc.
-    color?: string;                      // “Indigo” etc.
-    retestIn: string;                    // “8–12 weeks”
+    radarSubjective : Record<string, number>;  // 0-10 ints
+    radarObjective  : Record<string, number>;  // 0-10 ints (all 10 if none)
+    lifestyle       : Record<string, number>;  // 0-10 ints
+    optimisation    : string[];
+    services        : string[];
+    goals           : { goal: string; tips: string[] }[];
+    frequency?      : number;
+    note?           : string;
+    color?          : string;
+    retestIn        : string;
   }
   
-  /* ---------- helper: frequency ➜ colour / note ------------------- */
+  /* ---------- helpers ------------------------------------------------ */
   function mapFrequency(hz?: number) {
-    if (!hz) return { note: '', color: '' };
-    if (hz >= 420 && hz <= 444) return { note: 'A', color: 'Indigo' };
-    if (hz >= 524 && hz <= 532) return { note: 'C', color: 'Green' };
-    if (hz >= 638 && hz <= 650) return { note: 'D', color: 'Turquoise' };
-    return { note: 'Unknown', color: 'Gray' };
+    if (!hz) return { note:'', color:'' };
+    if (hz>=420 && hz<=444) return { note:'A', color:'Indigo'    };
+    if (hz>=524 && hz<=532) return { note:'C', color:'Green'     };
+    if (hz>=638 && hz<=650) return { note:'D', color:'Turquoise' };
+    return { note:'Unknown', color:'Gray' };
+  }
+  
+  /* ---------- subjective → bucket pts -------------------------------- */
+  function bucketFromSubjective(
+    sub      : Record<string,number>,
+    lifestyle: Record<string,number>,
+    snap     : Record<string,number>
+  ){
+    const b = { cellular:0, energy:0, gut:0, stress:0,
+                circulation:0, brain:0, physical:0, performance:0 };
+  
+    b.physical    += band(sub.musculoskeletal);
+    b.energy      += band(sub.energy);
+    b.circulation += band(sub.circulation);
+    b.stress      += band(lifestyle.stress ?? 10);
+  
+    if (snap.energy !== undefined) b.energy += band(snap.energy);
+    return b;
   }
   
   /* ------------------------------------------------------------------
-     MAIN – turn raw intake + metrics into a plan object
+     MAIN
   ------------------------------------------------------------------- */
   export function generatePlan(input: PlanInput): PlanResult {
     const {
       hc,
+      hcSlider = {},
       life,
       snapshot = {},
-      metrics = {},
+      metrics  = {},
       frequency,
     } = input;
   
-    /* 1 ▸ subjective radar (M-O-C-E-A-N) -------------------------- */
-    const rawCounts = calcStrainCounts(hc);
-    const strainPct = toStrainPct(rawCounts);
-    const radar     = toRadar10(strainPct);     // 10 good → 0 bad
+    /* 1 ▸ health radars --------------------------------------------- */
+    const radarSubjective = buildSubjectiveRadar(hc, hcSlider);   // 0-10 ints
+    const { radar: radarObjective, bucket: objB } = scoreObjective(metrics);
   
-    /* 2 ▸ lifestyle radar (0-10) ----------------------------------- */
-    const lifestyle = calcLifestyleScore(life); // already 0-10 in your helper
+    /* 2 ▸ lifestyle radar ------------------------------------------- */
+    const lifestyle = normalizeScore(calcLifestyleScore(life));   // 0-10 ints
   
-    /* 3 ▸ optimisation buckets ------------------------------------- */
-    const bucket: Record<string, number> = {
-      cellular: 0,
-      energy: 0,
-      gut: 0,
-      stress: 0,
-      circulation: 0,
-      brain: 0,
-      physical: 0,
-      performance: 0,
-    };
+    /* 3 ▸ optimisation buckets -------------------------------------- */
+    const subB = bucketFromSubjective(radarSubjective, lifestyle, snapshot);
   
-    // ←-- heuristics: tweak / extend freely
-    if (metrics.phase_angle && metrics.phase_angle < 5.5) bucket.cellular += 1;
-    if (metrics.vfa && metrics.vfa > 100)                 bucket.gut      += 1;
-    if (metrics.rmssd && metrics.rmssd < 30)              bucket.stress   += 1;
-    if (lifestyle.stress && lifestyle.stress >= 5)        bucket.stress   += 1;
-    if (snapshot.energy && snapshot.energy <= 5)          bucket.energy   += 1;
-    if (radar.musculoskeletal && radar.musculoskeletal < 6) bucket.physical += 1;
+    const combined: Record<keyof typeof subB, number> = { ...subB };
+    (Object.keys(objB) as (keyof typeof objB)[])
+      .forEach(k => combined[k] += objB[k]);
   
-    const optimisation = Object.entries(bucket)
+    const optimisation = Object
+      .entries(combined)
       .filter(([, n]) => n > 0)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 4)
       .map(([k]) => `${k[0].toUpperCase()}${k.slice(1)} Optimisation`);
   
-    /* 4 ▸ service recommendations ---------------------------------- */
+    /* 4 ▸ service suggestions --------------------------------------- */
     const services: string[] = [];
-    if (Object.values(radar).some(v => v < 5)) services.push('MOCEAN Therapy');
-    if (radar.organ_digest_hormone_detox < 5 || radar.energy < 5)
+    if (Object.values(radarSubjective).some(v => v < 5))
+      services.push('MOCEAN Therapy');
+    if (radarSubjective.organ_digest_hormone_detox < 5 ||
+        radarSubjective.energy < 5)
       services.push('Acupuncture');
-    if (radar.circulation < 5 || metrics.ecw_tbw && metrics.ecw_tbw > 0.39)
+    if (radarSubjective.circulation < 5 ||
+        (metrics.ecw_tbw && metrics.ecw_tbw > 0.39))
       services.push('ICOONE Lymphatic');
   
-    /* 5 ▸ goal / tip snippets -------------------------------------- */
+    /* 5 ▸ simple demo goals ----------------------------------------- */
     const goals: PlanResult['goals'] = [];
     if (metrics.vfa && metrics.vfa > 100)
-      goals.push({
-        goal: 'Reduce visceral fat',
-        tips: ['Anti-inflammatory plate', 'Core strength', '7-9 h sleep'],
-      });
+      goals.push({ goal:'Reduce visceral fat',
+                   tips:['Anti-inflammatory plate','Core strength','7‒9 h sleep']});
     if (metrics.phase_angle && metrics.phase_angle < 5.5)
-      goals.push({
-        goal: 'Improve cellular resilience',
-        tips: ['Electrolyte water', 'Daily movement', 'Deep sleep routine'],
-      });
+      goals.push({ goal:'Improve cellular resilience',
+                   tips:['Electrolyte water','Daily movement','Deep-sleep routine']});
     if (snapshot.sleep && snapshot.sleep <= 5)
-      goals.push({
-        goal: 'Upgrade sleep quality',
-        tips: ['No screens 1 h before bed', 'Fixed bedtime', 'Breathing drill'],
-      });
+      goals.push({ goal:'Upgrade sleep quality',
+                   tips:['No screens 1 h before bed','Fixed bedtime','Breathing drill']});
   
-    /* 6 ▸ frequency mapping ---------------------------------------- */
+    /* 6 ▸ wrap-up ---------------------------------------------------- */
     const { note, color } = mapFrequency(frequency);
   
-    /* 7 ▸ ship it --------------------------------------------------- */
     return {
-      radar,
+      radarSubjective,
+      radarObjective,
       lifestyle,
       optimisation,
       services,

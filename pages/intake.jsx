@@ -1,25 +1,75 @@
+/* ------------------------------------------------------------------
+   pages/intake.jsx  (client wizard)
+------------------------------------------------------------------- */
 import { useState } from 'react';
 import Head          from 'next/head';
-import Progress      from '../components/ui/Progress';
+import Progress      from '@/components/ui/Progress';
 
-/* step screens */
-import ReasonsStep     from '../components/steps/ReasonsStep';
-import HistoryStep     from '../components/steps/HistoryStep';
-import HealthCheckStep from '../components/steps/HealthCheckStep';
-import LifestyleStep   from '../components/steps/LifestyleStep';
-import ResultSheet from '../components/ui/ResultSheet'
-import { calcLifestyleScore } from '@/lib/score';
-import LifestyleResultSheet from '@/components/ui/LifestyleResultSheet';
-import ResultView from '@/components/ResultView';
+import ReasonsStep      from '@/components/steps/ReasonsStep';
+import HistoryStep      from '@/components/steps/HistoryStep';
+import HealthCheckStep  from '@/components/steps/HealthCheckStep';
+import LifestyleStep    from '@/components/steps/LifestyleStep';
+import ThankYouStep     from '@/components/steps/ThankYouStep';
 
+/* ──────────────────────────────────────────────────────────
+   Lifestyle template (used when the client opts-in)
+   ────────────────────────────────────────────────────────── */
+const defaultLifestyle = {
+  /* 1 – Move */
+  moveDays: '0-1',
+  moveLen : '<20',
+  moveTypes: [],
+  steps: '',
+  moveBarrier: '',
+  supplements: [],
+
+  /* 2 – Work & rest */
+  work : 'desk',
+  sleep: '5-7',
+  screen: 'nightly',
+  unwind: [],
+  otherUnwind: '',
+
+  /* 3 – Hydration */
+  water: '',
+  caf  : '0',
+  soda : 'none',
+  alc  : 'never',
+
+  /* 4 – Nourishment */
+  meals : '3',
+  produce: '2-3',
+  protein: 'some',
+  sugar  : 'few',
+  cookRatio: 'cook',
+  lastMeal: '',
+  dietApproach: [],
+  otherApproach: '',
+
+  /* 5 – Stress */
+  stressEat  : 'same',
+  stressReset: [],
+  stressScore: 5,
+
+  /* 6 – Recovery */
+  recovery: [],
+
+  /* misc */
+  otherMove: '',
+};
+
+/* =================================================================
+   COMPONENT
+================================================================= */
 export default function Intake() {
-  /* ---------- full form state ---------- */
+
+  /* ---------- master state ---------- */
   const [data, setData] = useState({
-    reasons: [],
-    
-    discomfort: { hasPain:'no', pain:0, areas:[], otherArea:'', numb:'no',
-                  onset:'<1wk', progress:'same',
-                  seen:'no', provider:'', trigger:'unsure', notes:'' },
+    /* -------------- goals & medical -------------- */
+    reasons    : [],
+    discomfort : { hasPain:'no', pain:0, areas:[], otherArea:'', numb:'no',
+                   onset:'<1wk', progress:'same',
+                   seen:'no', provider:'', trigger:'unsure', notes:'' },
                   history: {
                     /* --- section Yes/No answers (undefined = not answered yet) --- */
                     heart:      false,
@@ -115,163 +165,177 @@ export default function Intake() {
                       articular_joint            : { main: 10 },
                       nervous_system             : { main: 10 },
                     },   // ← **comma** before life
-    life: {
-      /* 1 ─ Move */
-      moveDays:   '0-1',
-      moveLen:    '<20',
-      moveTypes:  [],
-      steps:      '',
-      moveBarrier:'',
-      supplements: [], 
-  
-      /* 2 ─ Work & rest */
-      work:       'desk',
-      sleep:      '5-7',
-      screen:     'nightly',
-      unwind:     [],
-      otherUnwind:'',
-  
-      /* 3 ─ Hydration & boosters */
-      water: '',
-      caf:   '0',
-      soda:  'none',
-      alc:   'never',
-  
-      /* 4 ─ Nourishment */
-      meals:        '3',
-      produce:      '2-3',
-      protein:      'some',
-      sugar:        'few',
-      cookRatio:    'cook',
-      lastMeal:     '',
-      dietApproach: [],
-      otherApproach:'',
-  
-      /* 5 ─ Stress & mind-body */
-      stressEat:   'same',
-      stressReset: [],
-      stressScore: 5,
-  
-      /* 6 ─ Recovery & self-care */
-      recovery: [],
-  
-      /* misc */
-      otherMove: '',
-    },
-  
-  });
+    
 
-  /* helpers ------------------------------------------------ */
+/* -------------- lifestyle -------------- */
+life      : {},     // empty until client says “yes”
+lifeOptIn : null,   // null = undecided
+});
+
+
+   /* ---------- helpers ---------- */
 const setVal = (path, v) =>
   setData(prev => {
+    /* always treat path as array */
+    const parts = Array.isArray(path) ? path : [path];
+
     const copy = structuredClone(prev);
-    let cur = copy;
-    path.slice(0, -1).forEach(k => (cur = cur[k]));
-    cur[path.at(-1)] = typeof v === 'function' ? v(cur[path.at(-1)]) : v;
+    let cur    = copy;
+    parts.slice(0, -1).forEach(k => { cur = cur[k]; });
+
+    /* if the leaf does not exist yet, initialise it with
+       a sensible default so the updater function won’t explode */
+    const leaf   = cur[parts.at(-1)];
+    const newVal = typeof v === 'function' ? v(leaf) : v;
+    cur[parts.at(-1)] = newVal;
+
     return copy;
   });
 
-const toggle = (path, v) => setVal(path, prev => {
-  const s = new Set(prev);
-  s.has(v) ? s.delete(v) : s.add(v);
-  return [...s];
-});
+const toggle = (path, value) =>
+  setVal(path, prev => {
+    /* ensure we always toggle on an array */
+    const arr = Array.isArray(prev) ? prev : [];
 
-  /* ---------- step array ---------- */
-  const steps = [
-    <ReasonsStep     key="0" data={data} set={setData} setVal={setVal} />,
-    <HistoryStep     key="1" data={data} setVal={setVal} />,
-    <HealthCheckStep key="2" data={data} setVal={setVal} toggle={toggle} />,
-    <LifestyleStep
-        key="3"
-        data={data}
-        setVal={setVal}
-        toggle={toggle}
-        onComplete={() => setStep((s) => s + 1)}
-      />,
-  ];
-  const [step,   setStep]   = useState(0);
-  const [busy,   setBusy]   = useState(false);
-  const [result, setResult] = useState(null); 
+    const set = new Set(arr);
+    set.has(value) ? set.delete(value) : set.add(value);
+    return [...set];
+  });
 
 
-  /* ------------------------------------------------------ */
-/* SUBMIT HANDLER – keep the closing brace right here ⬇︎  */
-/* ------------------------------------------------------ */
+ /* ────────────────────────────────────────────────────────
+     2. Lifestyle-opt-in micro-step
+     ──────────────────────────────────────────────────────── */
+     function LifestyleOptInStep({ onYes, onNo }) {
+      return (
+        <section className="space-y-6">
+          <h2 className="text-lg font-semibold">Optional Lifestyle Survey</h2>
+          <p>
+            These extra questions take about&nbsp;5&nbsp;minutes and help us tailor
+            your plan. &nbsp;Would you like to fill them in?
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="px-4 py-2 rounded bg-blue-600 text-white"
+              onClick={() => {
+                setVal(['lifeOptIn'], true);
+                setVal(['life'], defaultLifestyle);
+                onYes();            // advance to LifestyleStep
+              }}
+            >
+              Yes, let’s do it
+            </button>
+  
+            <button
+              className="px-4 py-2 rounded bg-gray-300"
+              onClick={() => {
+                setVal(['lifeOptIn'], false);
+                setVal(['life'], {});  // keep empty
+                onNo();               // skip ahead
+              }}
+            >
+              No thanks
+            </button>
+          </div>
+        </section>
+      );
+    }
+  
+
+ /* ---------- wizard pages ---------- */
+ const [step, setStep] = useState(0);
+ const [busy, setBusy] = useState(false);
+
+ const steps = [
+   /* 0 */ <ReasonsStep key={0} data={data} setVal={setVal} toggle={toggle} />,
+   /* 1 */ <HistoryStep      key={1} data={data} setVal={setVal} />,
+   /* 2 */ <HealthCheckStep  key={2} data={data} setVal={setVal} toggle={toggle} />,
+   /* 3 */ <LifestyleOptInStep key={3}
+            onYes={() => setStep(4)}
+            onNo ={() => setStep(5)} />,
+   /* 4 */ <LifestyleStep    key={4}
+            data={data} setVal={setVal} toggle={toggle}
+            onComplete={() => setStep(5)} />,
+    /* 5 ─ Thank-you screen (dev build gets an Edit button) */
+  process.env.NODE_ENV === 'development'
+  ? <ThankYouStep key={5} onEdit={() => setStep(2)} />
+  : <ThankYouStep key={5} />,
+];
+
+
+
+
+/* ---------- submit ---------- */
 const submit = async () => {
   setBusy(true);
   try {
-    // 1) save
     const save = await fetch('/api/intake', {
-      method: 'POST',
+      method : 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body   : JSON.stringify(data),
     });
-    const { id } = await save.json();
+    const { id: submissionId } = await save.json();
 
-    // 2) score
-    const score = await fetch('/api/score', {
-      method: 'POST',
+    await fetch('/api/preview', {
+      method : 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ hc: data.hc, life: data.life }),
+      body   : JSON.stringify({ submissionId }),
     });
-    const payload = await score.json();          // { stress, support, focus }
-    setResult(payload);                          // show result screen
+
+    setStep(5);   // Thank-you page
   } catch (err) {
     console.error(err);
     alert('Sorry, please try again.');
   } finally {
     setBusy(false);
   }
-};   
-
-/* ----------------------------------------------
-   helper: return from ResultView to Health-Check
----------------------------------------------- */
-const goBackToHealth = () => {
-  setResult(null);   // hide ResultView
-  setStep(2);        // 2 = index of the Health-Check step
 };
 
-/* ──────────────── RESULT VIEW ──────────────── */
-if (result) {
-  return <ResultView data={result} onBack={goBackToHealth} />;
-}
-
-/* ──────────────── WIZARD VIEW ──────────────── */
+/* ──────────────── UI ──────────────── */
 return (
   <main className="max-w-lg w-full mx-auto px-4 py-6">
-    <Head>
-      <title>MOCEAN Intake</title>
-    </Head>
+    <Head><title>MOCEAN Intake</title></Head>
 
     <Progress step={step} total={steps.length} />
     {steps[step]}
 
-    {/* navigation buttons */}
+    {/* nav buttons */}
     <div className="mt-6 flex justify-between gap-6">
-      {step > 0 && (
+      {step > 0 && step < 5 && (
         <button
           type="button"
           className="w-28 px-3 py-2 rounded bg-gray-200 hover:bg-gray-300"
-          onClick={() => setStep((s) => s - 1)}
+          onClick={() => setStep(s => s - 1)}
         >
           Back
         </button>
       )}
 
-      {step < steps.length - 1 ? (
+      {step < 4 && (            /* normal “Next” */
         <button
           type="button"
           className="w-28 px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-          onClick={() => setStep((s) => s + 1)}
+          onClick={() => setStep(s => s + 1)}
         >
           Next
         </button>
-      ) : (
+      )}
+
+      {step === 4 && (          /* LifestyleStep finished */
         <button
           type="button"
-          className="w-28 px-3 py-2 rounded bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
+          className="w-28 px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          onClick={() => setStep(5)}
+        >
+          Next
+        </button>
+      )}
+
+      {step === 5 && (          /* final submit */
+        <button
+          type="button"
+          className="w-28 px-3 py-2 rounded bg-green-600 text-white
+                     hover:bg-green-700 disabled:opacity-50"
           onClick={submit}
           disabled={busy}
         >

@@ -60,14 +60,22 @@ export default function ResultSheet({ result }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(symptoms).map(([pillar, val]) => (
-            <tr key={pillar} className="even:bg-gray-50">
-              <td className="p-1">{PILLAR_LABEL[pillar]}</td>
-              <td className="p-1 text-center">{Math.round(val * 10)}%</td>
-              <td className="p-1 text-center">{tier(val * 10).emoji} {tier(val * 10).label}</td>
-              <td className="p-1 text-center">{support?.[pillar]}</td>
-            </tr>
-          ))}
+          {Object.entries(radar).map(([pillar, score]) => {
+            /* score comes in 0-10 float → convert to 0-100 %, round once */
+            const pct   = score * 10;          // e.g. 8.71 → 87.1
+            const whole = Math.round(pct);     //     87.1 → 87
+            const { emoji, label } = tier(whole);
+
+            return (
+              <tr key={pillar} className="even:bg-gray-50">
+                <td className="p-1">{PILLAR_LABEL[pillar]}</td>
+                <td className="p-1 text-center">{whole}%</td>
+                <td className="p-1 text-center">
+                  {emoji} {label}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 

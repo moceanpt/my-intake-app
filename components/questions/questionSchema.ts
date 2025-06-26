@@ -8,8 +8,6 @@ export type MoceanPillar =
   | 'organ'
   | 'circulation'
   | 'energy'      
-  | 'sleep'       
-  | 'mood' 
   | 'articular'
   | 'nervous';
 

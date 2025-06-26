@@ -16,12 +16,12 @@
    ];
    
    const PILLAR_LABEL = {
-     move:              'Move',
-     work_rest:         'Work & Rest',
-     hydration:         'Hydration & Boosters',
-     nourishment:       'Nourishment',
-     stress_mind_body:  'Stress & Mind-Body',
-     recovery_selfcare: 'Recovery & Self-Care',
+    move:    'Move',
+    rest:    'Work & Rest',
+    hydrate: 'Hydration & Boosters',
+    nourish:'Nourishment',
+    stress:  'Stress & Mind-Body',
+    restore:'Recovery & Self-Care',
    };
    
    /* ────────────────────────────────────────────────────────────── */
