@@ -148,6 +148,14 @@
          <Link href={`/staff/enter/${id}`} className="btn btn-primary inline-block mt-4">
            Looks&nbsp;good&nbsp;— Enter&nbsp;Metrics&nbsp;→
          </Link>
-       </main>
-     );
-   }
+
+        {/* ── Back to Dashboard ── */}
+        <Link
+            href="/staff/dashboard"
+            className="btn btn-secondary inline-block mt-4"
+        >
+            ←&nbsp;Back&nbsp;to&nbsp;Dashboard
+        </Link>
+            </main>
+            );
+     }

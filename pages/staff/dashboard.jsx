@@ -20,12 +20,13 @@ export async function getServerSideProps() {
 }
 
 /* ---------- 2.  Small helpers ----------------------------------- */
-const planIcon = (planResults = []) => {
-  const stages = planResults.map(p => p.stage);
-  if (stages.includes('final'))   return '🟢';   // final ready
-  if (stages.includes('preview')) return '🟡';   // preview only
-  return '⚫';                                   // no plan yet
-};
+const planIcon = (planResults = [], status) => {  // ① accept status
+    const stages = planResults.map(p => p.stage);
+    if (stages.includes('final'))        return '🟢';   // final ready
+    if (status === 'metrics_entered')    return '🔵';   // metrics saved
+    if (stages.includes('preview'))      return '🟡';   // preview only
+    return '⚫';                                      // no plan yet
+  };
 
 const nextLink = ({ id, status }) => {
   switch (status) {
