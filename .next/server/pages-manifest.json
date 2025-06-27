@@ -3,6 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/staff/enter/[id]": "pages/staff/enter/[id].js",
-  "/intake": "pages/intake.js",
-  "/staff/review/[id]": "pages/staff/review/[id].js"
+  "/intake": "pages/intake.js"
 }

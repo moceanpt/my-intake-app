@@ -26,11 +26,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/intake.js"
-    ],
-    "/staff/enter/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/staff/enter/[id].js"
     ]
   },
   "ampFirstPages": []
