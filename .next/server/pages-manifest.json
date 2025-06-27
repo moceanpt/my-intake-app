@@ -1,7 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/staff/enter/[id]": "pages/staff/enter/[id].js",
-  "/intake": "pages/intake.js"
-}

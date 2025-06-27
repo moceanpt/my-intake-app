@@ -1,10 +1,9 @@
-/* ------------------------------------------------------------------
-   pages/staff/enter/[id]/auracom.tsx
-   ------------------------------------------------------------------ */
-   import { auraComSchema }   from '@/lib/objective/auracom';
-   import DeviceForm          from '@/components/DeviceForm';
+/* pages/staff/enter/[id]/auracom.tsx
+   ────────────────────────────────── */
+   import { auraComUISchema }   from '@/lib/objective/auracom';  // 🟢 UI schema
+   import DeviceForm            from '@/components/DeviceForm';
    
-   /*  ─ reuse GSSP from the folder index page ─  */
+   /* ─ reuse the GSSP from the folder index page ─ */
    export { getServerSideProps } from '@/pages/staff/enter/[id]/index';
    
    type Props = { submissionId: string };
@@ -15,17 +14,18 @@
          title="AuraCom Metrics"
          device="auracom"
          submissionId={submissionId}
-         schema={auraComSchema}
    
-         /* optional — override labels or widget type for dropdowns */
+         /* 👇 pass the UI schema that contains `fields` */
+         schema={auraComUISchema}
+   
+         /* (optional) additional per-field UI tweaks */
          ui={{
-           zone1: { widget:'select',  placeholder:'Main aura colour' },
-           zone2: { widget:'select',  placeholder:'Vital-line colour' },
-           zone3: { widget:'select' },
-           zone4: { widget:'select' },
-           zone5: { widget:'select' },
-           lineQuality: { widget:'select' },
-           /* numbers auto-render as number inputs via <DeviceForm> */
+           zone1:       { widget: 'select', placeholder: 'Main aura colour' },
+           zone2:       { widget: 'select', placeholder: 'Vital-line colour' },
+           zone3:       { widget: 'select' },
+           zone4:       { widget: 'select' },
+           zone5:       { widget: 'select' },
+           lineQuality: { widget: 'select' },
          }}
        />
      );
