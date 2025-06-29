@@ -30,44 +30,76 @@ export const AURA_PALETTE = [
   ['white',           'White',                10],
 ] as const;
 
+/* ---------------------------------------------------------
+   2 ▸ Data-entry form blueprint (high-level; optional)
+--------------------------------------------------------- */
+export const FORM = [
+  /* A – Overall Aura */
+  { name:'zone1', section:'A. Overall Aura', label:'Zone 1 colour', widget:'select' },
+  { name:'zone2', section:'A. Overall Aura', label:'Zone 2 colour', widget:'select' },
+  { name:'zone3', section:'A. Overall Aura', label:'Zone 3 colour', widget:'select' },
+  { name:'zone4', section:'A. Overall Aura', label:'Zone 4 colour', widget:'select' },
+  { name:'zone5', section:'A. Overall Aura', label:'Zone 5 colour', widget:'select' },
+  {
+    name:'lineQuality',
+    section:'A. Overall Aura',
+    label:'Vital-line quality',
+    widget:'select',
+    options:[
+      { value:'stable',    label:'Stable'     },
+      { value:'disrupted', label:'Disrupted'  },
+    ],
+  },
+
+  /* B – Energy Level */
+  { name:'ava',  section:'B. Energy Level', label:'Ava – overall energy', step:1 },
+
+  /* C – Energy Balance */
+  { name:'vigor',     section:'C. Energy Balance', label:'Vigor %',     step:1 },
+  { name:'stability', section:'C. Energy Balance', label:'Stability %', step:1 },
+
+  /* D – Five-Element Balance */
+  { name:'elemA', section:'D. Five-Element', label:'Element A', step:1 },
+  { name:'elemB', section:'D. Five-Element', label:'Element B', step:1 },
+  { name:'elemC', section:'D. Five-Element', label:'Element C', step:1 },
+  { name:'elemD', section:'D. Five-Element', label:'Element D', step:1 },
+  { name:'elemE', section:'D. Five-Element', label:'Element E', step:1 },
+  { name:'overallEnergy', section:'D. Five-Element', label:'Overall Energy Level', step:1 },
+] as const;
+
 /* derive Zod enum from the palette IDs */
 const Colour = z.enum(AURA_PALETTE.map(([id]) => id) as [string, ...string[]]);
 
-/* small helper so we can reuse dropdown options ------------------- */
-const colourOptions = AURA_PALETTE.map(([id, label]) => ({
-  value: id,
-  label,
-}));
+/* dropdown helpers */
+const colourOptions = AURA_PALETTE.map(([id, label]) => ({ value:id, label }));
 
-/* ----------------------------------------------------------------
-   2 ▸ Zod schema (validation)  — activity removed
------------------------------------------------------------------ */
+/* ---------------------------------------------------------
+   3 ▸ Zod schema (validation) – Activity % removed
+--------------------------------------------------------- */
 export const auraComSchema = z.object({
   zone1: Colour,  zone2: Colour,  zone3: Colour,
   zone4: Colour,  zone5: Colour,
 
-  lineQuality : z.enum(['stable', 'disrupted']),
+  lineQuality: z.enum(['stable','disrupted']),
 
-  ava        : z.number().positive(),
-  vigor      : z.number().int().nonnegative(),
-  stability  : z.number().int().nonnegative(),
+  ava       : z.number().positive(),
+  vigor     : z.number().int().nonnegative(),
+  stability : z.number().int().nonnegative(),
 
-  elemA      : z.number().int(),
-  elemB      : z.number().int(),
-  elemC      : z.number().int(),
-  elemD      : z.number().int(),
-  elemE      : z.number().int(),
+  elemA : z.number().int(),
+  elemB : z.number().int(),
+  elemC : z.number().int(),
+  elemD : z.number().int(),
+  elemE : z.number().int(),
 });
 export type AuraComInput = z.infer<typeof auraComSchema>;
-
-/* convenient list for scoreObjective() registry ------------------ */
 export const auraComKeys = auraComSchema.keyof().Options;
 
-/* ----------------------------------------------------------------
-   3 ▸ Scorer  (same as before except activity-related rules removed)
------------------------------------------------------------------ */
+/* ---------------------------------------------------------
+   4 ▸ Scorer (unchanged except activity rules removed)
+--------------------------------------------------------- */
 export function scoreAuraCom(d: AuraComInput) {
-  const radar: Record<string, number> = {
+  const radar: Record<string,number> = {
     musculoskeletal:10,
     organ_digest_hormone_detox:10,
     circulation:10,
@@ -80,25 +112,25 @@ export function scoreAuraCom(d: AuraComInput) {
     circulation:0, brain:0, physical:0, performance:0,
   };
 
-  /* ① Ava -------------------------------------------------------- */
+  /* Ava */
   if (d.ava >= 600) { bucket.energy += band(2); radar.energy = 4; }
   else if (d.ava < 450) { bucket.energy += band(2); radar.energy = 5; }
 
-  /* ② Vigor / Stability ----------------------------------------- */
-  if (d.vigor     > 65 || d.vigor     < 60) bucket.stress += 1;
-  if (d.stability > 40 || d.stability < 35) bucket.brain  += 1;
+  /* Vigor / Stability */
+  if (d.vigor > 65 || d.vigor < 60)       bucket.stress += 1;
+  if (d.stability > 40 || d.stability < 35) bucket.brain += 1;
 
-  /* ③ Five-element spread --------------------------------------- */
-  const elems  = [d.elemA, d.elemB, d.elemC, d.elemD, d.elemE];
+  /* Five-element spread */
+  const elems  = [d.elemA,d.elemB,d.elemC,d.elemD,d.elemE];
   const spread = Math.max(...elems) - Math.min(...elems);
   if (spread > 15) bucket.gut += 2;
   else if (spread > 10) bucket.gut += 1;
 
-  /* ④ Colour red-flags ------------------------------------------ */
-  if (d.zone1 === 'red') { bucket.stress += 2; radar.circulation = 6; }
-  if (d.zone1 === 'green' /* liver strain hint */) bucket.gut += 1;
+  /* Colour red-flags */
+  if (d.zone1 === 'red')   { bucket.stress += 2; radar.circulation = 6; }
+  if (d.zone1 === 'green') bucket.gut    += 1;
 
-  /* ⑤ Vital-line quality ---------------------------------------- */
+  /* Vital-line */
   if (d.lineQuality === 'disrupted') {
     bucket.physical += 1;
     radar.musculoskeletal = 6;
@@ -107,58 +139,70 @@ export function scoreAuraCom(d: AuraComInput) {
   return { radar, bucket };
 }
 
-/* ----------------------------------------------------------------
-   4 ▸ UI schema for <DeviceForm>
------------------------------------------------------------------ */
+/* ---------------------------------------------------------
+   5 ▸ UI schema consumed by <DeviceForm>
+--------------------------------------------------------- */
 export const auraComUISchema = {
+  /* meta used by DevicePicker / DeviceForm */
+  title : 'AuraCom metrics',
+  slug  : 'auracom',
+
   fields: [
-    /* A. Overall aura (dropdowns) */
+    /* A. Overall Aura */
     ...(['zone1','zone2','zone3','zone4','zone5'] as const).map(name => ({
       name,
+      section:'A. Overall Aura',
       label : name.toUpperCase().replace('ZONE','Zone '),
-      widget: 'select',
+      widget:'select',
       options: colourOptions,
     })),
 
-    { name:'lineQuality',
+    {
+      name:'lineQuality',
+      section:'A. Overall Aura',
       label:'Vital-line quality',
       widget:'select',
       options:[
-        { value:'stable',     label:'Stable'     },
-        { value:'disrupted',  label:'Disrupted'  },
+        { value:'stable',    label:'Stable'     },
+        { value:'disrupted', label:'Disrupted'  },
       ],
     },
 
     /* B. Energy Level */
-    { name:'ava',      label:'Ava – overall energy', step:1 },
+    { name:'ava', section:'B. Energy Level',
+      label:'Ava – overall energy', step:1 },
 
     /* C. Energy Balance */
-    { name:'vigor',    label:'Vigor %',     step:1 },
-    { name:'stability',label:'Stability %', step:1 },
+    { name:'vigor',     section:'C. Energy Balance',
+      label:'Vigor %',     step:1 },
+    { name:'stability', section:'C. Energy Balance',
+      label:'Stability %', step:1 },
 
-    /* D. Five-element balance */
-    { name:'elemA', label:'Five-Element A', step:1 },
-    { name:'elemB', label:'Five-Element B', step:1 },
-    { name:'elemC', label:'Five-Element C', step:1 },
-    { name:'elemD', label:'Five-Element D', step:1 },
-    { name:'elemE', label:'Five-Element E', step:1 },
+    /* D. Five-Element Balance */
+    { name:'elemA', section:'D. Five-Element', label:'Element A', step:1 },
+    { name:'elemB', section:'D. Five-Element', label:'Element B', step:1 },
+    { name:'elemC', section:'D. Five-Element', label:'Element C', step:1 },
+    { name:'elemD', section:'D. Five-Element', label:'Element D', step:1 },
+    { name:'elemE', section:'D. Five-Element', label:'Element E', step:1 },
+    { name:'overallEnergy', section:'D. Five-Element', label:'Overall Energy Level', step:1 },
   ],
 
-  /* convert raw form-data → clean numeric payload --------------- */
+  /* raw → typed payload */
   toPayload(raw: Record<string, FormDataEntryValue>) {
-    const n = (k: string) => Number(raw[k] ?? 0);
-    const s = (k: string) => String(raw[k] ?? '');
+    const n = (k:string) => Number(raw[k] ?? 0);
+    const s = (k:string) => String(raw[k] ?? '');
 
     return {
-      zone1: s('zone1'), zone2: s('zone2'), zone3: s('zone3'),
-      zone4: s('zone4'), zone5: s('zone5'),
+      zone1:s('zone1'), zone2:s('zone2'), zone3:s('zone3'),
+      zone4:s('zone4'), zone5:s('zone5'),
 
-      lineQuality: s('lineQuality') as 'stable'|'disrupted',
+      lineQuality : s('lineQuality') as 'stable'|'disrupted',
 
-      ava: n('ava'), vigor: n('vigor'), stability: n('stability'),
+      ava:n('ava'), vigor:n('vigor'), stability:n('stability'),
 
-      elemA: n('elemA'), elemB: n('elemB'), elemC: n('elemC'),
-      elemD: n('elemD'), elemE: n('elemE'),
+      elemA:n('elemA'), elemB:n('elemB'), elemC:n('elemC'),
+      elemD:n('elemD'), elemE:n('elemE'),
+      overallEnergy: n('overallEnergy'),
     } as AuraComInput;
   },
 } as const;

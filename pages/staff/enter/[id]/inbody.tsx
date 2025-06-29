@@ -1,20 +1,24 @@
-/* pages/staff/enter/[id]/inbody.tsx
-   --------------------------------------------------------------
-   Ultra-thin page — just wire the generic <DeviceForm> to the
-   InBody field schema.  No form markup lives here any more.
----------------------------------------------------------------- */
-import DeviceForm           from '@/components/DeviceForm';
-import { inBodySchema }     from '@/lib/metrics/inbodySchema';
-
-/* ── reuse the same GSSP that [id]/index.tsx already exports ── */
-export { getServerSideProps } from '@/pages/staff/enter/[id]/index';
-
-export default function InBodyPage({ submissionId }: { submissionId: string }) {
-  return (
-    <DeviceForm
-      schema={inBodySchema}
-      submissionId={submissionId}
-      onDone={() => history.back()}        // or router.push(…)
-    />
-  );
-}
+/* --------------------------------------------------------------
+   pages/staff/enter/[id]/inbody.tsx
+   -------------------------------------------------------------- */
+   import React          from 'react';
+   import DeviceForm     from '@/components/DeviceForm';
+   import { inBodyUISchema } from '@/lib/objective/inbody';
+   
+   /* Re-export GSSP from the folder index */
+   export { getServerSideProps } from '@/pages/staff/enter/[id]/index';
+   
+   type Props = { submissionId: string };
+   
+   export default function InBodyPage({ submissionId }: Props) {
+     return (
+       <DeviceForm
+         schema={inBodyUISchema}        // 👈 real schema object
+         submissionId={submissionId}
+         onDone={() =>
+           // after save go back to the metrics hub
+           window.history.back()
+         }
+       />
+     );
+   }

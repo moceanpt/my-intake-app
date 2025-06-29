@@ -103,16 +103,26 @@ export function scoreInBody(
 
 /* ───── 3 ▸ UI schema for <DeviceForm> ───── */
 export const inBodyUISchema = {
-  fields: FORM,
-  toPayload(raw: Record<string, FormDataEntryValue>) {
-    const n = (k:string)=> Number(raw[k] ?? 0);
-    return {
-      hydration    : n('hydration'),
-      smm_pct      : n('smm_pct'),
-      body_fat_pct : n('body_fat_pct'),
-      vfa          : n('vfa'),
-      ecw_tbw      : n('ecw_tbw'),
-      phase_angle  : n('phase_angle'),
-    } as InBodyInput;
-  },
-} as const;
+    slug  : 'inbody',
+    title : 'InBody',
+    /** Every entry becomes one input */
+    fields: FORM.map(([name, label, step]) => ({
+      name,
+      label,
+      step,
+      widget: 'number',          // <- tell DeviceForm it’s numeric
+    })),
+  
+    /** convert raw form-values >>> clean payload for DB/scorer */
+    toPayload(raw: Record<string, FormDataEntryValue>) {
+      const n = (k: string) => Number(raw[k] ?? 0);
+      return {
+        hydration     : n('hydration'),
+        smm_pct       : n('smm_pct'),
+        body_fat_pct  : n('body_fat_pct'),
+        vfa           : n('vfa'),
+        ecw_tbw       : n('ecw_tbw'),
+        phase_angle   : n('phase_angle'),
+      } satisfies InBodyInput;
+    },
+  } as const;

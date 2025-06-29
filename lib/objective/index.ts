@@ -5,9 +5,10 @@
 
 import { scoreInBody }   from './inbody';
 import { scoreAuraCom, auraComKeys } from './auracom';
-// import { scoreExBody , exBodyKeys } from './exbody';   // when ready
+import { scoreExBody , exBodyKeys } from './exbody';   // when ready
 // import { scoreOmniFit, omniFitKeys } from './omnifit';
-// import { scoreHeartMath, heartMathKeys } from './heartmath';
+import { scoreHeartMath, heartMathKeys } from './heartmath';
+
 
 /* ──────────────────────────────────────────────────────────────
    1.  Master scorer — merge all per-device outputs
@@ -23,11 +24,12 @@ import { scoreAuraCom, auraComKeys } from './auracom';
     /* AuraCom --------------------------------------------------- */
     if (auraComKeys.some(k => k in metrics))
       collectors.push(scoreAuraCom(metrics));
-  
-    /* Future devices
-    if (exBodyKeys   .some(k => k in metrics)) collectors.push(scoreExBody(metrics));
-    if (omniFitKeys  .some(k => k in metrics)) collectors.push(scoreOmniFit(metrics));
     if (heartMathKeys.some(k => k in metrics)) collectors.push(scoreHeartMath(metrics));
+    if (exBodyKeys   .some(k => k in metrics)) collectors.push(scoreExBody(metrics));
+    /* Future devices
+    
+    if (omniFitKeys  .some(k => k in metrics)) collectors.push(scoreOmniFit(metrics));
+    
     */
   
 
@@ -63,9 +65,9 @@ import { scoreAuraCom, auraComKeys } from './auracom';
  /* Form blueprints ------------------------------------------------ */
  import * as inbody  from './inbody';
  import * as auracom from './auracom';
- // import * as exbody   from './exbody';
+ import * as exbody   from './exbody';
  // import * as omnifit  from './omnifit';
- // import * as heartmath from './heartmath';
+ import * as heartmath from './heartmath';
  
  /** Helper: all FORM constants share the same tuple-array shape */
  type DeviceForm = typeof inbody.FORM;
@@ -76,7 +78,7 @@ import { scoreAuraCom, auraComKeys } from './auracom';
  > = {
    inbody : { label: 'InBody',  form: inbody.FORM  },
    auracom: { label: 'AuraCom', form: auracom.FORM },
-   // exbody   : { label: 'ExBody',   form: exbody.FORM   },
+   exbody   : { label: 'ExBody',   form: exbody.FORM   },
    // omnifit  : { label: 'OmniFit',  form: omnifit.FORM  },
-   // heartmath: { label: 'HeartMath',form: heartmath.FORM},
+   heartmath: { label: 'HeartMath',form: heartmath.FORM},
  };
