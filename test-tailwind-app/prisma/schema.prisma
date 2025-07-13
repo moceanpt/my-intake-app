@@ -1,0 +1,123 @@
+// ----------  Datasource & Codegen  ----------
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ----------  Enums & Look-ups  ----------
+enum RiskLevel {
+  safe
+  caution
+  review
+}
+
+enum SubmissionStatus {
+  intake_submitted
+  intake_reviewed
+  assessments_pending
+  metrics_entered
+  plan_generated
+  plan_sent
+}
+
+/* NEW ─────────────────────────────────────── */
+enum PlanStage {
+  preview
+  final
+}
+
+// ----------  Core models  ----------
+model IntakeSubmission {
+  id               String            @id @default(uuid())
+  clientId         String?
+  submittedAt      DateTime          @default(now())
+
+  symptomChips     Json
+  sliderValues     Json?  
+  lifestyleAnswers Json
+  lifestyleOptIn   Boolean?  
+  stressScores     Json?
+  supportScores    Json?
+  pdfUrl           String?
+
+  rawReasons       Json      // full array of reasons/goals
+  rawDiscomfort    Json      // pain location / severity etc.
+  rawHistory       Json      // medical history details
+
+  status           SubmissionStatus  @default(intake_submitted)
+
+  /* CHANGED: singular → plural because we now hold two rows */
+  planResults      PlanResult[]
+
+  AssessmentMetric AssessmentMetric[]
+  riskLevel        RiskLevel         @default(safe)
+
+  surgeries        Surgery[]
+  implants         Implant[]
+  symptoms         Symptom[]
+
+  @@index([clientId])
+}
+
+/* ─── Existing relation tables (unchanged) ─── */
+model Surgery {
+  id            Int              @id @default(autoincrement())
+  submissionId  String
+  submission    IntakeSubmission @relation(fields: [submissionId], references: [id])
+  year          Int
+  bodyRegion    String
+  notes         String?
+}
+
+model Implant {
+  id            Int              @id @default(autoincrement())
+  submissionId  String
+  submission    IntakeSubmission @relation(fields: [submissionId], references: [id])
+  implantCode   String
+  year          Int
+  side          String?
+}
+
+model Symptom {
+  id            Int              @id @default(autoincrement())
+  submissionId  String
+  submission    IntakeSubmission @relation(fields: [submissionId], references: [id])
+  categoryCode  String
+  chipCode      String
+}
+
+/* ─── Manual-metric table (already in place) ─── */
+model AssessmentMetric {
+  id           Int              @id @default(autoincrement())
+  submissionId String
+  submission   IntakeSubmission @relation(fields: [submissionId], references: [id])
+
+  metricKey    String
+  value        Float
+  unit         String?
+  deviceType   String?
+  collectedAt  DateTime         @default(now())
+
+  @@unique([submissionId, metricKey])
+  @@index([metricKey])
+}
+
+/* UPDATED PlanResult ─ now stores preview & final */
+model PlanResult {
+  id           Int              @id @default(autoincrement())
+  submissionId String
+  submission   IntakeSubmission @relation(fields: [submissionId], references: [id])
+
+  stage        PlanStage        @default(preview)   // ← NEW column
+  resultJson   Json
+  generatedAt  DateTime         @default(now())
+  notes        Json?                               // ← optional therapist notes
+
+  pdfUrl       String?    // ← NEW FIELD
+
+  @@unique([submissionId, stage])                  // ← composite key
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "UploadedFile" ADD COLUMN "extractedData" JSONB; 

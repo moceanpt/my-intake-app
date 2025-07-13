@@ -28,6 +28,7 @@ export interface BaseQ {
   prompt: string;
   type: QuestionType;
   pillar: Pillar;
+  lifestyle_pillar?: string; // For backward compatibility
   risk_logic?: string;
   risk_points?: string;
 }
@@ -110,7 +111,7 @@ const questionSchema: QuestionSchema = {
           'Do you notice poor blood or lymph flow? (check all that apply)',
         type: 'multi',
         options: [
-          'Cold or numb hands / feet (Raynaud’s)',
+          "Cold or numb hands / feet (Raynaud's)",
           'Varicose veins or leg cramps',
           'Swelling / puffiness / limb heaviness',
           'Skin issues / flares (eczema, rashes)',
@@ -147,6 +148,8 @@ const questionSchema: QuestionSchema = {
               'Anxiety or panic attacks',
               'Mood swings / emotional eating',
             ],
+            pillar: 'energy',
+            risk_logic: '1 each',
           },
         ],
 
@@ -206,6 +209,7 @@ lifestyle: {
         type:  'single',
         options: ['0–1/wk', '2–3/wk', '4 +/wk'],
         lifestyle_pillar: 'move',
+        pillar: 'physical',
         risk_points: '2,1,0',
       },
       {
@@ -214,6 +218,7 @@ lifestyle: {
         type:  'single',
         options: ['0–1', '2–3', '4 +'],
         lifestyle_pillar: 'move',
+        pillar: 'physical',
         risk_points: '2,1,0',
       },
       {
@@ -222,6 +227,7 @@ lifestyle: {
         type:  'single',
         options: ['< 4 k', '4–7 k', '7–10 k', '10 k +'],
         lifestyle_pillar: 'move',
+        pillar: 'physical',
         risk_points: '2,1,0,0',
       },
       {
@@ -230,6 +236,7 @@ lifestyle: {
         type:  'single',
         options: ['< 4 h','4–6 h','6–8 h','8 h +'],
         lifestyle_pillar: 'move',
+        pillar: 'physical',
         risk_points: '0,1,2,3',
       },
       {
@@ -238,6 +245,7 @@ lifestyle: {
         type:  'single',
         options: ['Pain', 'Time / Motivation / Unsure'],
         lifestyle_pillar: 'move',
+        pillar: 'physical',
         risk_points: '2,1',
       },
     ],
@@ -250,6 +258,7 @@ lifestyle: {
         type:  'single',
         options: ['< 5 h','5–7 h','7–9 h','9 h +'],
         lifestyle_pillar: 'rest',
+        pillar: 'sleep',
         risk_points: '3,1,0,1',
       },
       {
@@ -258,6 +267,7 @@ lifestyle: {
         type:  'single',
         options: ['Yes','No'],
         lifestyle_pillar: 'rest',
+        pillar: 'sleep',
         risk_points: '0,1',
       },
       {
@@ -266,6 +276,7 @@ lifestyle: {
         type:  'single',
         options: ['Nightly','Few / wk','Rare'],
         lifestyle_pillar: 'rest',
+        pillar: 'sleep',
         risk_points: '2,1,0',
       },
       {
@@ -274,6 +285,7 @@ lifestyle: {
         type:  'single',
         options: ['Yes','No'],
         lifestyle_pillar: 'rest',
+        pillar: 'sleep',
         risk_points: '1,0',
       },
       {
@@ -282,6 +294,7 @@ lifestyle: {
         type:  'single',
         options: ['Day','Night / Rotating'],
         lifestyle_pillar: 'rest',
+        pillar: 'sleep',
         risk_points: '0,2',
       },
     ],
@@ -294,6 +307,7 @@ lifestyle: {
         type:  'single',
         options: ['< 4','4–7','8–10','10 +'],
         lifestyle_pillar: 'hydrate',
+        pillar: 'hydration',
         risk_points: '2,1,0,0',
       },
       {
@@ -302,6 +316,7 @@ lifestyle: {
         type:  'single',
         options: ['None','≤ 1 / wk','2–4 / wk','Daily'],
         lifestyle_pillar: 'hydrate',
+        pillar: 'hydration',
         risk_points: '0,1,2,3',
       },
       {
@@ -310,6 +325,7 @@ lifestyle: {
         type:  'single',
         options: ['Never','Occasional','Regular','Daily'],
         lifestyle_pillar: 'hydrate',
+        pillar: 'hydration',
         risk_points: '0,1,2,3',
       },
       {
@@ -318,6 +334,7 @@ lifestyle: {
         type:  'single',
         options: ['Rarely','Sometimes','Often'],
         lifestyle_pillar: 'hydrate',
+        pillar: 'hydration',
         risk_points: '0,1,2',
       },
       {
@@ -326,6 +343,7 @@ lifestyle: {
         type:  'single',
         options: ['Yes','No'],
         lifestyle_pillar: 'hydrate',
+        pillar: 'hydration',
         risk_points: '0,1',
       },
     ],
@@ -338,6 +356,7 @@ lifestyle: {
         type:  'single',
         options: ['0–1','2–3','4 +'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '2,1,0',
       },
       {
@@ -346,6 +365,7 @@ lifestyle: {
         type:  'single',
         options: ['Rarely','About half','Most'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '2,1,0',
       },
       {
@@ -354,6 +374,7 @@ lifestyle: {
         type:  'single',
         options: ['Almost never','Few / wk','Daily +'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '0,1,2',
       },
       {
@@ -362,6 +383,7 @@ lifestyle: {
         type:  'single',
         options: ['Rarely','Some days','Most days'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '2,1,0',
       },
       {
@@ -370,6 +392,7 @@ lifestyle: {
         type:  'single',
         options: ['Rarely','Some days','Most days'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '2,1,0',
       },
       {
@@ -378,6 +401,7 @@ lifestyle: {
         type:  'single',
         options: ['Home-cooked','Half-&-half','Mostly take-out'],
         lifestyle_pillar: 'nourish',
+        pillar: 'nutrition',
         risk_points: '0,1,2',
       },
     ],
@@ -389,6 +413,7 @@ lifestyle: {
         prompt: 'Perceived stress (0-10)',
         type:  'input',
         lifestyle_pillar: 'stress',
+        pillar: 'stress',
         risk_points: '0-2',          // round(val / 5)
       },
       {
@@ -397,7 +422,8 @@ lifestyle: {
         type:  'multi',
         options: ['Healthy tools','Still figuring'],
         lifestyle_pillar: 'stress',
-        risk_points: 'rule',         // +1 only if sole = “Still figuring”
+        pillar: 'stress',
+        risk_points: 'rule',         // +1 only if sole = "Still figuring"
       },
       {
         id: 'social_support',
@@ -405,6 +431,7 @@ lifestyle: {
         type:  'single',
         options: ['Yes','No'],
         lifestyle_pillar: 'stress',
+        pillar: 'stress',
         risk_points: '0,1',
       },
       {
@@ -413,6 +440,7 @@ lifestyle: {
         type:  'single',
         options: ['Good','Adequate','Poor'],
         lifestyle_pillar: 'stress',
+        pillar: 'stress',
         risk_points: '0,1,2',
       },
       {
@@ -421,6 +449,7 @@ lifestyle: {
         type:  'single',
         options: ['< 5','5–10','> 10'],
         lifestyle_pillar: 'stress',
+        pillar: 'stress',
         risk_points: '2,1,0',
       },
     ],
@@ -433,54 +462,61 @@ lifestyle: {
         type:  'multi',
         options: ['None','Any tool'],
         lifestyle_pillar: 'restore',
-        risk_points: 'rule',         // +1 if only “None”
+        pillar: 'recovery',
+        risk_points: 'rule',         // +1 if only "None"
       },
       {
         id: 'leisure_screen_time',
         prompt: 'Leisure screen time / day',
         type:  'single',
-        options: ['< 1 h','1–3 h','> 3 h'],
+        options: ['< 1 h', '1–3 h', '> 3 h'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '0,1,2',
       },
       {
         id: 'rest_days',
         prompt: 'Rest days from intense training / wk',
         type:  'single',
-        options: ['0','1','2','3 +'],
+        options: ['0', '1', '2', '3 +'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '2,1,0,0',
       },
       {
         id: 'time_outdoors',
         prompt: 'Time outdoors (natural light)',
         type:  'single',
-        options: ['< 15 min','15–30','30–60','60 +'],
+        options: ['< 15 min', '15–30', '30–60', '60 +'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '2,1,0,0',
       },
       {
         id: 'morning_sun',
         prompt: 'Morning sunlight within 1 h of waking?',
         type:  'single',
-        options: ['Yes','No'],
+        options: ['Yes', 'No'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '0,1',
       },
       {
         id: 'bedroom_environment',
         prompt: 'Bedroom environment',
         type:  'single',
-        options: ['Optimal','Needs work','Poor'],
+        options: ['Optimal', 'Needs work', 'Poor'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '0,1,2',
       },
       {
         id: 'digital_shutdown',
         prompt: 'Digital shut-down ≥ 30 min before bed?',
         type:  'single',
-        options: ['Never','Some nights','Most nights'],
+        options: ['Never', 'Some nights', 'Most nights'],
         lifestyle_pillar: 'restore',
+        pillar: 'recovery',
         risk_points: '2,1,0',
       },
     ],

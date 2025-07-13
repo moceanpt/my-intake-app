@@ -1,64 +1,68 @@
-/* -------------------- Tailwind directives -------------------- */
+/* Modern Medical UI: Active */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------- Global tweaks -------------------------- */
-@layer base {
-  body {
-    background-color: #f8fafc; /* slate-50 */
-    color: #0f172a;            /* slate-800 */
-    font-family: ui-sans-serif, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
+/* -------------------- Import Design System -------------------- */
+@import './design-system.css';
+
+/* -------------------- Force Light Theme Override -------------------- */
+/* Override any dark mode preferences to maintain medical light theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-secondary-50: #f8fafc !important;
+    --color-secondary-100: #f1f5f9 !important;
+    --color-secondary-200: #e2e8f0 !important;
+    --color-secondary-300: #cbd5e1 !important;
+    --color-secondary-400: #94a3b8 !important;
+    --color-secondary-500: #64748b !important;
+    --color-secondary-600: #475569 !important;
+    --color-secondary-700: #334155 !important;
+    --color-secondary-800: #1e293b !important;
+    --color-secondary-900: #0f172a !important;
   }
 }
 
-/* make an always-available “chip-active” helper */
+/* -------------------- Legacy compatibility -------------------- */
+/* Keep some legacy classes for backward compatibility during transition */
+
+/* Legacy chip-active class (will be replaced with .chip.active) */
 @layer components {
   .chip-active {
-    background-color: #2563eb; /* blue-600 */
+    background-color: var(--color-primary-600);
     color: white;
-    border: 1px solid #2563eb;
+    border: 1px solid var(--color-primary-600);
   }
 }
 
-/* Form-control polish */
+/* Legacy form styles (will be replaced with .form-input) */
 input,
 select,
 textarea {
-  border: 1px solid #cbd5e1; /* slate-300 */
-  border-radius: 0.25rem; /* rounded */
-  padding: 0.25rem 0.5rem; /* py-1 px-2 */
-  font-size: 0.875rem; /* text-sm */
+  /* @apply form-input; */
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  ring: 2px solid rgba(59, 130, 246, 0.4); /* ring-blue-500/40 */
-  border-color: #3b82f6; /* blue-500 */
-}
-
-/* Generic button hover / disabled */
-button:hover {
-  filter: brightness(1.05);
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Ensure blue buttons keep solid color */
+/* Legacy button styles (will be replaced with .btn classes) */
 button.bg-blue-600 {
-  color: white;
-  box-shadow: none;
+  /* @apply btn btn-primary; */
 }
 
-/* Let chip layout classes like gap/margin work */
+/* Ensure chip layout classes work during transition */
 button[class*="gap-"],
 button[class*="mb-"],
 button[class*="space-y-"] {
   margin: revert !important;
 }
+
+html, body {
+  background: var(--color-secondary-50) !important;
+  color: var(--color-secondary-900) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-semibold);
+  color: var(--color-secondary-900);
+}
+
+/* Remove legacy overrides that conflict with the new design system */

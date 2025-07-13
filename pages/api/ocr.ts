@@ -21,7 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       form.parse(req, (err, _fields, files) => {
         if (err) return reject(err);
         if (!files.file) return reject(new Error('No file uploaded'));
-        resolve(files.file as File);
+        const file = Array.isArray(files.file) ? files.file[0] : files.file;
+        resolve(file as File);
       });
     });
 

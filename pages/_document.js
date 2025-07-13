@@ -12,6 +12,13 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&family=Inter:wght@400;500&display=swap"
           rel="stylesheet"
         />
+        {/* Force light background and text color globally */}
+        <style>{`
+          body {
+            background: #f8fafc !important;
+            color: #0f172a !important;
+          }
+        `}</style>
       </Head>
       <body>
         <Main />

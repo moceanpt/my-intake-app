@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { buildFinal }   from '@/lib/planFactory';
+import { PILLAR_KEYS } from '@/lib/score';
 
 /* ---------- zod body schema ---------- */
 const Body = z.object({
@@ -71,6 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const finalPlan = buildFinal({
     hc:      sub.symptomChips as any,     // adapt if your field names differ
+    hcSlider: PILLAR_KEYS.reduce((acc, key) => { acc[key] = { main: 10 }; return acc; }, {} as Record<typeof PILLAR_KEYS[number], { main: number }>),
     life:    sub.lifestyleAnswers as any,
     metrics: objMetrics,
   });
@@ -78,8 +80,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   /* 5. upsert PlanResult(final) */
   await prisma.planResult.upsert({
     where: { submissionId_stage: { submissionId, stage: "final" } },
-    update:{ resultJson: finalPlan },
-    create:{ submissionId, stage: "final", resultJson: finalPlan },
+    update:{ resultJson: JSON.stringify(finalPlan) },
+    create:{ submissionId, stage: "final", resultJson: JSON.stringify(finalPlan) },
   });
 
   /* 6. respond */

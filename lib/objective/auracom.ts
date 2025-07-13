@@ -8,6 +8,7 @@
 
 import { z }   from 'zod';
 import { band } from './utils';
+import type { MetricSchema } from '../metrics/types';
 
 /* ──────────────────────────────────────────────────────────
    1 ▸ Colour reference table  (ID · label · scoreRef)
@@ -31,178 +32,198 @@ export const AURA_PALETTE = [
 ] as const;
 
 /* ---------------------------------------------------------
-   2 ▸ Data-entry form blueprint (high-level; optional)
+   2 ▸ Data-entry form blueprint (matching extracted data)
 --------------------------------------------------------- */
 export const FORM = [
-  /* A – Overall Aura */
-  { name:'zone1', section:'A. Overall Aura', label:'Zone 1 colour', widget:'select' },
-  { name:'zone2', section:'A. Overall Aura', label:'Zone 2 colour', widget:'select' },
-  { name:'zone3', section:'A. Overall Aura', label:'Zone 3 colour', widget:'select' },
-  { name:'zone4', section:'A. Overall Aura', label:'Zone 4 colour', widget:'select' },
-  { name:'zone5', section:'A. Overall Aura', label:'Zone 5 colour', widget:'select' },
-  {
-    name:'lineQuality',
-    section:'A. Overall Aura',
-    label:'Vital-line quality',
-    widget:'select',
-    options:[
-      { value:'stable',    label:'Stable'     },
-      { value:'disrupted', label:'Disrupted'  },
-    ],
-  },
+  /* A – Overall Assessment */
+  ['ava_score', 'Aura Vitality Assessment Score', 1, 0, 1000],
+  ['vigor', 'Vigor Level (0-100)', 1, 0, 100],
+  ['stability', 'Stability Score (0-100)', 1, 0, 100],
+  ['activity_percent', 'Activity Level (%)', 1, 0, 100],
 
-  /* B – Energy Level */
-  { name:'ava',  section:'B. Energy Level', label:'Ava – overall energy', step:1 },
-
-  /* C – Energy Balance */
-  { name:'vigor',     section:'C. Energy Balance', label:'Vigor %',     step:1 },
-  { name:'stability', section:'C. Energy Balance', label:'Stability %', step:1 },
-
-  /* D – Five-Element Balance */
-  { name:'elemA', section:'D. Five-Element', label:'Element A', step:1 },
-  { name:'elemB', section:'D. Five-Element', label:'Element B', step:1 },
-  { name:'elemC', section:'D. Five-Element', label:'Element C', step:1 },
-  { name:'elemD', section:'D. Five-Element', label:'Element D', step:1 },
-  { name:'elemE', section:'D. Five-Element', label:'Element E', step:1 },
-  { name:'overallEnergy', section:'D. Five-Element', label:'Overall Energy Level', step:1 },
+  /* B – Five-Element Balance */
+  ['wood', 'Wood Element Balance (0-100)', 1, 0, 100],
+  ['fire', 'Fire Element Balance (0-100)', 1, 0, 100],
+  ['earth', 'Earth Element Balance (0-100)', 1, 0, 100],
+  ['metal', 'Metal Element Balance (0-100)', 1, 0, 100],
+  ['water', 'Water Element Balance (0-100)', 1, 0, 100],
+  ['overall_balance_score', 'Overall Elemental Balance Score (0-100)', 1, 0, 100],
 ] as const;
 
-/* derive Zod enum from the palette IDs */
-const Colour = z.enum(AURA_PALETTE.map(([id]) => id) as [string, ...string[]]);
+/* helper tuple → Zod shape */
+const shape: Record<(typeof FORM)[number][0], z.ZodTypeAny> = {
+  ava_score: z.number().positive(),
+  vigor: z.number().int().min(0).max(100),
+  stability: z.number().int().min(0).max(100),
+  activity_percent: z.number().int().min(0).max(100),
+  wood: z.number().int().min(0).max(100),
+  fire: z.number().int().min(0).max(100),
+  earth: z.number().int().min(0).max(100),
+  metal: z.number().int().min(0).max(100),
+  water: z.number().int().min(0).max(100),
+  overall_balance_score: z.number().int().min(0).max(100),
+};
+
+export const auraComSchema = z.object(shape);
+export type AuraComInput = z.infer<typeof auraComSchema>;
+export const auraComKeys = auraComSchema.keyof().options;
 
 /* dropdown helpers */
 const colourOptions = AURA_PALETTE.map(([id, label]) => ({ value:id, label }));
 
 /* ---------------------------------------------------------
-   3 ▸ Zod schema (validation) – Activity % removed
+   4 ▸ Scorer (updated for new metrics)
 --------------------------------------------------------- */
-export const auraComSchema = z.object({
-  zone1: Colour,  zone2: Colour,  zone3: Colour,
-  zone4: Colour,  zone5: Colour,
-
-  lineQuality: z.enum(['stable','disrupted']),
-
-  ava       : z.number().positive(),
-  vigor     : z.number().int().nonnegative(),
-  stability : z.number().int().nonnegative(),
-
-  elemA : z.number().int(),
-  elemB : z.number().int(),
-  elemC : z.number().int(),
-  elemD : z.number().int(),
-  elemE : z.number().int(),
-});
-export type AuraComInput = z.infer<typeof auraComSchema>;
-export const auraComKeys = auraComSchema.keyof().Options;
-
-/* ---------------------------------------------------------
-   4 ▸ Scorer (unchanged except activity rules removed)
---------------------------------------------------------- */
-export function scoreAuraCom(d: AuraComInput) {
-  const radar: Record<string,number> = {
-    musculoskeletal:10,
-    organ_digest_hormone_detox:10,
-    circulation:10,
-    energy:10,
-    articular_joint:10,
-    nervous_system:10,
-  };
-  const bucket = {
-    cellular:0, energy:0, gut:0, stress:0,
-    circulation:0, brain:0, physical:0, performance:0,
-  };
-
-  /* Ava */
-  if (d.ava >= 600) { bucket.energy += band(2); radar.energy = 4; }
-  else if (d.ava < 450) { bucket.energy += band(2); radar.energy = 5; }
-
-  /* Vigor / Stability */
-  if (d.vigor > 65 || d.vigor < 60)       bucket.stress += 1;
-  if (d.stability > 40 || d.stability < 35) bucket.brain += 1;
-
-  /* Five-element spread */
-  const elems  = [d.elemA,d.elemB,d.elemC,d.elemD,d.elemE];
-  const spread = Math.max(...elems) - Math.min(...elems);
-  if (spread > 15) bucket.gut += 2;
-  else if (spread > 10) bucket.gut += 1;
-
-  /* Colour red-flags */
-  if (d.zone1 === 'red')   { bucket.stress += 2; radar.circulation = 6; }
-  if (d.zone1 === 'green') bucket.gut    += 1;
-
-  /* Vital-line */
-  if (d.lineQuality === 'disrupted') {
-    bucket.physical += 1;
-    radar.musculoskeletal = 6;
+// Color band logic for Auracom (consistent with other metrics)
+function auraColorBand(label: string) {
+  switch (label) {
+    case 'Optimal':
+    case 'Ideal':
+    case 'Balanced':
+      return { color: 'dark-green', label };
+    case 'Average':
+    case 'Low':
+    case 'Mild imbalance':
+    case 'High/Stressed':
+    case 'Parasympathetic Dominance':
+      return { color: 'yellow', label };
+    case 'Needs improvement':
+    case 'Underactive':
+      return { color: 'orange', label };
+    case 'Overactive':
+    case 'Over-stimulated':
+    case 'Red':
+    case 'Fatigued':
+    case 'Severe imbalance':
+    case 'Sympathetic Dominance':
+      return { color: 'red', label };
+    default:
+      return { color: 'gray', label: 'Unknown' };
   }
+}
 
-  return { radar, bucket };
+export function scoreAuraCom(d: AuraComInput) {
+  const result: any = { bands: {} };
+  // Energy Score (Ava)
+  let ava_pts = 0;
+  if (d.ava_score > 600) ava_pts = 6; // Orange (Excess output)
+  else if (d.ava_score >= 500) ava_pts = 0; // Green
+  else if (d.ava_score >= 450) ava_pts = 4; // Yellow
+  else if (d.ava_score >= 400) ava_pts = 6; // Orange
+  else ava_pts = 8; // Red
+  result.bands.ava = { score: 100 - (ava_pts * 100 / 8) };
+
+  // Vigor (Yang)
+  let vigor_pts = 0;
+  if (d.vigor > 71) vigor_pts = 8; // Red (Burnout risk)
+  else if (d.vigor >= 60) vigor_pts = 0; // Green
+  else if (d.vigor >= 50) vigor_pts = 4; // Yellow
+  else vigor_pts = 6; // Orange
+  result.bands.vigor = { score: 100 - (vigor_pts * 100 / 8) };
+
+  // Stability (Yin)
+  let stability_pts = 0;
+  if (d.stability > 51) stability_pts = 8; // Red (Fatigued)
+  else if (d.stability >= 41) stability_pts = 4; // Yellow
+  else if (d.stability >= 30) stability_pts = 0; // Green
+  else stability_pts = 6; // Orange
+  result.bands.stability = { score: 100 - (stability_pts * 100 / 8) };
+
+  // Activity % (ANS)
+  let activity_pts = 0;
+  if (d.activity_percent > 60) activity_pts = 8; // Red (Sympathetic dom.)
+  else if (d.activity_percent >= 40 && d.activity_percent <= 60) activity_pts = 0; // Green
+  else activity_pts = 4; // Yellow (Parasymp. dom.)
+  result.bands.activity_pct = { score: 100 - (activity_pts * 100 / 8) };
+
+  // Overall Elemental Balance
+  let elem_pts = 0;
+  if (d.overall_balance_score < 80) elem_pts = 8; // Red (Significant deficiency)
+  else if (d.overall_balance_score >= 95 && d.overall_balance_score <= 110) elem_pts = 0; // Green
+  else if (d.overall_balance_score >= 90 && d.overall_balance_score < 95) elem_pts = 4; // Yellow
+  else if ((d.overall_balance_score >= 80 && d.overall_balance_score < 90) || d.overall_balance_score > 110) elem_pts = 6; // Orange
+  result.bands.element_score = { score: 100 - (elem_pts * 100 / 8) };
+
+  // Elemental Deviation Severity (max-min of five elements)
+  const elements = [d.wood, d.fire, d.earth, d.metal, d.water];
+  const deviation = Math.max(...elements) - Math.min(...elements);
+  let dev_pts = 0;
+  if (deviation <= 5) dev_pts = 0; // Green
+  else if (deviation <= 10) dev_pts = 4; // Yellow
+  else if (deviation <= 15) dev_pts = 6; // Orange
+  else dev_pts = 8; // Red
+  result.bands.element_deviation = { score: 100 - (dev_pts * 100 / 8) };
+
+  // Return both bands and a summary (e.g., average of all scores)
+  const allScores = Object.values(result.bands).map((b: any) => b.score).filter(Boolean);
+  const avgScore = allScores.length ? allScores.reduce((a, b) => a + b, 0) / allScores.length : 0;
+  result.radar = { energy: avgScore, organ_digest_hormone_detox: avgScore };
+  result.bucket = { energy: avgScore, gut: avgScore };
+  return result;
 }
 
 /* ---------------------------------------------------------
-   5 ▸ UI schema consumed by <DeviceForm>
+   5 ▸ New MetricSchema for DeviceForm
+--------------------------------------------------------- */
+export const auracomMetricSchema: MetricSchema = {
+  slug: 'auracom',
+  title: 'AuraCom Traditional Chinese Medicine Balance',
+  fields: [
+    /* A. Overall Assessment */
+    { name: 'ava_score', label: 'Aura Vitality Assessment Score', widget: 'number' as const, step: 1 },
+    { name: 'vigor', label: 'Vigor Level (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'stability', label: 'Stability Score (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'activity_percent', label: 'Activity Level (%)', widget: 'number' as const, step: 1 },
+
+    /* B. Five-Element Balance */
+    { name: 'wood', label: 'Wood Element Balance (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'fire', label: 'Fire Element Balance (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'earth', label: 'Earth Element Balance (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'metal', label: 'Metal Element Balance (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'water', label: 'Water Element Balance (0-100)', widget: 'number' as const, step: 1 },
+    { name: 'overall_balance_score', label: 'Overall Elemental Balance Score (0-100)', widget: 'number' as const, step: 1 },
+  ]
+};
+
+/* ---------------------------------------------------------
+   6 ▸ Legacy UI schema consumed by <DeviceForm>
 --------------------------------------------------------- */
 export const auraComUISchema = {
   /* meta used by DevicePicker / DeviceForm */
-  title : 'AuraCom metrics',
+  title : 'AuraCom Traditional Chinese Medicine Balance',
   slug  : 'auracom',
 
   fields: [
-    /* A. Overall Aura */
-    ...(['zone1','zone2','zone3','zone4','zone5'] as const).map(name => ({
-      name,
-      section:'A. Overall Aura',
-      label : name.toUpperCase().replace('ZONE','Zone '),
-      widget:'select',
-      options: colourOptions,
-    })),
+    /* A. Overall Assessment */
+    { name: 'ava_score', section: 'A. Overall Assessment', label: 'Aura Vitality Assessment Score', step: 1 },
+    { name: 'vigor', section: 'A. Overall Assessment', label: 'Vigor Level (0-100)', step: 1 },
+    { name: 'stability', section: 'A. Overall Assessment', label: 'Stability Score (0-100)', step: 1 },
+    { name: 'activity_percent', section: 'A. Overall Assessment', label: 'Activity Level (%)', step: 1 },
 
-    {
-      name:'lineQuality',
-      section:'A. Overall Aura',
-      label:'Vital-line quality',
-      widget:'select',
-      options:[
-        { value:'stable',    label:'Stable'     },
-        { value:'disrupted', label:'Disrupted'  },
-      ],
-    },
-
-    /* B. Energy Level */
-    { name:'ava', section:'B. Energy Level',
-      label:'Ava – overall energy', step:1 },
-
-    /* C. Energy Balance */
-    { name:'vigor',     section:'C. Energy Balance',
-      label:'Vigor %',     step:1 },
-    { name:'stability', section:'C. Energy Balance',
-      label:'Stability %', step:1 },
-
-    /* D. Five-Element Balance */
-    { name:'elemA', section:'D. Five-Element', label:'Element A', step:1 },
-    { name:'elemB', section:'D. Five-Element', label:'Element B', step:1 },
-    { name:'elemC', section:'D. Five-Element', label:'Element C', step:1 },
-    { name:'elemD', section:'D. Five-Element', label:'Element D', step:1 },
-    { name:'elemE', section:'D. Five-Element', label:'Element E', step:1 },
-    { name:'overallEnergy', section:'D. Five-Element', label:'Overall Energy Level', step:1 },
+    /* B. Five-Element Balance */
+    { name: 'wood', section: 'B. Five-Element Balance', label: 'Wood Element Balance (0-100)', step: 1 },
+    { name: 'fire', section: 'B. Five-Element Balance', label: 'Fire Element Balance (0-100)', step: 1 },
+    { name: 'earth', section: 'B. Five-Element Balance', label: 'Earth Element Balance (0-100)', step: 1 },
+    { name: 'metal', section: 'B. Five-Element Balance', label: 'Metal Element Balance (0-100)', step: 1 },
+    { name: 'water', section: 'B. Five-Element Balance', label: 'Water Element Balance (0-100)', step: 1 },
+    { name: 'overall_balance_score', section: 'B. Five-Element Balance', label: 'Overall Elemental Balance Score (0-100)', step: 1 },
   ],
 
   /* raw → typed payload */
   toPayload(raw: Record<string, FormDataEntryValue>) {
     const n = (k:string) => Number(raw[k] ?? 0);
-    const s = (k:string) => String(raw[k] ?? '');
 
     return {
-      zone1:s('zone1'), zone2:s('zone2'), zone3:s('zone3'),
-      zone4:s('zone4'), zone5:s('zone5'),
-
-      lineQuality : s('lineQuality') as 'stable'|'disrupted',
-
-      ava:n('ava'), vigor:n('vigor'), stability:n('stability'),
-
-      elemA:n('elemA'), elemB:n('elemB'), elemC:n('elemC'),
-      elemD:n('elemD'), elemE:n('elemE'),
-      overallEnergy: n('overallEnergy'),
-    } as AuraComInput;
+      ava_score: n('ava_score'),
+      vigor: n('vigor'),
+      stability: n('stability'),
+      activity_percent: n('activity_percent'),
+      wood: n('wood'),
+      fire: n('fire'),
+      earth: n('earth'),
+      metal: n('metal'),
+      water: n('water'),
+      overall_balance_score: n('overall_balance_score'),
+    };
   },
-} as const;
+};

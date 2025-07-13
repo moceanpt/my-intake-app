@@ -170,7 +170,7 @@ export function pillarScore(
 /** Build full 6-spoke subjective radar (whole ints) */
 export function buildSubjectiveRadar(
   hc: Record<Pillar,string[]> = {} as any,
-  sliders: Record<Pillar,{ main:number }> = {},
+  sliders: Record<Pillar,{ main:number }> = PILLAR_KEYS.reduce((acc, key) => { acc[key] = { main: 10 }; return acc; }, {} as Record<Pillar, { main: number }>),
 ){
   const out = {} as Record<Pillar,number>;
   for (const p of PILLAR_KEYS){
@@ -190,7 +190,7 @@ export function buildPreview(sub:{
   life:Record<string,any>;
 }){
   return generatePlan({ hc:sub.hc, hcSlider:sub.hcSlider, life:sub.life,
-                        metrics:{}, ratio:0 });
+                        metrics:{} });
 }
 
 export function buildFinal(sub:{
@@ -200,7 +200,7 @@ export function buildFinal(sub:{
   metrics:Record<string,number>;
 }){
   return generatePlan({ hc:sub.hc, hcSlider:sub.hcSlider, life:sub.life,
-                        metrics:sub.metrics, ratio:0.7 });
+                        metrics:sub.metrics });
 }
 
 /* Dev-time safeguard */

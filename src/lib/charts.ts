@@ -1,3 +1,5 @@
+import QuickChart from 'quickchart-js';
+
 export function makeRadar(stress: Record<string,number>, support: Record<string,number>) {
     const labels = Object.keys(stress);
     const stressArr = labels.map((l) => stress[l]);

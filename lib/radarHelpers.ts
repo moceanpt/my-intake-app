@@ -8,7 +8,7 @@ import {
   calcLifestyleScore,
   normalizeScore,
 } from './score';
-import { objectiveToRadar } from './radarHelpers';
+import { scoreObjective } from './objective';
 
 /* ---------- inbound ------------------------------------------- */
 export interface PlanInput {
@@ -55,7 +55,7 @@ function subjectiveBuckets(
   const b = { cellular:0, energy:0, gut:0, stress:0,
               circulation:0, brain:0, physical:0, performance:0 };
 
-  b.physical    += bandScore(sub.musculoskeletal);
+  b.physical    += bandScore(sub.musculoskeletal_subjective);
   b.energy      += bandScore(sub.energy);
   b.circulation += bandScore(sub.circulation);
   b.stress      += bandScore(life.stress ?? 10);
@@ -112,7 +112,7 @@ export function generatePlan(input: PlanInput): PlanResult {
 
   /* 1 ▸ health radars ------------------------------------------- */
   const radarSubjective = buildSubjectiveRadar(hc, hcSlider);      // 0-10 ints
-  const radarObjective  = objectiveToRadar(metrics);               // default 10s
+  const radarObjective  = scoreObjective(metrics).radar;           // default 10s
 
   /* 2 ▸ lifestyle radar ----------------------------------------- */
   const lifestyle      = normalizeScore(calcLifestyleScore(life)); // 0-10 ints

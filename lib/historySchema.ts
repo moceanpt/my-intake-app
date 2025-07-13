@@ -20,8 +20,8 @@ export const HISTORY_SECTIONS = [
         ['diab1',   'Diabetes – type 1'],
         ['diab2',   'Diabetes – type 2'],
         ['prediab', 'Pre-diabetes'],
-        ['hypo',    'Hypothyroidism / Hashimoto’s'],
-        ['hyper',   'Hyperthyroidism / Graves’'],
+        ['hypo',    'Hypothyroidism / Hashimoto\'s'],
+        ['hyper',   'Hyperthyroidism / Graves\'s'],
         ['pcos',    'Endometriosis and/or PCOS'],
         ['hormone', 'Low testosterone / HRT / menopause'],
         ['steroid', 'Long-term corticosteroid use (> 3 mo)'],
@@ -36,10 +36,10 @@ export const HISTORY_SECTIONS = [
         ['sle',    'Systemic lupus'],
         ['psa',    'Psoriasis / psoriatic arthritis'],
         ['axspa',  'Ankylosing spondylitis / axial SpA'],
-        ['ibd',    'Inflammatory bowel (Crohn’s / UC)'],
+        ['ibd',    'Inflammatory bowel (Crohn\'s / UC)'],
         ['celiac', 'Coeliac disease'],
         ['ms',     'Multiple sclerosis'],
-        ['sj',     'Sjögren’s syndrome'],
+        ['sj',     'Sjögren\'s syndrome'],
         ['immOther','Other auto-immune', true],
       ],
     },
@@ -105,6 +105,6 @@ export const HISTORY_SECTIONS = [
   ------------------------------------------------------------------- */
   export const HISTORY_LABEL: Record<string,string> = Object.fromEntries(
     HISTORY_SECTIONS.flatMap(sec =>
-      sec.items.map(([key, label]) => [key as string, label as string]),
+      sec.items.map(item => [item[0] as string, item[1] as string]),
     ),
   );

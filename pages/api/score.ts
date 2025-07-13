@@ -49,8 +49,8 @@ export default async function handler(
       if (!saved)
         return res.status(404).json({ error: 'submission not found' });
 
-      hc   = saved.hc   as any;
-      life = saved.life as any;
+      hc   = saved.symptomChips as any;
+      life = saved.lifestyleAnswers as any;
       // (snapshot / metrics could also be stored & retrieved here)
     }
 

@@ -60,3 +60,7 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ## License
 MIT 
+
+## Reference Charts
+
+For all clinical reference values, scoring bands, and color logic used in this app—including InBody, ExBody, and OmniFit (PPG & EEG)—see [REFERENCE_CHARTS.md](./REFERENCE_CHARTS.md). This file is the single source of truth for all objective test scoring and interpretation. 

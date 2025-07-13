@@ -11,22 +11,10 @@
    export default function AuraComPage({ submissionId }: Props) {
      return (
        <DeviceForm
-         title="AuraCom Metrics"
-         device="auracom"
          submissionId={submissionId}
    
          /* 👇 pass the UI schema that contains `fields` */
          schema={auraComUISchema}
-   
-         /* (optional) additional per-field UI tweaks */
-         ui={{
-           zone1:       { widget: 'select', placeholder: 'Main aura colour' },
-           zone2:       { widget: 'select', placeholder: 'Vital-line colour' },
-           zone3:       { widget: 'select' },
-           zone4:       { widget: 'select' },
-           zone5:       { widget: 'select' },
-           lineQuality: { widget: 'select' },
-         }}
        />
      );
    }

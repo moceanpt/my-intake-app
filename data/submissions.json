@@ -13078,5 +13078,118 @@
     },
     "life": {},
     "lifeOptIn": false
+  },
+  {
+    "id": "83dc73be-2d9e-4a40-9af1-f9647d9472b6",
+    "submittedAt": "2025-06-30T01:31:53.148Z",
+    "reasons": [
+      "Pain relief / injury care",
+      "Build strength & resilience",
+      "Better posture & alignment",
+      "Calm digestion & gut health",
+      "Stress relief & relaxation",
+      "Clear & focused mind",
+      "Longevity & healthy aging",
+      "Healthy body composition"
+    ],
+    "discomfort": {
+      "hasPain": "no",
+      "pain": 0,
+      "areas": [],
+      "otherArea": "",
+      "numb": "no",
+      "onset": "<1wk",
+      "progress": "same",
+      "seen": "no",
+      "provider": "",
+      "trigger": "unsure",
+      "notes": ""
+    },
+    "history": {
+      "heart": true,
+      "metabolic": false,
+      "immune": false,
+      "cancer": false,
+      "surgery": false,
+      "neuro": false,
+      "respRenal": false,
+      "blood": false,
+      "boneSkin": false,
+      "preg": false,
+      "bp": true,
+      "clots": false,
+      "pacer": false,
+      "diab1": false,
+      "diab2": false,
+      "prediab": false,
+      "hypo": false,
+      "hyper": false,
+      "pcos": false,
+      "hormone": false,
+      "steroid": false,
+      "metaOther": "",
+      "ra": false,
+      "lupus": false,
+      "psoriasis": false,
+      "axspa": false,
+      "ibd": false,
+      "celiac": false,
+      "ms": false,
+      "sjogren": false,
+      "immOther": "",
+      "cancerType": "",
+      "surgeryDetail": "",
+      "joint": false,
+      "spinal": false,
+      "otherImplant": false,
+      "implantDetail": "",
+      "seizure": false,
+      "neuroPathy": false,
+      "tbi": false,
+      "asthma": false,
+      "kidney": false,
+      "liver": false,
+      "bleed": false,
+      "thinner": false,
+      "osteo": false,
+      "osteoYear": "",
+      "photoNerve": false,
+      "photoSkin": false,
+      "postpartum": false,
+      "notes": ""
+    },
+    "hc": {
+      "musculoskeletal": [],
+      "organ_digest_hormone_detox": [
+        "organ_symptoms_1",
+        "organ_symptoms_0"
+      ],
+      "circulation": [],
+      "energy": [],
+      "articular_joint": [],
+      "nervous_system": []
+    },
+    "hcSlider": {
+      "musculoskeletal": {
+        "main": 1
+      },
+      "organ_digest_hormone_detox": {
+        "main": 3
+      },
+      "circulation": {
+        "main": 10
+      },
+      "energy": {
+        "main": 7
+      },
+      "articular_joint": {
+        "main": 10
+      },
+      "nervous_system": {
+        "main": 10
+      }
+    },
+    "life": {},
+    "lifeOptIn": false
   }
 ]

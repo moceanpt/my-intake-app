@@ -7,6 +7,7 @@
 ------------------------------------------------------------------- */
 import { z } from 'zod';
 import { band } from './utils';          // helper already in repo
+import type { MetricSchema } from '../metrics/types';
 
 /* ───── 1 ▸ UI blueprint (order matters) ───── */
 export const FORM = [
@@ -36,12 +37,24 @@ export const inBodySchema = z.object(shape);
 export type InBodyInput   = z.infer<typeof inBodySchema>;
 export const inBodyKeys   = Object.keys(shape) as (keyof InBodyInput)[];
 
-/* ───── 2 ▸ Scoring logic (unchanged) ───── */
+/* ───── 2 ▸ Color band logic ───── */
+// Total Organ-Health Score color band logic
+function organHealthScoreColorBand(score: number) {
+  if (score >= 80) return { color: 'dark-green', label: 'Optimal' };
+  if (score >= 60) return { color: 'yellow', label: 'Moderate imbalance' };
+  if (score >= 40) return { color: 'orange', label: 'High-risk imbalance' };
+  return { color: 'red', label: 'Critical – immediate attention' };
+}
+
+/* ───── 3 ▸ Scoring logic (cleaned, no organ-health score) ───── */
 export function scoreInBody(
   d   : InBodyInput,
   sex : 'M' | 'F' = 'M',
   age = 35,                       // default when DOB unknown
 ) {
+  let total_pts = 0;
+  const result: any = { bands: {} };
+  
   const radar: Record<string, number> = {
     musculoskeletal: 10,
     organ_digest_hormone_detox: 10,
@@ -55,74 +68,218 @@ export function scoreInBody(
     circulation: 0, brain: 0, physical: 0, performance: 0,
   };
 
-  /* Hydration % -------------------------------------------------- */
+  // --- Hydration % (Total Body Water / Weight) ---
+  let hydration_pts = 0;
   const hyd = d.hydration;
-  if (hyd < (sex === 'M' ? 50 : 40)) { bucket.energy += band(3); radar.energy = 4; }
-  else if (hyd < (sex === 'M' ? 58 : 48)) { bucket.energy += band(1); radar.energy = 6; }
-  else if (hyd > (sex === 'M' ? 66 : 60)) { bucket.stress += band(1); radar.circulation = 6; }
+  if (sex === 'M') {
+    if (hyd >= 58) hydration_pts = 4; // Green
+    else if (hyd >= 52) hydration_pts = 3; // Yellow
+    else if (hyd >= 50) hydration_pts = 2; // Orange
+    else hydration_pts = 1; // Red
+  } else {
+    if (hyd >= 48) hydration_pts = 4; // Green
+    else if (hyd >= 41) hydration_pts = 3; // Yellow
+    else if (hyd >= 40) hydration_pts = 2; // Orange
+    else hydration_pts = 1; // Red
+  }
+  total_pts += hydration_pts;
 
-  /* Body-fat % (age & sex table) -------------------------------- */
+  // --- Body Fat % (BIA, Adults) ---
+  let bf_pts = 0;
   const bf = d.body_fat_pct;
-  const fatTable = sex === 'M'
-    ? [[8,10.5,14.8,18.6,23.1],[8,14.5,18.2,21.3,24.9],
-       [8,17.4,20.6,23.4,26.6],[8,19.1,22.1,24.6,27.8],
-       [8,19.7,22.6,25.2,28.4]]
-    : [[14,16.5,19.4,22.7,27.1],[14,17.4,20.8,24.6,29.1],
-       [14,19.8,23.8,27.6,31.9],[14,22.5,27.0,30.4,34.5],
-       [14,23.2,27.9,31.3,35.4]];
-  const row = Math.min(Math.floor((age - 20) / 10), 4);
-  const [ , , , fair, poor] = fatTable[row];
-  if (bf > poor) bucket.gut += band(2), radar.circulation = 6;
-  else if (bf > fair) bucket.gut += band(1);
+  if (sex === 'M') {
+    const ageBands = [
+      { min: 20, max: 29, green: [8, 14.8], yellow: [14.9, 18.6], orange: [18.7, 23.1], red: 23.2 },
+      { min: 30, max: 39, green: [8, 18.2], yellow: [18.3, 21.3], orange: [21.4, 24.9], red: 25 },
+      { min: 40, max: 49, green: [8, 20.6], yellow: [20.7, 23.4], orange: [23.5, 26.6], red: 26.7 },
+      { min: 50, max: 59, green: [8, 22.1], yellow: [22.2, 24.6], orange: [24.7, 27.8], red: 27.9 },
+      { min: 60, max: 69, green: [8, 22.6], yellow: [22.7, 25.2], orange: [25.3, 28.4], red: 28.5 },
+    ];
+    const band = ageBands.find(b => age >= b.min && age <= b.max) || ageBands[0];
+    if (bf < band.green[0]) bf_pts = 1; // Low (Red)
+    else if (bf <= band.green[1]) bf_pts = 4; // Green
+    else if (bf <= band.yellow[1]) bf_pts = 3; // Yellow
+    else if (bf <= band.orange[1]) bf_pts = 2; // Orange
+    else if (bf > band.red) bf_pts = 1; // Red
+  } else {
+    // Body Fat % reference chart from REFERENCE_CHARTS.md
+    const ageBands = [
+      { min: 20, max: 29, low: 14, excellent: [14, 16.5], good: [16.6, 19.4], fair: [19.5, 22.7], poor: [22.8, 27.1], danger: 27.2 },
+      { min: 30, max: 39, low: 14, excellent: [14, 17.4], good: [17.5, 20.8], fair: [20.9, 24.6], poor: [24.7, 29.1], danger: 29.2 },
+      { min: 40, max: 49, low: 14, excellent: [14, 19.8], good: [19.9, 23.8], fair: [23.9, 27.6], poor: [27.7, 31.9], danger: 31.9 },
+      { min: 50, max: 59, low: 14, excellent: [14, 22.5], good: [22.6, 27.0], fair: [27.1, 30.4], poor: [30.5, 34.5], danger: 34.6 },
+      { min: 60, max: 69, low: 14, excellent: [14, 23.2], good: [23.3, 27.9], fair: [28.0, 31.3], poor: [31.4, 35.4], danger: 35.5 },
+    ];
+    const band = ageBands.find(b => age >= b.min && age <= b.max) || ageBands[0];
+    
+    if (bf < band.low) bf_pts = 1; // Low (Red)
+    else if (bf >= band.excellent[0] && bf <= band.excellent[1]) bf_pts = 4; // Excellent (Green)
+    else if (bf >= band.good[0] && bf <= band.good[1]) bf_pts = 4; // Good (Green)
+    else if (bf >= band.fair[0] && bf <= band.fair[1]) bf_pts = 3; // Fair (Yellow)
+    else if (bf >= band.poor[0] && bf <= band.poor[1]) bf_pts = 2; // Poor (Orange)
+    else if (bf > band.danger) bf_pts = 1; // Dangerously High (Red)
+  }
+  total_pts += bf_pts;
 
-  /* Visceral fat area ------------------------------------------- */
-  if (d.vfa >= 150)       { bucket.gut += 2; radar.circulation = 5; }
-  else if (d.vfa >= 130)  bucket.gut += 1;
-  else if (d.vfa >= 100)  bucket.gut += 0.5;
+  // --- Visceral Fat Area (cm²) ---
+  let vfa_pts = 0;
+  const vfa = d.vfa;
+  if (vfa < 100) vfa_pts = 4; // Green
+  else if (vfa < 130) vfa_pts = 3; // Yellow
+  else if (vfa < 150) vfa_pts = 2; // Orange
+  else vfa_pts = 1; // Red
+  total_pts += vfa_pts;
 
-  /* SMM % -------------------------------------------------------- */
-  const smmOK = sex === 'M' ? 40 : 30;
-  if (d.smm_pct < smmOK)          { bucket.physical += 2; radar.musculoskeletal = 6; }
-  else if (d.smm_pct > smmOK+10)  bucket.performance += 1;
+  // --- ECW/TBW Ratio ---
+  let ecw_pts = 0;
+  if (d.ecw_tbw >= 0.401) ecw_pts = 1; // Red
+  else if (d.ecw_tbw >= 0.391) ecw_pts = 2; // Orange
+  else if (d.ecw_tbw >= 0.381) ecw_pts = 3; // Yellow
+  else ecw_pts = 4; // Green (<0.381)
+  total_pts += ecw_pts;
 
-  /* ECW/TBW ratio ----------------------------------------------- */
-  if (d.ecw_tbw >= 0.420) bucket.stress += 2, radar.circulation = 5;
-  else if (d.ecw_tbw >= 0.401) bucket.stress += 1;
-  else if (d.ecw_tbw >= 0.391) bucket.stress += 0.5;
+  // --- SMM % (Skeletal Muscle Mass / Weight) ---
+  let smm_pts = 0;
+  const smm_pct = d.smm_pct;
+  if (sex === 'M') {
+    if (smm_pct > 48) {
+      smm_pts = 4; // Athletic
+    } else if (age <= 35) {
+      if (smm_pct >= 40) smm_pts = 4;
+      else if (smm_pct >= 37) smm_pts = 3;
+      else if (smm_pct >= 34) smm_pts = 2;
+      else smm_pts = 1;
+    } else if (age <= 55) {
+      if (smm_pct >= 36) smm_pts = 4;
+      else if (smm_pct >= 33) smm_pts = 3;
+      else if (smm_pct >= 30) smm_pts = 2;
+      else smm_pts = 1;
+    } else if (age <= 75) {
+      if (smm_pct >= 32) smm_pts = 4;
+      else if (smm_pct >= 29) smm_pts = 3;
+      else if (smm_pct >= 26) smm_pts = 2;
+      else smm_pts = 1;
+    } else {
+      if (smm_pct >= 31) smm_pts = 4;
+      else if (smm_pct >= 27) smm_pts = 3;
+      else if (smm_pct >= 24) smm_pts = 2;
+      else smm_pts = 1;
+    }
+  } else {
+    if (smm_pct > 38) {
+      smm_pts = 4; // Athletic
+    } else if (age <= 35) {
+      if (smm_pct >= 31) smm_pts = 4;
+      else if (smm_pct >= 28) smm_pts = 3;
+      else if (smm_pct >= 26) smm_pts = 2;
+      else smm_pts = 1;
+    } else if (age <= 55) {
+      if (smm_pct >= 29) smm_pts = 4;
+      else if (smm_pct >= 26) smm_pts = 3;
+      else if (smm_pct >= 24) smm_pts = 2;
+      else smm_pts = 1;
+    } else if (age <= 75) {
+      if (smm_pct >= 27) smm_pts = 4;
+      else if (smm_pct >= 24) smm_pts = 3;
+      else if (smm_pct >= 22) smm_pts = 2;
+      else smm_pts = 1;
+    } else {
+      if (smm_pct >= 26) smm_pts = 4;
+      else if (smm_pct >= 23) smm_pts = 3;
+      else if (smm_pct >= 20) smm_pts = 2;
+      else smm_pts = 1;
+    }
+  }
+  total_pts += smm_pts;
 
-  /* Phase angle -------------------------------------------------- */
-  const phaLow  = (sex === 'M'
-    ? [5.4,5.2,5.0,4.7,4.3] : [4.8,4.6,4.4,4.0,3.6])
-      [Math.min(Math.floor((age - 18)/10),4)];
-  const phaGood = phaLow + 1.0;
-  if (d.phase_angle < phaLow)       { bucket.cellular += 2; radar.energy = 5; }
-  else if (d.phase_angle < phaGood) bucket.cellular += 1;
+  // --- Phase Angle (PhA) ---
+  let pha_pts = 0;
+  const pha = d.phase_angle;
+  if (sex === 'M') {
+    const phaBands = [
+      { min: 18, max: 29, green: 6.8, yellow: 6.2, orange: 5.4, red: 5.4 },
+      { min: 30, max: 39, green: 6.6, yellow: 6.0, orange: 5.2, red: 5.2 },
+      { min: 40, max: 49, green: 6.4, yellow: 5.8, orange: 5.0, red: 5.0 },
+      { min: 50, max: 59, green: 6.0, yellow: 5.4, orange: 4.7, red: 4.7 },
+      { min: 60, max: 69, green: 5.6, yellow: 5.0, orange: 4.3, red: 4.3 },
+      { min: 70, max: 79, green: 5.2, yellow: 4.6, orange: 3.9, red: 3.9 },
+      { min: 80, max: 120, green: 4.8, yellow: 4.2, orange: 3.5, red: 3.5 },
+    ];
+    const band = phaBands.find(b => age >= b.min && age <= b.max) || phaBands[0];
+    if (pha >= band.green) pha_pts = 4; // Green
+    else if (pha >= band.yellow) pha_pts = 3; // Yellow
+    else if (pha >= band.orange) pha_pts = 2; // Orange
+    else pha_pts = 1; // Red
+  } else {
+    const phaBands = [
+      { min: 18, max: 29, green: 6.2, yellow: 5.6, orange: 4.8, red: 4.8 },
+      { min: 30, max: 39, green: 6.0, yellow: 5.4, orange: 4.6, red: 4.6 },
+      { min: 40, max: 49, green: 5.8, yellow: 5.2, orange: 4.4, red: 4.4 },
+      { min: 50, max: 59, green: 5.4, yellow: 4.8, orange: 4.0, red: 4.0 },
+      { min: 60, max: 69, green: 5.0, yellow: 4.4, orange: 3.6, red: 3.6 },
+      { min: 70, max: 79, green: 4.6, yellow: 4.0, orange: 3.2, red: 3.2 },
+      { min: 80, max: 120, green: 4.2, yellow: 3.6, orange: 2.9, red: 2.9 },
+    ];
+    const band = phaBands.find(b => age >= b.min && age <= b.max) || phaBands[0];
+    if (pha >= band.green) pha_pts = 4; // Green
+    else if (pha >= band.yellow) pha_pts = 3; // Yellow
+    else if (pha >= band.orange) pha_pts = 2; // Orange
+    else pha_pts = 1; // Red
+  }
+  total_pts += pha_pts;
 
-  return { radar, bucket };
+  // Cap total_pts at 40 (max possible points from all organ metrics)
+  total_pts = Math.min(total_pts, 40);
+
+  // Compute Organ-Health Score
+  // const Organ_Health_Score = 100 - (total_pts * 100 / 40);
+
+  // Add total Organ-Health Score with color banding
+  // result.bands.organ_health_score = organHealthScoreColorBand(Organ_Health_Score);
+  // result.bands.organ_health_score.score = Organ_Health_Score;
+
+  return result;
 }
 
-/* ───── 3 ▸ UI schema for <DeviceForm> ───── */
-export const inBodyUISchema = {
-    slug  : 'inbody',
-    title : 'InBody',
-    /** Every entry becomes one input */
-    fields: FORM.map(([name, label, step]) => ({
-      name,
-      label,
-      step,
-      widget: 'number',          // <- tell DeviceForm it’s numeric
-    })),
-  
-    /** convert raw form-values >>> clean payload for DB/scorer */
-    toPayload(raw: Record<string, FormDataEntryValue>) {
-      const n = (k: string) => Number(raw[k] ?? 0);
-      return {
-        hydration     : n('hydration'),
-        smm_pct       : n('smm_pct'),
-        body_fat_pct  : n('body_fat_pct'),
-        vfa           : n('vfa'),
-        ecw_tbw       : n('ecw_tbw'),
-        phase_angle   : n('phase_angle'),
-      } satisfies InBodyInput;
-    },
-  } as const;
+/* ───── 3 ▸ New MetricSchema for DeviceForm ───── */
+export const inbodyMetricSchema: MetricSchema = {
+  slug: 'inbody',
+  title: 'InBody Body Composition',
+  fields: [
+    { name: 'tbw_lb', label: 'Total Body Water (lb)', widget: 'number', step: 0.1 },
+    { name: 'weight_lb', label: 'Weight (lb)', widget: 'number', step: 0.1 },
+    { name: 'smm_lb', label: 'Skeletal Muscle Mass (lb)', widget: 'number', step: 0.1 },
+    { name: 'body_fat_lb', label: 'Body Fat Mass (lb)', widget: 'number', step: 0.1 },
+    { name: 'pbf_pct', label: 'Percent Body Fat (%)', widget: 'number', step: 0.1 },
+    { name: 'ecw_tbw', label: 'ECW/TBW Ratio', widget: 'number', step: 0.001 },
+    { name: 'vfa_cm2', label: 'Visceral Fat Area (cm²)', widget: 'number', step: 1 },
+    { name: 'phase_angle_deg', label: 'Whole-Body Phase Angle (°)', widget: 'number', step: 0.1 },
+  ]
+};
+
+/* ───── 4 ▸ Legacy schema for backward compatibility ───── */
+export const inbodySchema = z.object({
+  tbw_lb: z.number().nullable(),
+  weight_lb: z.number().nullable(),
+  smm_lb: z.number().nullable(),
+  body_fat_lb: z.number().nullable(),
+  pbf_pct: z.number().nullable(),
+  ecw_tbw: z.number().nullable(),
+  vfa_cm2: z.number().nullable(),
+  phase_angle_deg: z.number().nullable(),
+});
+
+export const inbodyUISchema = {
+  title: 'InBody Body Composition',
+  description: 'Extracted metrics from InBody report',
+  fields: [
+    { key: 'tbw_lb', label: 'Total Body Water (lb)', type: 'number', unit: 'lb' },
+    { key: 'weight_lb', label: 'Weight (lb)', type: 'number', unit: 'lb' },
+    { key: 'smm_lb', label: 'Skeletal Muscle Mass (lb)', type: 'number', unit: 'lb' },
+    { key: 'body_fat_lb', label: 'Body Fat Mass (lb)', type: 'number', unit: 'lb' },
+    { key: 'pbf_pct', label: 'Percent Body Fat (%)', type: 'number', unit: '%' },
+    { key: 'ecw_tbw', label: 'ECW/TBW Ratio', type: 'number' },
+    { key: 'vfa_cm2', label: 'Visceral Fat Area (cm²)', type: 'number', unit: 'cm²' },
+    { key: 'phase_angle_deg', label: 'Whole-Body Phase Angle (°)', type: 'number', unit: '°' },
+  ]
+};

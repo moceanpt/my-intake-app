@@ -1,7 +1,9 @@
 /* ------------------------------------------------------------------
-   components/steps/ReasonsStep.jsx   (updated for new helpers)
+   components/steps/ReasonsStep.jsx - Redesigned with Design System
 ------------------------------------------------------------------- */
 import React from 'react';
+import Card from '@/components/ui/Card';
+import Chip from '@/components/ui/Chip';
 import DiscomfortStep from '@/components/steps/DiscomfortStep';
 
 const OPTIONS = [
@@ -27,7 +29,7 @@ export default function ReasonsStep({ data, setVal, toggle }) {
   const onOtherChange = (e) =>
     setVal(['reasonsOther'], e.target.value);
 
-  /* auto-add / remove “Something else” based on free-text -------- */
+  /* auto-add / remove "Something else" based on free-text -------- */
   React.useEffect(() => {
     if (otherText && !reasons.includes('Something else'))
       setVal(['reasons'], (prev=[]) => [...prev, 'Something else']);
@@ -37,44 +39,67 @@ export default function ReasonsStep({ data, setVal, toggle }) {
 
   /* ----- UI ----------------------------------------------------- */
   return (
-    <section className="space-y-6">
-      <h2 className="text-lg font-semibold">
-        What brings you to&nbsp;MOCEAN? <span className="font-normal text-sm">(select all that apply)</span>
-      </h2>
+    <div className="space-y-6">
+      {/* Main Reasons Card */}
+      <Card>
+        <Card.Header>
+          <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+            What brings you to MOCEAN?
+          </h2>
+          <p className="mt-2" style={{ color: 'var(--color-secondary-600)' }}>
+            Select all that apply to help us understand your goals
+          </p>
+        </Card.Header>
+        <Card.Body>
+          <div className="space-y-4">
+            {/* Reason Options */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {OPTIONS.map((label) => (
+                <Chip
+                  key={label}
+                  label={label}
+                  active={reasons.includes(label)}
+                  onClick={() => onTick(label)}
+                  variant="outline"
+                  size="lg"
+                  className="justify-start text-left"
+                />
+              ))}
+            </div>
 
-      <ul className="grid gap-2">
-        {OPTIONS.map((label) => (
-          <li key={label} className="flex items-center gap-2">
-            <input
-              id={label}
-              type="checkbox"
-              checked={reasons.includes(label)}
-              onChange={() => onTick(label)}
-              className="h-4 w-4 accent-blue-600"
-            />
-            <label htmlFor={label} className="select-none">
-              {label}
-            </label>
-          </li>
-        ))}
-      </ul>
+            {/* Free-text when "Something else" is chosen ---------------- */}
+            {reasons.includes('Something else') && (
+              <div className="form-field">
+                <label className="form-label">Tell us more about your goals</label>
+                <textarea
+                  className="form-input"
+                  rows={3}
+                  placeholder="Please describe what brings you to MOCEAN..."
+                  value={otherText}
+                  onChange={onOtherChange}
+                />
+              </div>
+            )}
+          </div>
+        </Card.Body>
+      </Card>
 
-      {/* free-text when “Something else” is chosen ---------------- */}
-      {reasons.includes('Something else') && (
-        <textarea
-          className="w-full border rounded p-2"
-          rows={3}
-          placeholder="Tell us more…"
-          value={otherText}
-          onChange={onOtherChange}
-        />
+      {/* Pain Assessment Card - only show if pain relief is selected */}
+      {reasons.includes('Pain relief / injury care') && (
+        <Card>
+          <Card.Header>
+            <h3 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+              Pain Assessment
+            </h3>
+            <p className="mt-1" style={{ color: 'var(--color-secondary-600)' }}>
+              Help us understand your pain better
+            </p>
+          </Card.Header>
+          <Card.Body>
+            <DiscomfortStep data={data} setVal={setVal} />
+          </Card.Body>
+        </Card>
       )}
-{/* 2 ▸ follow-up pain questionnaire -------------------------- */}
-     {reasons.includes('Pain relief / injury care') && (
-       <div className="mt-8">
-         <DiscomfortStep data={data} setVal={setVal} />
-       </div>
-     )}
-    </section>
+    </div>
   );
 }

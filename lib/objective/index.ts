@@ -5,10 +5,11 @@
 
 import { scoreInBody }   from './inbody';
 import { scoreAuraCom, auraComKeys } from './auracom';
-import { scoreExBody , exBodyKeys } from './exbody';   // when ready
-// import { scoreOmniFit, omniFitKeys } from './omnifit';
+import { scoreExBody, exBodyKeys } from './exbody';
+import { scoreOmniFit, omniFitKeys } from './omnifit';
 import { scoreHeartMath, heartMathKeys } from './heartmath';
-
+import { scoreCirculation, circulationKeys } from './circulation';
+import type { MetricSchema } from '../metrics/types';
 
 /* ──────────────────────────────────────────────────────────────
    1.  Master scorer — merge all per-device outputs
@@ -23,14 +24,11 @@ import { scoreHeartMath, heartMathKeys } from './heartmath';
   
     /* AuraCom --------------------------------------------------- */
     if (auraComKeys.some(k => k in metrics))
-      collectors.push(scoreAuraCom(metrics));
+      collectors.push(scoreAuraCom(metrics as any));
     if (heartMathKeys.some(k => k in metrics)) collectors.push(scoreHeartMath(metrics));
-    if (exBodyKeys   .some(k => k in metrics)) collectors.push(scoreExBody(metrics));
-    /* Future devices
-    
-    if (omniFitKeys  .some(k => k in metrics)) collectors.push(scoreOmniFit(metrics));
-    
-    */
+    if (omniFitKeys.some(k => k in metrics)) collectors.push(scoreOmniFit(metrics as any));
+    if (exBodyKeys.some(k => k in metrics)) collectors.push(scoreExBody({ data: metrics as any }));
+    if (circulationKeys.some(k => k in metrics)) collectors.push(scoreCirculation(metrics as any));
   
 
    /* ---- combine outputs -------------------------------------- */
@@ -49,9 +47,9 @@ import { scoreHeartMath, heartMathKeys } from './heartmath';
      });
    });
  
-   /* fill missing spokes with 10 ( = “ideal”) */
+   /* fill missing spokes with 10 ( = "ideal") */
    [
-     'musculoskeletal','organ_digest_hormone_detox','circulation',
+     'musculoskeletal_objective','organ_digest_hormone_detox','circulation',
      'energy','articular_joint','nervous_system',
    ].forEach(k => { if (combinedRadar[k] === undefined) combinedRadar[k] = 10; });
  
@@ -66,19 +64,33 @@ import { scoreHeartMath, heartMathKeys } from './heartmath';
  import * as inbody  from './inbody';
  import * as auracom from './auracom';
  import * as exbody   from './exbody';
- // import * as omnifit  from './omnifit';
+ import * as omnifit  from './omnifit';
  import * as heartmath from './heartmath';
+ import * as circulation from './circulation';
  
  /** Helper: all FORM constants share the same tuple-array shape */
- type DeviceForm = typeof inbody.FORM;
+ type DeviceForm = readonly (readonly [string, string, number, number, number])[];
  
  export const OBJECTIVE_FORMS: Record<
-   string,
-   { label: string; form: DeviceForm }
- > = {
-   inbody : { label: 'InBody',  form: inbody.FORM  },
-   auracom: { label: 'AuraCom', form: auracom.FORM },
-   exbody   : { label: 'ExBody',   form: exbody.FORM   },
-   // omnifit  : { label: 'OmniFit',  form: omnifit.FORM  },
-   heartmath: { label: 'HeartMath',form: heartmath.FORM},
- };
+  string,
+  { label: string; form: DeviceForm }
+> = {
+  inbody : { label: 'InBody',  form: inbody.FORM  },
+  auracom: { label: 'AuraCom', form: auracom.FORM },
+  // exbody   : { label: 'ExBody',   form: exbody.FORM   },
+  omnifit  : { label: 'OmniFit',  form: omnifit.FORM  },
+  heartmath: { label: 'HeartMath',form: heartmath.FORM},
+  circulation: { label: 'Circulation', form: circulation.FORM },
+};
+
+/* ──────────────────────────────────────────────────────────────
+   3.  New MetricSchema registry for DeviceForm
+   ──────────────────────────────────────────────────────────── */
+export const OBJECTIVE_SCHEMAS: Record<string, MetricSchema> = {
+  inbody: inbody.inbodyMetricSchema,
+  auracom: auracom.auracomMetricSchema,
+  exbody: exbody.exbodyMetricSchema,
+  omnifit: omnifit.omnifitMetricSchema,
+  heartmath: heartmath.heartmathMetricSchema,
+  circulation: circulation.circulationMetricSchema,
+};

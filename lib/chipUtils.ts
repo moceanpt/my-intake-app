@@ -8,10 +8,10 @@ export function chipToLabel(code: string): string {
   const [ , idPrefix, idxStr ] = m;
   const idx = Number(idxStr);
 
-  // search every pillar’s questions for a matching idPrefix
+  // search every pillar's questions for a matching idPrefix
   for (const section of Object.values(questionSchema.health)) {
     const q = section.find(q => q.id === idPrefix);
-    if (q && Array.isArray(q.options) && q.options[idx] !== undefined) {
+    if (q && 'options' in q && Array.isArray(q.options) && q.options[idx] !== undefined) {
       return q.options[idx];
     }
   }
@@ -19,7 +19,7 @@ export function chipToLabel(code: string): string {
   // (optional) look in lifestyle schema too
   for (const section of Object.values(questionSchema.lifestyle)) {
     const q = section.find(q => q.id === idPrefix);
-    if (q && Array.isArray(q.options) && q.options[idx] !== undefined) {
+    if (q && 'options' in q && Array.isArray(q.options) && q.options[idx] !== undefined) {
       return q.options[idx];
     }
   }

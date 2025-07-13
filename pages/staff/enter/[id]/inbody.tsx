@@ -3,7 +3,7 @@
    -------------------------------------------------------------- */
    import React          from 'react';
    import DeviceForm     from '@/components/DeviceForm';
-   import { inBodyUISchema } from '@/lib/objective/inbody';
+   import { inbodyMetricSchema } from '@/lib/objective/inbody';
    
    /* Re-export GSSP from the folder index */
    export { getServerSideProps } from '@/pages/staff/enter/[id]/index';
@@ -13,7 +13,7 @@
    export default function InBodyPage({ submissionId }: Props) {
      return (
        <DeviceForm
-         schema={inBodyUISchema}        // 👈 real schema object
+         schema={inbodyMetricSchema}        // 👈 new MetricSchema object
          submissionId={submissionId}
          onDone={() =>
            // after save go back to the metrics hub

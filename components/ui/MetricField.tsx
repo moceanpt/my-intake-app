@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------
-   components/ui/MetricField.tsx
-   – safe in both “context” and “prop” modes
+   components/ui/MetricField.tsx - Redesigned with Design System
+   – safe in both "context" and "prop" modes
 ---------------------------------------------------------------- */
 import { useFormContext } from 'react-hook-form';
 import type { UseFormRegister } from 'react-hook-form';
@@ -18,7 +18,7 @@ interface Props {
  * • If a `register` prop is supplied we use it.
  * • Otherwise we fall back to `useFormContext()`.
  * • When neither is available we render nothing and log a warning,
- *   preventing the dreaded “reading '_f' of undefined” runtime error.
+ *   preventing the dreaded "reading '_f' of undefined" runtime error.
  */
 export default function MetricField({
   name,
@@ -45,20 +45,21 @@ export default function MetricField({
   const errors = ctx?.formState?.errors ?? {};
 
   return (
-    <div>
-      <label className="block font-medium mb-1">{label}</label>
+    <div className="form-field">
+      <label className="form-label">{label}</label>
 
       <input
         type="number"
-        step={step}
+        step="any"
         {...register(name, { valueAsNumber: true, required: 'Required' })}
-        className="input input-bordered w-full"
+        className="form-input"
+        placeholder="Enter value..."
       />
 
       {errors[name] && (
-        <p className="text-red-500 text-sm mt-1">
+        <span className="form-error">
           {String(errors[name]?.message)}
-        </p>
+        </span>
       )}
     </div>
   );

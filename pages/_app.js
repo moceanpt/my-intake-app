@@ -12,7 +12,7 @@ import Head from "next/head";
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div className="design-concept design-modern-medical">
       {/* Shared page metadata (you can adjust) */}
       <Head>
         <title>MOCEAN • Holistic Health Intake</title>
@@ -25,12 +25,12 @@ export default function MyApp({ Component, pageProps }) {
       
       </Head>
 
-       {/* 👇 JIT “seed” – invisible but forces Tailwind to emit the classes */}
+       {/* 👇 JIT "seed" – invisible but forces Tailwind to emit the classes */}
        <div className="hidden bg-coast-50 text-coast-500" />
 
       {/* Render the actual page component */}
       <Component {...pageProps} />
-    </>
+    </div>
   );
   
 }

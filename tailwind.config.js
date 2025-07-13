@@ -1,5 +1,4 @@
-const colors = require('tailwindcss/colors');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './pages/**/*.{js,jsx,ts,tsx}',
@@ -9,7 +8,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ...colors, // ✅ includes gray-50, slate, etc.
         coast: {
           50:  '#f1fafc',
           100: '#e0f4f7',

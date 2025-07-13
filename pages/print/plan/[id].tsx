@@ -13,7 +13,7 @@ export async function getServerSideProps({ params, query }) {
 export default function PrintPlan({ plan }) {
   return (
     <div className="p-0 m-0 print-bg white">
-      <ResultView data={plan} readOnly />
+      <ResultView data={plan} onBack={() => {}} />
       <style jsx global>{`
         @media print {
           body { margin:0; }

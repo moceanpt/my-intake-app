@@ -1,9 +1,11 @@
 /* ------------------------------------------------------------------
-   pages/intake.jsx  (client wizard)
+   pages/intake.jsx  (client wizard) - Redesigned with Design System
 ------------------------------------------------------------------- */
 import { useState } from 'react';
 import Head          from 'next/head';
 import Progress      from '@/components/ui/Progress';
+import Card          from '@/components/ui/Card';
+import Button        from '@/components/ui/Button';
 
 import ReasonsStep      from '@/components/steps/ReasonsStep';
 import HistoryStep      from '@/components/steps/HistoryStep';
@@ -168,7 +170,7 @@ export default function Intake() {
     
 
 /* -------------- lifestyle -------------- */
-life      : {},     // empty until client says “yes”
+life      : {},     // empty until client says "yes"
 lifeOptIn : null,   // null = undecided
 });
 
@@ -184,7 +186,7 @@ const setVal = (path, v) =>
     parts.slice(0, -1).forEach(k => { cur = cur[k]; });
 
     /* if the leaf does not exist yet, initialise it with
-       a sensible default so the updater function won’t explode */
+       a sensible default so the updater function won't explode */
     const leaf   = cur[parts.at(-1)];
     const newVal = typeof v === 'function' ? v(leaf) : v;
     cur[parts.at(-1)] = newVal;
@@ -208,36 +210,44 @@ const toggle = (path, value) =>
      ──────────────────────────────────────────────────────── */
      function LifestyleOptInStep({ onYes, onNo }) {
       return (
-        <section className="space-y-6">
-          <h2 className="text-lg font-semibold">Optional Lifestyle Survey</h2>
-          <p>
-            These extra questions take about&nbsp;5&nbsp;minutes and help us tailor
-            your plan. &nbsp;Would you like to fill them in?
-          </p>
-          <div className="flex gap-4">
-            <button
-              className="px-4 py-2 rounded bg-blue-600 text-white"
-              onClick={() => {
-                setVal(['lifeOptIn'], true);
-                setVal(['life'], defaultLifestyle);
-                onYes();            // advance to LifestyleStep
-              }}
-            >
-              Yes, let’s do it
-            </button>
+        <Card>
+          <Card.Header>
+            <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>Optional Lifestyle Survey</h2>
+            <p className="mt-2" style={{ color: 'var(--color-secondary-600)' }}>
+              These extra questions take about 5 minutes and help us tailor your plan. 
+              Would you like to fill them in?
+            </p>
+          </Card.Header>
+          <Card.Body>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                variant="primary"
+                size="lg"
+                className="flex-1"
+                onClick={() => {
+                  setVal(['lifeOptIn'], true);
+                  setVal(['life'], defaultLifestyle);
+                  onYes();            // advance to LifestyleStep
+                }}
+              >
+                Yes, let's do it
+              </Button>
   
-            <button
-              className="px-4 py-2 rounded bg-gray-300"
-              onClick={() => {
-                setVal(['lifeOptIn'], false);
-                setVal(['life'], {});  // keep empty
-                onNo();               // skip ahead
-              }}
-            >
-              No thanks
-            </button>
-          </div>
-        </section>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="flex-1"
+                onClick={() => {
+                  setVal(['lifeOptIn'], false);
+                  setVal(['life'], {});  // keep empty
+                  onNo();               // skip ahead
+                }}
+              >
+                No thanks
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
       );
     }
   
@@ -293,56 +303,79 @@ const submit = async () => {
 
 /* ──────────────── UI ──────────────── */
 return (
-  <main className="max-w-lg w-full mx-auto px-4 py-6">
-    <Head><title>MOCEAN Intake</title></Head>
+  <div className="min-h-screen bg-white text-secondary-900" style={{ background: 'var(--color-secondary-50)', color: 'var(--color-secondary-900)' }}>
+    <Head>
+      <title>MOCEAN Intake</title>
+      <meta name="description" content="Complete your health intake assessment" />
+    </Head>
 
-    <Progress step={step} total={steps.length} />
-    {steps[step]}
+    <main className="container py-8">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-secondary-900)' }}>
+          MOCEAN Health Intake
+        </h1>
+        <p style={{ color: 'var(--color-secondary-600)' }}>
+          Let's personalize your health journey
+        </p>
+      </div>
 
-    {/* nav buttons */}
-    <div className="mt-6 flex justify-between gap-6">
-      {step > 0 && step < 5 && (
-        <button
-          type="button"
-          className="w-28 px-3 py-2 rounded bg-gray-200 hover:bg-gray-300"
-          onClick={() => setStep(s => s - 1)}
-        >
-          Back
-        </button>
-      )}
+      {/* Progress Indicator */}
+      <div className="mb-8">
+        <Progress step={step} total={steps.length} />
+      </div>
 
-      {step < 4 && (            /* normal “Next” */
-        <button
-          type="button"
-          className="w-28 px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-          onClick={() => setStep(s => s + 1)}
-        >
-          Next
-        </button>
-      )}
+      {/* Step Content */}
+      <div className="max-w-2xl mx-auto">
+        {steps[step]}
+      </div>
 
-      {step === 4 && (          /* LifestyleStep finished */
-        <button
-          type="button"
-          className="w-28 px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-          onClick={() => setStep(5)}
-        >
-          Next
-        </button>
-      )}
+      {/* Navigation */}
+      <div className="max-w-2xl mx-auto mt-8">
+        <div className="flex justify-between gap-4">
+          {step > 0 && step < 5 && (
+            <Button
+              variant="secondary"
+              onClick={() => setStep(s => s - 1)}
+            >
+              ← Back
+            </Button>
+          )}
 
-      {step === 5 && (          /* final submit */
-        <button
-          type="button"
-          className="w-28 px-3 py-2 rounded bg-green-600 text-white
-                     hover:bg-green-700 disabled:opacity-50"
-          onClick={submit}
-          disabled={busy}
-        >
-          {busy ? 'Wait…' : 'Submit'}
-        </button>
-      )}
-    </div>
-  </main>
+          {step < 4 && (            /* normal "Next" */
+            <Button
+              variant="primary"
+              className="ml-auto"
+              onClick={() => setStep(s => s + 1)}
+            >
+              Next →
+            </Button>
+          )}
+
+          {step === 4 && (          /* LifestyleStep finished */
+            <Button
+              variant="primary"
+              className="ml-auto"
+              onClick={() => setStep(5)}
+            >
+              Next →
+            </Button>
+          )}
+
+          {step === 5 && (          /* final submit */
+            <Button
+              variant="primary"
+              className="ml-auto"
+              onClick={submit}
+              disabled={busy}
+              loading={busy}
+            >
+              {busy ? 'Submitting...' : 'Submit Assessment'}
+            </Button>
+          )}
+        </div>
+      </div>
+    </main>
+  </div>
 );
 }

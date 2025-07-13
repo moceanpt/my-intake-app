@@ -4,6 +4,8 @@
    import ResultView from '@/components/ResultView';
    import prisma     from '@/lib/prisma';     // ← default export
    import { useRouter } from 'next/router';
+   import Card from '@/components/ui/Card';
+   import Button from '@/components/ui/Button';
    
    /* ---------- 1. SSR: fetch plan row (preview | final) -------------- */
    export async function getServerSideProps({ params, query }) {
@@ -47,26 +49,29 @@
        <main className="max-w-3xl mx-auto p-6 space-y-6">
          {/* header row ------------------------------------------------ */}
          <div className="flex items-center justify-between">
-           <h1 className="text-2xl font-bold">Plan&nbsp;({stage})</h1>
+           <h1 className="text-2xl font-bold" style={{ color: 'var(--color-secondary-900)' }}>Plan&nbsp;({stage})</h1>
    
            {stage === 'final' && (
              pdfUrl ? (
-               <a href={pdfUrl}
-                  target="_blank"
-                  className="btn btn-secondary">
-                 Download&nbsp;PDF
+               <a href={pdfUrl} target="_blank">
+                 <Button variant="secondary">
+                   Download&nbsp;PDF
+                 </Button>
                </a>
              ) : (
-               <button onClick={genPdf}
-                       className="btn btn-secondary">
+               <Button variant="secondary" onClick={genPdf}>
                  Generate&nbsp;PDF
-               </button>
+               </Button>
              )
            )}
          </div>
    
          {/* plan content ---------------------------------------------- */}
-         <ResultView readOnly data={normalisedPlan} />
+         <Card>
+           <Card.Body>
+             <ResultView readOnly data={normalisedPlan} />
+           </Card.Body>
+         </Card>
        </main>
      );
    }

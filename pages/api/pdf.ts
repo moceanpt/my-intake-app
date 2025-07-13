@@ -36,12 +36,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }));
       pdfUrl = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${key}`;
 
-      /* persist URL so “Download” button appears */
+      /* persist URL so "Download" button appears */
       await prisma.planResult.update({
         where: {
           submissionId_stage: {
             submissionId: String(id),
-            stage: String(stage),
+            stage: String(stage) as 'preview' | 'final',
           },
         },
         data: { pdfUrl },
