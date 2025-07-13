@@ -1,7 +1,18 @@
 import React from 'react';
+import { scoreInBody } from '@/lib/objective/inbody';
 
 // Deterministic demo status mapping
-const getStatus = (metric, value, sex, age) => {
+const getStatus = (metric, value, sex, age, scoreResult) => {
+  // If we have scoring data, use it for accurate status indicators
+  if (scoreResult && scoreResult.bands && scoreResult.bands[metric]) {
+    const score = scoreResult.bands[metric].score;
+    if (score >= 80) return '🟢';
+    if (score >= 60) return '🟡';
+    if (score >= 40) return '🟠';
+    return '🔴';
+  }
+  
+  // Fallback to deterministic demo mapping if no scoring data
   const statusMap = {
     hydration: '🟡',
     smm_pct: '🟢',
@@ -75,14 +86,57 @@ const InBodyResultSection = ({ data, history, sex, age }) => {
   const getTrendValues = key => history ? history.map(h => h[key]).filter(v => v !== undefined) : [];
   const getTrendDates = () => history ? history.map(h => h.date).filter(d => d !== undefined) : [];
 
-  // Placeholder for total organ score (replace with real calculation)
-  const totalOrganScore = '87.5%';
+  // Calculate real organ health score using the scoring logic
+  const calculateOrganScore = () => {
+    try {
+      // Check if we have the required metrics for scoring
+      const requiredMetrics = ['hydration', 'smm_pct', 'body_fat_pct', 'ecw_tbw', 'vfa', 'phase_angle'];
+      const hasRequiredMetrics = requiredMetrics.every(metric => data[metric] !== undefined && data[metric] !== null);
+      
+      if (!hasRequiredMetrics) {
+        return { score: null, label: 'Insufficient data for scoring', scoreResult: null };
+      }
+
+      const scoreResult = scoreInBody(data, sex, age);
+      const organScore = scoreResult.bands.organ_health_score.score;
+      
+      return {
+        score: organScore,
+        label: scoreResult.bands.organ_health_score.label,
+        color: scoreResult.bands.organ_health_score.color,
+        scoreResult: scoreResult
+      };
+    } catch (error) {
+      console.error('Error calculating organ score:', error);
+      return { score: null, label: 'Error calculating score', scoreResult: null };
+    }
+  };
+
+  const organScoreResult = calculateOrganScore();
 
   return (
     <section style={{ margin: '2rem 0', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: '2rem' }}>
       <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Organ System Result</h3>
       <div style={{ fontWeight: 600, fontSize: '1.2rem', marginBottom: '1.5rem' }}>
-        Total Organ Score: {totalOrganScore}
+        Total Organ Score: {organScoreResult.score !== null ? `${organScoreResult.score.toFixed(1)}%` : organScoreResult.label}
+        {organScoreResult.color && (
+          <span style={{ 
+            marginLeft: '1rem', 
+            padding: '0.25rem 0.5rem', 
+            borderRadius: '4px', 
+            fontSize: '0.9rem',
+            backgroundColor: organScoreResult.color === 'dark-green' ? '#dcfce7' : 
+                           organScoreResult.color === 'yellow' ? '#fef3c7' :
+                           organScoreResult.color === 'orange' ? '#fed7aa' :
+                           organScoreResult.color === 'red' ? '#fee2e2' : '#f3f4f6',
+            color: organScoreResult.color === 'dark-green' ? '#166534' :
+                  organScoreResult.color === 'yellow' ? '#92400e' :
+                  organScoreResult.color === 'orange' ? '#ea580c' :
+                  organScoreResult.color === 'red' ? '#dc2626' : '#374151'
+          }}>
+            {organScoreResult.label}
+          </span>
+        )}
       </div>
       {/* Unified Metrics Table */}
       <table style={{ width: '100%', marginBottom: '2rem', borderCollapse: 'collapse' }}>
@@ -97,7 +151,7 @@ const InBodyResultSection = ({ data, history, sex, age }) => {
         <tbody>
           {allMetrics.map(m => (
             <tr key={m.key} style={{ borderBottom: '1px solid #f3f3f3' }}>
-              <td style={{ width: 24, textAlign: 'center' }}>{m.scored ? <span style={{ fontSize: 18 }}>{getStatus(m.key, data[m.key], sex, age)}</span> : null}</td>
+              <td style={{ width: 24, textAlign: 'center' }}>{m.scored ? <span style={{ fontSize: 18 }}>{getStatus(m.key, data[m.key], sex, age, organScoreResult.scoreResult)}</span> : null}</td>
               <td>{m.label}</td>
               <td>{data[m.key]}</td>
               <td><TrendSparkline values={getTrendValues(m.key)} dates={getTrendDates()} /></td>

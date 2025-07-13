@@ -232,11 +232,23 @@ export function scoreInBody(
   total_pts = Math.min(total_pts, 40);
 
   // Compute Organ-Health Score
-  // const Organ_Health_Score = 100 - (total_pts * 100 / 40);
+  const Organ_Health_Score = 100 - (total_pts * 100 / 40);
 
   // Add total Organ-Health Score with color banding
-  // result.bands.organ_health_score = organHealthScoreColorBand(Organ_Health_Score);
-  // result.bands.organ_health_score.score = Organ_Health_Score;
+  result.bands.organ_health_score = organHealthScoreColorBand(Organ_Health_Score);
+  result.bands.organ_health_score.score = Organ_Health_Score;
+
+  // Add individual metric scores for detailed breakdown
+  result.bands.hydration = { score: 100 - (hydration_pts * 100 / 4) };
+  result.bands.body_fat_pct = { score: 100 - (bf_pts * 100 / 4) };
+  result.bands.vfa = { score: 100 - (vfa_pts * 100 / 4) };
+  result.bands.ecw_tbw = { score: 100 - (ecw_pts * 100 / 4) };
+  result.bands.smm_pct = { score: 100 - (smm_pts * 100 / 4) };
+  result.bands.phase_angle = { score: 100 - (pha_pts * 100 / 4) };
+
+  // Add radar and bucket data for integration with other devices
+  result.radar = radar;
+  result.bucket = bucket;
 
   return result;
 }
