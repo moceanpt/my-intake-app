@@ -9,6 +9,8 @@ import { scoreExBody, exBodyKeys } from './exbody';
 import { scoreOmniFit, omniFitKeys } from './omnifit';
 import { scoreHeartMath, heartMathKeys } from './heartmath';
 import { scoreCirculation, circulationKeys } from './circulation';
+import { scoreNervous, nervousKeys } from './nervous';
+import { exbodyROMMetricSchema } from './exbody';
 import type { MetricSchema } from '../metrics/types';
 
 /* ──────────────────────────────────────────────────────────────
@@ -29,6 +31,7 @@ import type { MetricSchema } from '../metrics/types';
     if (omniFitKeys.some(k => k in metrics)) collectors.push(scoreOmniFit(metrics as any));
     if (exBodyKeys.some(k => k in metrics)) collectors.push(scoreExBody({ data: metrics as any }));
     if (circulationKeys.some(k => k in metrics)) collectors.push(scoreCirculation(metrics as any));
+    if (nervousKeys.some(k => k in metrics)) collectors.push(scoreNervous(metrics as any));
   
 
    /* ---- combine outputs -------------------------------------- */
@@ -67,6 +70,7 @@ import type { MetricSchema } from '../metrics/types';
  import * as omnifit  from './omnifit';
  import * as heartmath from './heartmath';
  import * as circulation from './circulation';
+ import * as nervous from './nervous';
  
  /** Helper: all FORM constants share the same tuple-array shape */
  type DeviceForm = readonly (readonly [string, string, number, number, number])[];
@@ -81,6 +85,7 @@ import type { MetricSchema } from '../metrics/types';
   omnifit  : { label: 'OmniFit',  form: omnifit.FORM  },
   heartmath: { label: 'HeartMath',form: heartmath.FORM},
   circulation: { label: 'Circulation', form: circulation.FORM },
+  nervous: { label: 'Nervous System', form: nervous.FORM },
 };
 
 /* ──────────────────────────────────────────────────────────────
@@ -90,7 +95,9 @@ export const OBJECTIVE_SCHEMAS: Record<string, MetricSchema> = {
   inbody: inbody.inbodyMetricSchema,
   auracom: auracom.auracomMetricSchema,
   exbody: exbody.exbodyMetricSchema,
+  exbody_rom: exbodyROMMetricSchema,
   omnifit: omnifit.omnifitMetricSchema,
   heartmath: heartmath.heartmathMetricSchema,
   circulation: circulation.circulationMetricSchema,
+  nervous: nervous.nervousMetricSchema,
 };

@@ -14,8 +14,9 @@ export const config = { api: { bodyParser: false } };
 
 const DEVICE_ORDER = [
   { id: 'exbody', name: 'ExBody' },
+  { id: 'exbody_rom', name: 'ExBody ROM' },
   { id: 'inbody', name: 'InBody' },
-  { id: 'omnifit', name: 'OmniFit PPG' },
+  { id: 'omnifit_ppg', name: 'OmniFit PPG' },
   { id: 'omnifit_eeg', name: 'OmniFit EEG' },
   { id: 'auracom', name: 'Auracom' },
   { id: 'heartmath', name: 'HeartMath' },
@@ -102,88 +103,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const buffer = Buffer.from(base64Image, 'base64');
         const uploadResult = await uploadFileToS3(buffer, `page${i}.png`, 'image/png', `clients/${submissionId}/${DEVICE_ORDER[i-1].id}`);
 
-        if (deviceType === 'omnifit') {
-          // Extract PPG metrics from OmniFit PPG page
-          const { extractedData: ppgData, lastError: ppgError, extractedText: ppgExtractedText } = await (async () => {
-            const result = await extractDeviceData('omnifit', base64Image, 'image/png');
-            // Add debug print for OpenAI response
-            console.log('OpenAI response for OmniFit PPG:', result.extractedText);
-            console.log('Parsed extractedData for OmniFit PPG:', result.extractedData);
-            return { ...result, extractedText: result.extractedText };
-          })();
-          await prisma.uploadedFile.create({
-            data: {
-              submissionId,
-              fileName: `page${i}.png`,
-              fileKey: uploadResult.key,
-              fileUrl: uploadResult.url,
-              contentType: 'image/png',
-              fileSize: buffer.length,
-              deviceType: 'omnifit_ppg',
-              extractedData: ppgData ?? undefined,
-            },
-          });
-          results.push({
-            device: 'omnifit_ppg',
-            fileUrl: uploadResult.url,
+        // Extract data for all devices
+        const { extractedData, lastError } = await extractDeviceData(deviceType, base64Image, 'image/png');
+        await prisma.uploadedFile.create({
+          data: {
+            submissionId,
+            fileName: `page${i}.png`,
             fileKey: uploadResult.key,
-            extractedData: ppgData,
-            error: ppgError ? (ppgError.message || String(ppgError)) : null
-          });
-          console.log(`Finished device omnifit (PPG)`);
-        } else if (deviceType === 'omnifit_eeg') {
-          // Extract EEG metrics from OmniFit EEG page
-          const { extractedData: eegData, lastError: eegError, extractedText: eegExtractedText } = await (async () => {
-            const result = await extractDeviceData('omnifit_eeg', base64Image, 'image/png');
-            // Add debug print for OpenAI response
-            console.log('OpenAI response for OmniFit EEG:', result.extractedText);
-            console.log('Parsed extractedData for OmniFit EEG:', result.extractedData);
-            return { ...result, extractedText: result.extractedText };
-          })();
-          await prisma.uploadedFile.create({
-            data: {
-              submissionId,
-              fileName: `page${i}.png`,
-              fileKey: uploadResult.key,
-              fileUrl: uploadResult.url,
-              contentType: 'image/png',
-              fileSize: buffer.length,
-              deviceType: 'omnifit_eeg',
-              extractedData: eegData ?? undefined,
-            },
-          });
-          results.push({
-            device: 'omnifit_eeg',
             fileUrl: uploadResult.url,
-            fileKey: uploadResult.key,
-            extractedData: eegData,
-            error: eegError ? (eegError.message || String(eegError)) : null
-          });
-          console.log(`Finished device omnifit (EEG)`);
-        } else {
-          // Extract data for other devices as before
-          const { extractedData, lastError } = await extractDeviceData(deviceType, base64Image, 'image/png');
-          await prisma.uploadedFile.create({
-            data: {
-              submissionId,
-              fileName: `page${i}.png`,
-              fileKey: uploadResult.key,
-              fileUrl: uploadResult.url,
-              contentType: 'image/png',
-              fileSize: buffer.length,
-              deviceType: deviceType,
-              extractedData: extractedData ?? undefined,
-            },
-          });
-          results.push({
-            device: deviceType,
-            fileUrl: uploadResult.url,
-            fileKey: uploadResult.key,
-            extractedData,
-            error: lastError ? (lastError.message || String(lastError)) : null
-          });
-          console.log(`Finished device ${deviceType}`);
-        }
+            contentType: 'image/png',
+            fileSize: buffer.length,
+            deviceType: deviceType,
+            extractedData: extractedData ?? undefined,
+          },
+        });
+        results.push({
+          device: deviceType,
+          fileUrl: uploadResult.url,
+          fileKey: uploadResult.key,
+          extractedData,
+          error: lastError ? (lastError.message || String(lastError)) : null
+        });
+        console.log(`Finished device ${deviceType}`);
       } catch (err) {
         console.error(`Error processing page ${i} for device ${deviceType}:`, err);
         results.push({

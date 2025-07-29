@@ -104,10 +104,15 @@ export default function Dashboard({ subs }) {
           <p style={{ color: 'var(--color-secondary-600)' }}>
             Manage client intakes and health assessments
           </p>
-          <div className="mt-4">
+          <div className="mt-4 flex gap-3">
             <Link href="/ai-demo">
               <Button variant="secondary">
                 🧠 Test AI Document Upload
+              </Button>
+            </Link>
+            <Link href="/history-tracking">
+              <Button variant="secondary">
+                📊 View History & Trends
               </Button>
             </Link>
           </div>

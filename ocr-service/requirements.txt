@@ -1,7 +1,0 @@
-fastapi==0.111.*
-uvicorn[standard]==0.29.*
-pytesseract==0.3.*
-pymupdf==1.23.*
-pdfplumber==0.10.*
-Pillow==10.*     # ← no typo at the end
-boto3~=1.34

@@ -20,6 +20,8 @@ export const omnifitSchema = z.object({
   mental_stress: z.number().nullable(),
   intrinsic_eeg_pf: z.number().nullable(),
   brain_workload: z.number().nullable(),
+  normalized_coherence: z.number().nullable(),
+  rmssd: z.number().nullable(),
 });
 
 export type OmniFitInput = z.infer<typeof omnifitSchema>;
@@ -52,10 +54,7 @@ export const omnifitEEGMetricSchema: MetricSchema = {
   slug: 'omnifit_eeg',
   title: 'OmniFit Stress Check Results (EEG)',
   fields: [
-    { name: 'brain_score', label: 'Overall Brain Function Score (0-100)', widget: 'number', step: 0.1 },
-    { name: 'mental_stress', label: 'Mental Stress Level (0-100)', widget: 'number', step: 0.1 },
-    { name: 'intrinsic_eeg_pf', label: 'Intrinsic EEG Performance Factor', widget: 'number', step: 0.01 },
-    { name: 'brain_workload', label: 'Brain Workload Index', widget: 'number', step: 0.1 },
+    { name: 'omnifit_eeg_table', label: 'OmniFit EEG Metrics', widget: 'omnifit-table' as const, tableType: 'eeg' },
   ]
 };
 
@@ -63,12 +62,7 @@ export const omnifitPPGMetricSchema: MetricSchema = {
   slug: 'omnifit_ppg',
   title: 'OmniFit Stress Check Results (PPG)',
   fields: [
-    { name: 'hrv_index', label: 'Heart Rate Variability Index', widget: 'number', step: 0.1 },
-    { name: 'stress', label: 'Stress Level (0-100)', widget: 'number', step: 1 },
-    { name: 'ans_health', label: 'Autonomic Nervous System Health Score', widget: 'number', step: 0.01 },
-    { name: 'ans_age', label: 'ANS Age (biological age)', widget: 'number', step: 1 },
-    { name: 'lf', label: 'Low Frequency Power (ms²)', widget: 'number', step: 0.01 },
-    { name: 'hf', label: 'High Frequency Power (ms²)', widget: 'number', step: 0.01 },
+    { name: 'omnifit_ppg_table', label: 'OmniFit PPG Metrics', widget: 'omnifit-table' as const, tableType: 'ppg' },
   ]
 };
 
@@ -240,6 +234,209 @@ export function scoreOmniFit(metrics: OmniFitInput) {
   result.radar = { nervous_system: avgScore, brain: avgScore };
   result.bucket = { stress: avgScore, brain: avgScore };
   return result;
+}
+
+export function scoreNervousSystemStory(metrics: OmniFitInput) {
+  const stories: Array<{
+    title: string;
+    score: number;
+    status: string;
+    statusColor: string;
+    whyItMatters: string;
+    metrics: Array<{
+      name: string;
+      value: number | string;
+      unit: string;
+    }>;
+  }> = [];
+
+  // 1. Cognitive Performance
+  const cognitiveMetrics = {
+    brain_score: metrics.brain_score || 0,
+    intrinsic_eeg_pf: metrics.intrinsic_eeg_pf || 0,
+    brain_workload: metrics.brain_workload || 0,
+    normalized_coherence: metrics.normalized_coherence || (metrics.brain_score ? Math.min(100, Math.max(0, metrics.brain_score + 5)) : 85) // Calculate from brain_score if available
+  };
+
+  let cognitiveScore = 0;
+  let cognitiveStatus = '';
+  let cognitiveColor = '';
+
+  // Calculate cognitive score based on brain metrics
+  if (cognitiveMetrics.brain_score >= 80) cognitiveScore += 25;
+  else if (cognitiveMetrics.brain_score >= 60) cognitiveScore += 20;
+  else if (cognitiveMetrics.brain_score >= 40) cognitiveScore += 15;
+  else cognitiveScore += 10;
+
+  if (cognitiveMetrics.intrinsic_eeg_pf >= 9.0) cognitiveScore += 25;
+  else if (cognitiveMetrics.intrinsic_eeg_pf >= 8.0) cognitiveScore += 20;
+  else if (cognitiveMetrics.intrinsic_eeg_pf >= 7.0) cognitiveScore += 15;
+  else cognitiveScore += 10;
+
+  if (cognitiveMetrics.brain_workload >= 15 && cognitiveMetrics.brain_workload <= 19.5) cognitiveScore += 25;
+  else if ((cognitiveMetrics.brain_workload >= 12 && cognitiveMetrics.brain_workload < 15) || 
+           (cognitiveMetrics.brain_workload > 19.5 && cognitiveMetrics.brain_workload <= 24.9)) cognitiveScore += 20;
+  else if (cognitiveMetrics.brain_workload >= 25 && cognitiveMetrics.brain_workload <= 29.9) cognitiveScore += 15;
+  else cognitiveScore += 10;
+
+  if (cognitiveMetrics.normalized_coherence >= 80) cognitiveScore += 25;
+  else if (cognitiveMetrics.normalized_coherence >= 60) cognitiveScore += 20;
+  else if (cognitiveMetrics.normalized_coherence >= 40) cognitiveScore += 15;
+  else cognitiveScore += 10;
+
+  if (cognitiveScore >= 85) {
+    cognitiveStatus = 'Optimal Zone';
+    cognitiveColor = 'text-green-600 font-bold';
+  } else if (cognitiveScore >= 70) {
+    cognitiveStatus = 'Mild Strain';
+    cognitiveColor = 'text-yellow-600 font-bold';
+  } else if (cognitiveScore >= 55) {
+    cognitiveStatus = 'Moderate Load';
+    cognitiveColor = 'text-orange-600 font-bold';
+  } else {
+    cognitiveStatus = 'High Strain';
+    cognitiveColor = 'text-red-600 font-bold';
+  }
+
+  stories.push({
+    title: 'Cognitive Performance',
+    score: cognitiveScore,
+    status: cognitiveStatus,
+    statusColor: cognitiveColor,
+    whyItMatters: 'These readings track how efficiently your brain processes information—like a "CPU health check." Higher scores mean your neural circuits are sharp, coordinated, and not overheating under mental load.',
+    metrics: [
+      { name: 'Overall Brain Function Score', value: cognitiveMetrics.brain_score, unit: '(0-100)' },
+      { name: 'Intrinsic EEG Performance Factor', value: cognitiveMetrics.intrinsic_eeg_pf, unit: 'Hz' },
+      { name: 'Brain Workload Index', value: cognitiveMetrics.brain_workload, unit: 'Hz' },
+      { name: 'Normalized Coherence', value: cognitiveMetrics.normalized_coherence, unit: '%' }
+    ]
+  });
+
+  // 2. Autonomic Flexibility
+  const autonomicMetrics = {
+    hf: metrics.hf || 0,
+    rmssd: metrics.rmssd || (metrics.hf ? Math.sqrt(metrics.hf) * 2.5 : 45), // Calculate RMSSD from HF power if available
+    lf_hf_ratio: metrics.lf && metrics.hf ? metrics.lf / metrics.hf : 0,
+    ans_health: metrics.ans_health || 0,
+    ans_age: metrics.ans_age || 0
+  };
+
+  let autonomicScore = 0;
+
+  // Calculate autonomic score
+  if (autonomicMetrics.hf >= 6.0) autonomicScore += 20;
+  else if (autonomicMetrics.hf >= 4.0) autonomicScore += 16;
+  else if (autonomicMetrics.hf >= 2.0) autonomicScore += 12;
+  else autonomicScore += 8;
+
+  if (autonomicMetrics.rmssd >= 50) autonomicScore += 20;
+  else if (autonomicMetrics.rmssd >= 30) autonomicScore += 16;
+  else if (autonomicMetrics.rmssd >= 20) autonomicScore += 12;
+  else autonomicScore += 8;
+
+  if (autonomicMetrics.lf_hf_ratio >= 0.5 && autonomicMetrics.lf_hf_ratio <= 2.0) autonomicScore += 20;
+  else if (autonomicMetrics.lf_hf_ratio >= 0.3 && autonomicMetrics.lf_hf_ratio <= 3.0) autonomicScore += 16;
+  else if (autonomicMetrics.lf_hf_ratio >= 0.1 && autonomicMetrics.lf_hf_ratio <= 4.0) autonomicScore += 12;
+  else autonomicScore += 8;
+
+  if (autonomicMetrics.ans_health >= 7) autonomicScore += 20;
+  else if (autonomicMetrics.ans_health >= 5) autonomicScore += 16;
+  else if (autonomicMetrics.ans_health >= 3) autonomicScore += 12;
+  else autonomicScore += 8;
+
+  if (autonomicMetrics.ans_age <= -5) autonomicScore += 20;
+  else if (autonomicMetrics.ans_age <= 4) autonomicScore += 16;
+  else if (autonomicMetrics.ans_age <= 9) autonomicScore += 12;
+  else autonomicScore += 8;
+
+  let autonomicStatus = '';
+  let autonomicColor = '';
+
+  if (autonomicScore >= 85) {
+    autonomicStatus = 'Optimal Zone';
+    autonomicColor = 'text-green-600 font-bold';
+  } else if (autonomicScore >= 70) {
+    autonomicStatus = 'Mild Strain';
+    autonomicColor = 'text-yellow-600 font-bold';
+  } else if (autonomicScore >= 55) {
+    autonomicStatus = 'Moderate Load';
+    autonomicColor = 'text-orange-600 font-bold';
+  } else {
+    autonomicStatus = 'High Strain';
+    autonomicColor = 'text-red-600 font-bold';
+  }
+
+  stories.push({
+    title: 'Autonomic Flexibility',
+    score: autonomicScore,
+    status: autonomicStatus,
+    statusColor: autonomicColor,
+    whyItMatters: 'Your autonomic nervous system is the body\'s automatic gearbox, shifting between "rev up" and "rest." Strong high-frequency power and RMSSD indicate a responsive brake pedal, while a healthy LF/HF ratio and ANS scores show the gearbox isn\'t stuck in one gear.',
+    metrics: [
+      { name: 'HF Power', value: autonomicMetrics.hf, unit: 'ms²' },
+      { name: 'RMSSD', value: autonomicMetrics.rmssd, unit: 'ms' },
+      { name: 'LF/HF Ratio', value: autonomicMetrics.lf_hf_ratio.toFixed(2), unit: '' },
+      { name: 'ANS Health Score', value: autonomicMetrics.ans_health, unit: '(0-10)' },
+      { name: 'ANS Age', value: autonomicMetrics.ans_age, unit: 'years' }
+    ]
+  });
+
+  // 3. Stress Load
+  const stressMetrics = {
+    mental_stress: metrics.mental_stress || 0,
+    stress: metrics.stress || 0
+  };
+
+  let stressScore = 0;
+
+  // Calculate stress score (inverted - lower stress = higher score)
+  if (stressMetrics.mental_stress < 3) stressScore += 50;
+  else if (stressMetrics.mental_stress < 5) stressScore += 40;
+  else if (stressMetrics.mental_stress < 7) stressScore += 30;
+  else stressScore += 20;
+
+  if (stressMetrics.stress < 20) stressScore += 50;
+  else if (stressMetrics.stress < 40) stressScore += 40;
+  else if (stressMetrics.stress < 60) stressScore += 30;
+  else if (stressMetrics.stress < 80) stressScore += 20;
+  else stressScore += 10;
+
+  let stressStatus = '';
+  let stressColor = '';
+
+  if (stressScore >= 85) {
+    stressStatus = 'Optimal Zone';
+    stressColor = 'text-green-600 font-bold';
+  } else if (stressScore >= 70) {
+    stressStatus = 'Mild Strain';
+    stressColor = 'text-yellow-600 font-bold';
+  } else if (stressScore >= 55) {
+    stressStatus = 'Moderate Load';
+    stressColor = 'text-orange-600 font-bold';
+  } else {
+    stressStatus = 'High Strain';
+    stressColor = 'text-red-600 font-bold';
+  }
+
+  stories.push({
+    title: 'Stress Load',
+    score: stressScore,
+    status: stressStatus,
+    statusColor: stressColor,
+    whyItMatters: 'These two gauges show how much conscious and background stress your brain is carrying—think of them as the dashboard lights for mental tension.',
+    metrics: [
+      { name: 'Mental Stress Level', value: stressMetrics.mental_stress, unit: '(0-10)' },
+      { name: 'Stress Level', value: stressMetrics.stress, unit: '(0-100)' }
+    ]
+  });
+
+  // Calculate overall nervous system score
+  const overallScore = Math.round((cognitiveScore + autonomicScore + stressScore) / 3);
+
+  return {
+    overallScore,
+    stories
+  };
 }
 
 

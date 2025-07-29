@@ -15,6 +15,7 @@
    import RegionHeader   from '@/components/ui/RegionHeader';
    import Card           from '@/components/ui/Card';
    import AIDocumentUpload from '@/components/ui/AIDocumentUpload';
+   import ROMTable from '@/components/ui/ROMTable';
    
    /* optional colour list for dropdown widgets ------------------ */
    export const COLOUR_OPTIONS = [
@@ -260,6 +261,18 @@
                               </div>
                             );
                           }
+                         /* ---------- ROM table widget ------------------- */
+                         if (f.widget === 'rom-table') {
+                           return (
+                             <ROMTable
+                               key={f.name}
+                               name={f.name}
+                               label={f.label}
+                               romType={f.romType}
+                             />
+                           );
+                         }
+
                          /* ---------- dropdown (select) ------------------- */
                          if (f.widget === 'select') {
                            return (

@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import Card from './Card';
 
 interface AIDocumentUploadProps {
-  deviceType: 'inbody' | 'auracom' | 'heartmath' | 'exbody' | 'omnifit' | 'omnifit_eeg';
+  deviceType: 'inbody' | 'auracom' | 'heartmath' | 'exbody' | 'exbody_rom' | 'omnifit' | 'omnifit_ppg' | 'omnifit_eeg';
   submissionId?: string;
   onDataExtracted: (data: Record<string, any>, fileUrl?: string) => void;
   onError: (error: string) => void;
@@ -68,6 +68,22 @@ const DEVICE_INFO = {
     ],
     icon: '🧍'
   },
+  exbody_rom: {
+    title: 'Exbody ROM (Articular Joint System)',
+    description: 'Drag & drop your Exbody ROM report to extract range of motion metrics',
+    metrics: [
+      'Neck Flexion (Left/Right)',
+      'Neck Lateral Flexion (Left/Right)',
+      'Shoulder Abduction (Left/Right)',
+      'Shoulder Flexion (Left/Right)',
+      'Shoulder Extension (Left/Right)',
+      'Trunk Lateral Flexion (Left/Right)',
+      'Hip Abduction (Left/Right)',
+      'Hip Flexion (Left/Right)',
+      'Hip Extension (Left/Right)'
+    ],
+    icon: '🦴'
+  },
   omnifit: {
     title: 'OmniFit Stress Check Results',
     description: 'Drag & drop your OmniFit report to extract PPG & EEG stress metrics',
@@ -84,14 +100,26 @@ const DEVICE_INFO = {
     ],
     icon: '🧠'
   },
+  omnifit_ppg: {
+    title: 'OmniFit Stress Check Results (PPG)',
+    description: 'Drag & drop your OmniFit PPG report to extract PPG stress metrics',
+    metrics: [
+      'HRV Index',
+      'Stress Score (0-100)',
+      'ANS Health Score',
+      'ANS Age (years)',
+      'LF & HF Power'
+    ],
+    icon: '💓'
+  },
   omnifit_eeg: {
-    title: 'OmniFit EEG Analysis',
+    title: 'OmniFit Stress Check Results (EEG)',
     description: 'Drag & drop your OmniFit EEG report to extract EEG metrics',
     metrics: [
-      'EEG Metrics',
-      'Brain Wave Analysis (Gamma, Beta, Alpha, Theta)',
-      'Mental Stress & Brain Workload',
-      'Left-Right Brain Activity (%)'
+      'Brain Score',
+      'Mental Stress',
+      'Intrinsic EEG (PF)',
+      'Brain Workload'
     ],
     icon: '🧠'
   }

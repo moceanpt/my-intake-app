@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------
    pages/intake.jsx  (client wizard) - Redesigned with Design System
 ------------------------------------------------------------------- */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Head          from 'next/head';
 import Progress      from '@/components/ui/Progress';
 import Card          from '@/components/ui/Card';

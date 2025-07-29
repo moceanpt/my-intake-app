@@ -1,7 +1,7 @@
 /* pages/staff/enter/[id]/all-metrics.jsx */
 
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormProvider, useForm, Controller, SubmitHandler } from 'react-hook-form';
 import prisma from '@/lib/prisma';
 import { OBJECTIVE_SCHEMAS } from '@/lib/objective';
@@ -22,11 +22,12 @@ export async function getServerSideProps({ params }) {
 }
 
 const DEVICES = [
-  { id: 'inbody', name: 'InBody' },
   { id: 'exbody', name: 'ExBody' },
-  { id: 'auracom', name: 'Auracom' },
+  { id: 'exbody_rom', name: 'ExBody ROM' },
+  { id: 'inbody', name: 'InBody' },
   { id: 'omnifit_ppg', name: 'OmniFit PPG' },
   { id: 'omnifit_eeg', name: 'OmniFit EEG' },
+  { id: 'auracom', name: 'Auracom' },
   { id: 'heartmath', name: 'HeartMath' },
 ];
 

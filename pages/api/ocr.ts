@@ -1,12 +1,68 @@
 // pages/api/ocr.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import formidable, { File }      from 'formidable';
-import fs                        from 'fs/promises';
-import FormData                  from 'form-data';
-import fetch                     from 'node-fetch';
+import formidable, { File } from 'formidable';
+import fs from 'fs/promises';
+import OpenAI from 'openai';
 
 // tell Next.js not to parse the request body
 export const config = { api: { bodyParser: false } };
+
+// Initialize OpenAI client
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+// Simple AI extraction function
+async function extractDataWithAI(base64Image: string, deviceType: string = 'auto'): Promise<any> {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `You are an expert at extracting health metrics from medical device reports. 
+              Analyze this image and extract any numerical health metrics you can find. 
+              Return the data as a JSON object with clear key names and numeric values only.
+              Device type: ${deviceType}`
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${base64Image}`
+              }
+            }
+          ]
+        }
+      ],
+      max_tokens: 1000,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error('No response from AI');
+    }
+
+    // Try to parse JSON from the response
+    try {
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        return JSON.parse(jsonMatch[0]);
+      }
+    } catch (parseError) {
+      console.warn('Failed to parse JSON from AI response:', parseError);
+    }
+
+    // Return raw text if JSON parsing fails
+    return { raw_text: content, extracted_metrics: 'See raw_text for extracted data' };
+
+  } catch (error) {
+    console.error('AI extraction error:', error);
+    throw error;
+  }
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -18,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     /* ── 1 ▸ grab the uploaded PDF from multipart ───────────────── */
     const pdf: File = await new Promise((resolve, reject) => {
       const form = new formidable.IncomingForm();
-      form.parse(req, (err, _fields, files) => {
+      form.parse(req, (err, fields, files) => {
         if (err) return reject(err);
         if (!files.file) return reject(new Error('No file uploaded'));
         const file = Array.isArray(files.file) ? files.file[0] : files.file;
@@ -26,30 +82,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     });
 
-    /* ── 2 ▸ build a new multipart body for FastAPI ─────────────── */
+    /* ── 2 ▸ read the file and convert to base64 ────────────────── */
     const buffer = await fs.readFile(pdf.filepath);
-    const form   = new FormData();
-    form.append('file', buffer, pdf.originalFilename || 'upload.pdf');
+    const base64Image = buffer.toString('base64');
+    const mimeType = pdf.mimetype || 'application/pdf';
 
-    /* ── 3 ▸ POST to Python OCR micro-service ───────────────────── */
-    const base = process.env.OCR_SERVICE_URL ?? 'http://localhost:8000';
-    const pyRes = await fetch(`${base}/extract`, {
-      method: 'POST',
-      body:   form,
-      // form-data sets its own Content-Type (with boundary) via getHeaders()
-      headers: form.getHeaders(),
+    /* ── 3 ▸ determine device type from query params ────────────── */
+    const deviceType = req.query.deviceType as string || 'auto';
+
+    /* ── 4 ▸ use AI extraction ──────────────────────────────────── */
+    const extractedData = await extractDataWithAI(base64Image, deviceType);
+
+    /* ── 5 ▸ return the extracted data ──────────────────────────── */
+    return res.status(200).json({
+      success: true,
+      data: extractedData,
+      message: 'Data extracted successfully using AI OCR',
+      deviceType
     });
-
-    if (!pyRes.ok) {
-      const text = await pyRes.text();
-      return res.status(pyRes.status).json({ error: 'ocr failure', detail: text });
-    }
-
-    const data = await pyRes.json();   // { metrics: {...}, raw_text: "..." }
-    return res.status(200).json(data);
 
   } catch (err: any) {
     console.error('[api/ocr] fatal:', err);
-    return res.status(500).json({ error: err.message || 'internal error' });
+    return res.status(500).json({ 
+      error: err.message || 'internal error',
+      message: 'AI OCR extraction failed'
+    });
   }
 }

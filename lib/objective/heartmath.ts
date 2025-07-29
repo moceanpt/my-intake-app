@@ -55,17 +55,7 @@ export const heartmathMetricSchema: MetricSchema = {
   slug: 'heartmath',
   title: 'HeartMath Heart Rate Variability & Coherence',
   fields: [
-    { name: 'rr_intervals', label: 'R-R Intervals (count)', widget: 'number' as const, step: 1 },
-    { name: 'mean_hr_bpm', label: 'Mean Heart Rate (bpm)', widget: 'number' as const, step: 0.1 },
-    { name: 'mean_ibi_ms', label: 'Mean Inter-Beat Interval (ms)', widget: 'number' as const, step: 0.1 },
-    { name: 'sdnn_ms', label: 'SDNN (ms)', widget: 'number' as const, step: 0.1 },
-    { name: 'rmssd_ms', label: 'RMSSD (ms)', widget: 'number' as const, step: 0.1 },
-    { name: 'total_power', label: 'Total Power (ms²)', widget: 'number' as const, step: 0.1 },
-    { name: 'vlf_power', label: 'VLF Power (ms²)', widget: 'number' as const, step: 0.1 },
-    { name: 'lf_power', label: 'LF Power (ms²)', widget: 'number' as const, step: 0.1 },
-    { name: 'hf_power', label: 'HF Power (ms²)', widget: 'number' as const, step: 0.1 },
-    { name: 'lf_hf_ratio', label: 'LF/HF Ratio', widget: 'number' as const, step: 0.01 },
-    { name: 'normalized_coherence_pct', label: 'Normalized Coherence (%)', widget: 'number' as const, step: 0.1 },
+    { name: 'heartmath_table', label: 'HeartMath Metrics', widget: 'heartmath-table' as const, tableType: 'combined' },
   ]
 };
 

@@ -1,166 +1,433 @@
-import React from 'react';
-import { scoreInBody } from '@/lib/objective/inbody';
+import React, { useState } from 'react';
+import { scoreOrganSystemStory } from '@/lib/objective/inbody';
 
-// Deterministic demo status mapping
-const getStatus = (metric, value, sex, age, scoreResult) => {
-  // If we have scoring data, use it for accurate status indicators
-  if (scoreResult && scoreResult.bands && scoreResult.bands[metric]) {
-    const score = scoreResult.bands[metric].score;
-    if (score >= 80) return '🟢';
-    if (score >= 60) return '🟡';
-    if (score >= 40) return '🟠';
-    return '🔴';
-  }
-  
-  // Fallback to deterministic demo mapping if no scoring data
-  const statusMap = {
-    hydration: '🟡',
-    smm_pct: '🟢',
-    body_fat_pct: '🟠',
-    ecw_tbw: '🟢',
-    vfa: '🟢',
-    phase_angle: '🟡',
-  };
-  return statusMap[metric] || '';
-};
-
-// SVG sparkline for trend with dots, values, and dates
-const TrendSparkline = ({ values, dates }) => {
-  if (!values || values.length === 0) return null;
-  // Add y-axis padding: 5% of the range, expand if last value is near max/min
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  const range = max - min || 1;
-  let padTop = range * 0.05;
-  let padBottom = range * 0.05;
-  // If last value is within 2% of max, double top padding
-  if (Math.abs(values[values.length - 1] - max) < range * 0.02) padTop *= 2;
-  // If first or last value is within 2% of min, double bottom padding
-  if (Math.abs(values[0] - min) < range * 0.02 || Math.abs(values[values.length - 1] - min) < range * 0.02) padBottom *= 2;
-  const paddedMin = min - padBottom;
-  const paddedMax = max + padTop;
-  // Normalise with padding: y=20 (top, for label), y=50 (bottom)
-  const norm = v => 50 - ((v - paddedMin) / (paddedMax - paddedMin)) * 30;
-  const points = values.map((v, i) => `${i * 30},${norm(v)}`).join(' ');
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <svg width={30 * (values.length - 1) + 8} height={70} style={{ verticalAlign: 'middle' }}>
-        <polyline
-          fill="none"
-          stroke="#2563eb"
-          strokeWidth="2"
-          points={points}
-        />
-        {values.map((v, i) => (
-          <g key={i}>
-            <text x={i * 30} y={norm(v) - 8} textAnchor="middle" fontSize="10" fill="#222">{v}</text>
-            <circle cx={i * 30} cy={norm(v)} r={4} fill="#2563eb" stroke="#fff" strokeWidth={2} />
-          </g>
-        ))}
-      </svg>
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: 10, color: '#888', marginTop: 2 }}>
-        {dates && dates.length > 0 && dates.map((d, i) => (
-          <span key={i} style={{ minWidth: 30, textAlign: 'center' }}>{d.slice(5, 10)}</span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
+// @refresh reset
 const InBodyResultSection = ({ data, history, sex, age }) => {
-  // All metrics in unified order
-  const allMetrics = [
-    { label: 'Hydration %', key: 'hydration', scored: true },
-    { label: 'SMM %', key: 'smm_pct', scored: true },
-    { label: 'Body Fat %', key: 'body_fat_pct', scored: true },
-    { label: 'ECW/TBW Ratio', key: 'ecw_tbw', scored: true },
-    { label: 'Visceral Fat Area (cm²)', key: 'vfa', scored: true },
-    { label: 'Phase Angle (°)', key: 'phase_angle', scored: true },
-    { label: 'Weight (lb)', key: 'weight', scored: false },
-    { label: 'Body Fat Mass (lb)', key: 'body_fat_mass', scored: false },
-    { label: 'SMM Mass (lb)', key: 'smm_mass', scored: false },
-    { label: 'Total Body Water (lb)', key: 'tbw', scored: false },
-  ];
-
-  // Helper to get trend values and dates from history
-  const getTrendValues = key => history ? history.map(h => h[key]).filter(v => v !== undefined) : [];
-  const getTrendDates = () => history ? history.map(h => h.date).filter(d => d !== undefined) : [];
-
-  // Calculate real organ health score using the scoring logic
-  const calculateOrganScore = () => {
-    try {
-      // Check if we have the required metrics for scoring
-      const requiredMetrics = ['hydration', 'smm_pct', 'body_fat_pct', 'ecw_tbw', 'vfa', 'phase_angle'];
-      const hasRequiredMetrics = requiredMetrics.every(metric => data[metric] !== undefined && data[metric] !== null);
-      
-      if (!hasRequiredMetrics) {
-        return { score: null, label: 'Insufficient data for scoring', scoreResult: null };
-      }
-
-      const scoreResult = scoreInBody(data, sex, age);
-      const organScore = scoreResult.bands.organ_health_score.score;
-      
-      return {
-        score: organScore,
-        label: scoreResult.bands.organ_health_score.label,
-        color: scoreResult.bands.organ_health_score.color,
-        scoreResult: scoreResult
-      };
-    } catch (error) {
-      console.error('Error calculating organ score:', error);
-      return { score: null, label: 'Error calculating score', scoreResult: null };
-    }
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Use the new story-based scoring
+  const storyResult = scoreOrganSystemStory(data, sex, age);
+  const overallScore = storyResult.overallScore;
+  const stories = storyResult.stories;
+  
+  // Get color for score display
+  const getScoreColor = (score) => {
+    if (score >= 80) return '#10b981'; // Green
+    if (score >= 60) return '#f59e0b'; // Yellow
+    if (score >= 40) return '#f97316'; // Orange
+    return '#ef4444'; // Red
   };
 
-  const organScoreResult = calculateOrganScore();
+  // Get status text for score display
+  const getStatusText = (score) => {
+    if (score >= 80) return 'Optimal Zone';
+    if (score >= 60) return 'Mild Strain';
+    if (score >= 40) return 'Moderate Load';
+    return 'High Strain';
+  };
+
+  // Get color for individual metric values based on the same logic as group scores
+  const getMetricColor = (metricName, value) => {
+    if (value === undefined || value === null) return '#6b7280'; // Gray for no data
+    // Hydration %
+    if (metricName === 'Hydration %') {
+      if (sex === 'M') {
+        if (value >= 58) return '#10b981';
+        if (value >= 52) return '#f59e0b';
+        if (value >= 50) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (value >= 48) return '#10b981';
+        if (value >= 41) return '#f59e0b';
+        if (value >= 40) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // ECW/TBW Ratio
+    if (metricName === 'ECW/TBW Ratio') {
+      if (value < 0.381) return '#10b981';
+      if (value < 0.391) return '#f59e0b';
+      if (value < 0.401) return '#f97316';
+      return '#ef4444';
+    }
+    // Phase Angle
+    if (metricName === 'Phase Angle') {
+      if (sex === 'M') {
+        if (age <= 29 && value >= 6.8) return '#10b981';
+        if (age <= 29 && value >= 6.2) return '#f59e0b';
+        if (age <= 29 && value >= 5.4) return '#f97316';
+        if (age <= 29) return '#ef4444';
+        if (age <= 39 && value >= 6.6) return '#10b981';
+        if (age <= 39 && value >= 6.0) return '#f59e0b';
+        if (age <= 39 && value >= 5.2) return '#f97316';
+        if (age <= 39) return '#ef4444';
+        if (age <= 49 && value >= 6.4) return '#10b981';
+        if (age <= 49 && value >= 5.8) return '#f59e0b';
+        if (age <= 49 && value >= 5.0) return '#f97316';
+        if (age <= 49) return '#ef4444';
+        if (age <= 59 && value >= 6.0) return '#10b981';
+        if (age <= 59 && value >= 5.4) return '#f59e0b';
+        if (age <= 59 && value >= 4.7) return '#f97316';
+        if (age <= 59) return '#ef4444';
+        if (age <= 69 && value >= 5.6) return '#10b981';
+        if (age <= 69 && value >= 5.0) return '#f59e0b';
+        if (age <= 69 && value >= 4.3) return '#f97316';
+        if (age <= 69) return '#ef4444';
+        if (age <= 79 && value >= 5.2) return '#10b981';
+        if (age <= 79 && value >= 4.6) return '#f59e0b';
+        if (age <= 79 && value >= 3.9) return '#f97316';
+        if (age <= 79) return '#ef4444';
+        if (value >= 4.8) return '#10b981';
+        if (value >= 4.2) return '#f59e0b';
+        if (value >= 3.5) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (age <= 29 && value >= 6.2) return '#10b981';
+        if (age <= 29 && value >= 5.6) return '#f59e0b';
+        if (age <= 29 && value >= 4.8) return '#f97316';
+        if (age <= 29) return '#ef4444';
+        if (age <= 39 && value >= 6.0) return '#10b981';
+        if (age <= 39 && value >= 5.4) return '#f59e0b';
+        if (age <= 39 && value >= 4.6) return '#f97316';
+        if (age <= 39) return '#ef4444';
+        if (age <= 49 && value >= 5.8) return '#10b981';
+        if (age <= 49 && value >= 5.2) return '#f59e0b';
+        if (age <= 49 && value >= 4.4) return '#f97316';
+        if (age <= 49) return '#ef4444';
+        if (age <= 59 && value >= 5.4) return '#10b981';
+        if (age <= 59 && value >= 4.8) return '#f59e0b';
+        if (age <= 59 && value >= 4.0) return '#f97316';
+        if (age <= 59) return '#ef4444';
+        if (age <= 69 && value >= 5.0) return '#10b981';
+        if (age <= 69 && value >= 4.4) return '#f59e0b';
+        if (age <= 69 && value >= 3.6) return '#f97316';
+        if (age <= 69) return '#ef4444';
+        if (age <= 79 && value >= 4.6) return '#10b981';
+        if (age <= 79 && value >= 4.0) return '#f59e0b';
+        if (age <= 79 && value >= 3.2) return '#f97316';
+        if (age <= 79) return '#ef4444';
+        if (value >= 4.2) return '#10b981';
+        if (value >= 3.6) return '#f59e0b';
+        if (value >= 2.9) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // SMM %
+    if (metricName === 'SMM %') {
+      if (sex === 'M') {
+        if (age <= 35 && value >= 40) return '#10b981';
+        if (age <= 35 && value >= 37) return '#f59e0b';
+        if (age <= 35 && value >= 34) return '#f97316';
+        if (age <= 35) return '#ef4444';
+        if (age <= 55 && value >= 36) return '#10b981';
+        if (age <= 55 && value >= 33) return '#f59e0b';
+        if (age <= 55 && value >= 30) return '#f97316';
+        if (age <= 55) return '#ef4444';
+        if (age <= 75 && value >= 32) return '#10b981';
+        if (age <= 75 && value >= 29) return '#f59e0b';
+        if (age <= 75 && value >= 26) return '#f97316';
+        if (age <= 75) return '#ef4444';
+        if (value >= 31) return '#10b981';
+        if (value >= 27) return '#f59e0b';
+        if (value >= 24) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (age <= 35 && value >= 31) return '#10b981';
+        if (age <= 35 && value >= 28) return '#f59e0b';
+        if (age <= 35 && value >= 26) return '#f97316';
+        if (age <= 35) return '#ef4444';
+        if (age <= 55 && value >= 29) return '#10b981';
+        if (age <= 55 && value >= 26) return '#f59e0b';
+        if (age <= 55 && value >= 24) return '#f97316';
+        if (age <= 55) return '#ef4444';
+        if (age <= 75 && value >= 27) return '#10b981';
+        if (age <= 75 && value >= 24) return '#f59e0b';
+        if (age <= 75 && value >= 22) return '#f97316';
+        if (age <= 75) return '#ef4444';
+        if (value >= 26) return '#10b981';
+        if (value >= 23) return '#f59e0b';
+        if (value >= 20) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // Body-Fat %
+    if (metricName === 'Body-Fat %') {
+      if (sex === 'M') {
+        if (age <= 29 && value >= 8 && value <= 18.6) {
+          if (value <= 14.8) return '#10b981';
+          if (value <= 18.6) return '#f59e0b';
+        }
+        if (age <= 39 && value >= 8 && value <= 21.3) {
+          if (value <= 18.2) return '#10b981';
+          if (value <= 21.3) return '#f59e0b';
+        }
+        if (age <= 49 && value >= 8 && value <= 23.4) {
+          if (value <= 20.6) return '#10b981';
+          if (value <= 23.4) return '#f59e0b';
+        }
+        if (age <= 59 && value >= 8 && value <= 24.6) {
+          if (value <= 22.1) return '#10b981';
+          if (value <= 24.6) return '#f59e0b';
+        }
+        if (age <= 69 && value >= 8 && value <= 25.2) {
+          if (value <= 22.6) return '#10b981';
+          if (value <= 25.2) return '#f59e0b';
+        }
+        if (value > 25.2) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (age <= 29 && value >= 14 && value <= 22.7) {
+          if (value <= 19.4) return '#10b981';
+          if (value <= 22.7) return '#f59e0b';
+        }
+        if (age <= 39 && value >= 14 && value <= 24.6) {
+          if (value <= 20.8) return '#10b981';
+          if (value <= 24.6) return '#f59e0b';
+        }
+        if (age <= 49 && value >= 14 && value <= 27.6) {
+          if (value <= 23.8) return '#10b981';
+          if (value <= 27.6) return '#f59e0b';
+        }
+        if (age <= 59 && value >= 14 && value <= 30.4) {
+          if (value <= 27.0) return '#10b981';
+          if (value <= 30.4) return '#f59e0b';
+        }
+        if (age <= 69 && value >= 14 && value <= 31.3) {
+          if (value <= 27.9) return '#10b981';
+          if (value <= 31.3) return '#f59e0b';
+        }
+        if (value > 31.3) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // Visceral Fat Area
+    if (metricName === 'Visceral Fat Area') {
+      if (value < 100) return '#10b981';
+      if (value < 130) return '#f59e0b';
+      if (value < 150) return '#f97316';
+      return '#ef4444';
+    }
+    // SMM Mass (derived from SMM %)
+    if (metricName === 'SMM Mass') {
+      const smmPercent = (value / 150) * 100; // Assuming 150lb weight
+      if (sex === 'M') {
+        if (age <= 35 && smmPercent >= 40) return '#10b981';
+        if (age <= 35 && smmPercent >= 37) return '#f59e0b';
+        if (age <= 35 && smmPercent >= 34) return '#f97316';
+        if (age <= 35) return '#ef4444';
+        if (age <= 55 && smmPercent >= 36) return '#10b981';
+        if (age <= 55 && smmPercent >= 33) return '#f59e0b';
+        if (age <= 55 && smmPercent >= 30) return '#f97316';
+        if (age <= 55) return '#ef4444';
+        if (age <= 75 && smmPercent >= 32) return '#10b981';
+        if (age <= 75 && smmPercent >= 29) return '#f59e0b';
+        if (age <= 75 && smmPercent >= 26) return '#f97316';
+        if (age <= 75) return '#ef4444';
+        if (smmPercent >= 31) return '#10b981';
+        if (smmPercent >= 27) return '#f59e0b';
+        if (smmPercent >= 24) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (age <= 35 && smmPercent >= 31) return '#10b981';
+        if (age <= 35 && smmPercent >= 28) return '#f59e0b';
+        if (age <= 35 && smmPercent >= 26) return '#f97316';
+        if (age <= 35) return '#ef4444';
+        if (age <= 55 && smmPercent >= 29) return '#10b981';
+        if (age <= 55 && smmPercent >= 26) return '#f59e0b';
+        if (age <= 55 && smmPercent >= 24) return '#f97316';
+        if (age <= 55) return '#ef4444';
+        if (age <= 75 && smmPercent >= 27) return '#10b981';
+        if (age <= 75 && smmPercent >= 24) return '#f59e0b';
+        if (age <= 75 && smmPercent >= 22) return '#f97316';
+        if (age <= 75) return '#ef4444';
+        if (smmPercent >= 26) return '#10b981';
+        if (smmPercent >= 23) return '#f59e0b';
+        if (smmPercent >= 20) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // Body-Fat Mass (derived from Body-Fat %)
+    if (metricName === 'Body-Fat Mass') {
+      const bfPercent = (value / 150) * 100; // Assuming 150lb weight
+      if (sex === 'M') {
+        if (age <= 29 && bfPercent >= 8 && bfPercent <= 18.6) {
+          if (bfPercent <= 14.8) return '#10b981';
+          if (bfPercent <= 18.6) return '#f59e0b';
+        }
+        if (age <= 39 && bfPercent >= 8 && bfPercent <= 21.3) {
+          if (bfPercent <= 18.2) return '#10b981';
+          if (bfPercent <= 21.3) return '#f59e0b';
+        }
+        if (age <= 49 && bfPercent >= 8 && bfPercent <= 23.4) {
+          if (bfPercent <= 20.6) return '#10b981';
+          if (bfPercent <= 23.4) return '#f59e0b';
+        }
+        if (age <= 59 && bfPercent >= 8 && bfPercent <= 24.6) {
+          if (bfPercent <= 22.1) return '#10b981';
+          if (bfPercent <= 24.6) return '#f59e0b';
+        }
+        if (age <= 69 && bfPercent >= 8 && bfPercent <= 25.2) {
+          if (bfPercent <= 22.6) return '#10b981';
+          if (bfPercent <= 25.2) return '#f59e0b';
+        }
+        if (bfPercent > 25.2) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (age <= 29 && bfPercent >= 14 && bfPercent <= 22.7) {
+          if (bfPercent <= 19.4) return '#10b981';
+          if (bfPercent <= 22.7) return '#f59e0b';
+        }
+        if (age <= 39 && bfPercent >= 14 && bfPercent <= 24.6) {
+          if (bfPercent <= 20.8) return '#10b981';
+          if (bfPercent <= 24.6) return '#f59e0b';
+        }
+        if (age <= 49 && bfPercent >= 14 && bfPercent <= 27.6) {
+          if (bfPercent <= 23.8) return '#10b981';
+          if (bfPercent <= 27.6) return '#f59e0b';
+        }
+        if (age <= 59 && bfPercent >= 14 && bfPercent <= 30.4) {
+          if (bfPercent <= 27.0) return '#10b981';
+          if (bfPercent <= 30.4) return '#f59e0b';
+        }
+        if (age <= 69 && bfPercent >= 14 && bfPercent <= 31.3) {
+          if (bfPercent <= 27.9) return '#10b981';
+          if (bfPercent <= 31.3) return '#f59e0b';
+        }
+        if (bfPercent > 31.3) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // Weight (neutral metric - always gray)
+    if (metricName === 'Weight') {
+      return '#6b7280';
+    }
+    // Total Body Water (derived from Hydration %)
+    if (metricName === 'Total Body Water') {
+      const hydPercent = (value / 150) * 100; // Assuming 150lb weight
+      if (sex === 'M') {
+        if (hydPercent >= 58) return '#10b981';
+        if (hydPercent >= 52) return '#f59e0b';
+        if (hydPercent >= 50) return '#f97316';
+        return '#ef4444';
+      } else {
+        if (hydPercent >= 48) return '#10b981';
+        if (hydPercent >= 41) return '#f59e0b';
+        if (hydPercent >= 40) return '#f97316';
+        return '#ef4444';
+      }
+    }
+    // Fallback
+    return '#6b7280';
+  };
 
   return (
-    <section style={{ margin: '2rem 0', background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: '2rem' }}>
-      <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Organ System Result</h3>
-      <div style={{ fontWeight: 600, fontSize: '1.2rem', marginBottom: '1.5rem' }}>
-        Total Organ Score: {organScoreResult.score !== null ? `${organScoreResult.score.toFixed(1)}%` : organScoreResult.label}
-        {organScoreResult.color && (
-          <span style={{ 
-            marginLeft: '1rem', 
-            padding: '0.25rem 0.5rem', 
-            borderRadius: '4px', 
-            fontSize: '0.9rem',
-            backgroundColor: organScoreResult.color === 'dark-green' ? '#dcfce7' : 
-                           organScoreResult.color === 'yellow' ? '#fef3c7' :
-                           organScoreResult.color === 'orange' ? '#fed7aa' :
-                           organScoreResult.color === 'red' ? '#fee2e2' : '#f3f4f6',
-            color: organScoreResult.color === 'dark-green' ? '#166534' :
-                  organScoreResult.color === 'yellow' ? '#92400e' :
-                  organScoreResult.color === 'orange' ? '#ea580c' :
-                  organScoreResult.color === 'red' ? '#dc2626' : '#374151'
-          }}>
-            {organScoreResult.label}
-          </span>
-        )}
+    <section style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', minHeight: '120px' }}>
+        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#1f2937', margin: 0 }}>Organ System</h3>
+          <p style={{ fontSize: '1rem', color: '#6b7280', margin: '0.5rem 0 0 0', fontWeight: '500' }}>Cellular Health & Body Composition</p>
+        </div>
+        <div style={{ textAlign: 'center', flex: '0 0 auto', marginLeft: '3rem', minWidth: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ fontSize: '3.5rem', fontWeight: '800', color: getScoreColor(overallScore), lineHeight: '1', marginBottom: '0.25rem' }}>
+            {Math.round(overallScore)}%
+          </div>
+          <div style={{ fontSize: '1.125rem', color: '#6b7280', fontWeight: '500' }}>
+            {getStatusText(overallScore)}
+          </div>
+        </div>
       </div>
-      {/* Unified Metrics Table */}
-      <table style={{ width: '100%', marginBottom: '2rem', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #eee' }}>
-            <th></th>
-            <th align="left">Metric</th>
-            <th align="left">Value</th>
-            <th align="left">Trend</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allMetrics.map(m => (
-            <tr key={m.key} style={{ borderBottom: '1px solid #f3f3f3' }}>
-              <td style={{ width: 24, textAlign: 'center' }}>{m.scored ? <span style={{ fontSize: 18 }}>{getStatus(m.key, data[m.key], sex, age, organScoreResult.scoreResult)}</span> : null}</td>
-              <td>{m.label}</td>
-              <td>{data[m.key]}</td>
-              <td><TrendSparkline values={getTrendValues(m.key)} dates={getTrendDates()} /></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: '#3b82f6',
+          fontSize: '0.875rem',
+          cursor: 'pointer',
+          padding: '0.5rem 0',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.25rem'
+        }}
+      >
+        {isExpanded ? 'Hide Details' : 'Show Details'}
+        <span style={{ fontSize: '0.75rem' }}>{isExpanded ? '▲' : '▼'}</span>
+      </button>
+
+      {isExpanded && (
+        <div style={{ marginTop: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
+            {stories.map((story, index) => {
+              const [description, statusText] = story.whyItMatters.split('\n\n');
+              
+              return (
+                <div key={index} style={{ 
+                  background: '#f9fafb', 
+                  border: '1px solid #e5e7eb', 
+                  borderRadius: '12px', 
+                  padding: '1.5rem',
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h4 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1f2937', margin: 0 }}>
+                      {story.title}
+                    </h4>
+                    <div style={{ 
+                      fontSize: '1.5rem', 
+                      fontWeight: '700', 
+                      color: story.statusColor 
+                    }}>
+                      {Math.round(story.score)}%
+                    </div>
+                  </div>
+                  
+                  <div style={{ 
+                    fontSize: '0.875rem', 
+                    color: '#6b7280', 
+                    lineHeight: '1.5',
+                    marginBottom: '1.5rem',
+                    whiteSpace: 'pre-line'
+                  }} 
+                  dangerouslySetInnerHTML={{ __html: story.whyItMatters }}
+                  />
+                  
+                  <div style={{ background: 'white', padding: '1rem', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
+                    <div style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151', marginBottom: '0.75rem' }}>
+                      Metrics
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
+                      {story.metrics.map((metric, metricIndex) => (
+                        <div key={metricIndex} style={{ 
+                          display: 'flex', 
+                          justifyContent: 'space-between', 
+                          alignItems: 'center',
+                          fontSize: '0.875rem'
+                        }}>
+                          <span style={{ color: '#6b7280' }}>{metric.name}</span>
+                          <div style={{
+                            background: getMetricColor(metric.name, metric.value),
+                            color: 'white',
+                            padding: '0.25rem 0.5rem',
+                            borderRadius: '4px',
+                            fontWeight: '600',
+                            minWidth: '40px',
+                            textAlign: 'center'
+                          }}>
+                            {metric.value}{metric.unit}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </section>
   );
 };
 
-export default InBodyResultSection; 
+export { InBodyResultSection }; 

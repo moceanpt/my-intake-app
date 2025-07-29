@@ -12,19 +12,16 @@ import type { MetricSchema } from '../metrics/types';
 export const circulationSchema = z.object({
   // OmniFit PPG metrics
   hrv_index: z.number().positive().optional(),
-  stress: z.number().int().min(0).max(100).optional(),
-  ans_health: z.number().positive().optional(),
-  ans_age: z.number().int().positive().optional(),
   lf: z.number().positive().optional(),
-  hf: z.number().positive().optional(),
   
   // HeartMath metrics
+  mean_hr_bpm: z.number().positive().optional(),
+  mean_ibi_ms: z.number().positive().optional(),
   sdnn_ms: z.number().positive().optional(),
-  rmssd_ms: z.number().positive().optional(),
   total_power: z.number().positive().optional(),
+  vlf_power: z.number().positive().optional(),
   lf_power: z.number().positive().optional(),
-  hf_power: z.number().positive().optional(),
-  lf_hf_ratio: z.number().positive().optional(),
+  rr_intervals: z.number().int().positive().optional(),
   normalized_coherence_pct: z.number().nonnegative().optional(),
 });
 
@@ -40,19 +37,16 @@ export const circulationMetricSchema: MetricSchema = {
   fields: [
     // OmniFit PPG fields
     { name: 'hrv_index', label: 'HRV Index (OmniFit)', widget: 'number' as const, step: 0.1, section: 'OmniFit PPG' },
-    { name: 'stress', label: 'Stress Level (0-100)', widget: 'number' as const, step: 1, section: 'OmniFit PPG' },
-    { name: 'ans_health', label: 'ANS Health Score', widget: 'number' as const, step: 0.01, section: 'OmniFit PPG' },
-    { name: 'ans_age', label: 'ANS Age (years)', widget: 'number' as const, step: 1, section: 'OmniFit PPG' },
     { name: 'lf', label: 'LF Power (log ms²)', widget: 'number' as const, step: 0.01, section: 'OmniFit PPG' },
-    { name: 'hf', label: 'HF Power (log ms²)', widget: 'number' as const, step: 0.01, section: 'OmniFit PPG' },
     
     // HeartMath fields
+    { name: 'mean_hr_bpm', label: 'Mean Heart Rate (bpm)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
+    { name: 'mean_ibi_ms', label: 'Mean Inter-Beat Interval (ms)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
     { name: 'sdnn_ms', label: 'SDNN (ms)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
-    { name: 'rmssd_ms', label: 'RMSSD (ms)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
     { name: 'total_power', label: 'Total Power (ms²)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
+    { name: 'vlf_power', label: 'VLF Power (ms²)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
     { name: 'lf_power', label: 'LF Power (ms²)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
-    { name: 'hf_power', label: 'HF Power (ms²)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
-    { name: 'lf_hf_ratio', label: 'LF/HF Ratio', widget: 'number' as const, step: 0.01, section: 'HeartMath' },
+    { name: 'rr_intervals', label: 'R-R Intervals (count)', widget: 'number' as const, step: 1, section: 'HeartMath' },
     { name: 'normalized_coherence_pct', label: 'Normalized Coherence (%)', widget: 'number' as const, step: 0.1, section: 'HeartMath' },
   ]
 };
@@ -60,7 +54,13 @@ export const circulationMetricSchema: MetricSchema = {
 /* ──────────────────────────────────────────────────────────────
    3.  Color band logic
    ──────────────────────────────────────────────────────────── */
-// Total Circulation Score color band logic
+function bandColor(score: number) {
+  if (score === 4) return { color: 'dark-green', label: 'Optimal' };
+  if (score === 3) return { color: 'yellow', label: 'Mild' };
+  if (score === 2) return { color: 'orange', label: 'Moderate' };
+  return { color: 'red', label: 'High Risk' };
+}
+
 function circulationColorBand(score: number) {
   if (score >= 80) return { color: 'dark-green', label: 'Optimal' };
   if (score >= 60) return { color: 'yellow', label: 'Mild imbalance' };
@@ -69,7 +69,183 @@ function circulationColorBand(score: number) {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   4.  Scorer — combines OmniFit PPG + HeartMath
+   4.  Story-based Circulation Scoring
+   ──────────────────────────────────────────────────────────── */
+export function scoreCirculationStories(data: CirculationInput) {
+  const result: any = { 
+    bands: {},
+    stories: {
+      heart_rhythm_strength: { score: 0, status: '', story: '', metrics: {} },
+      autonomic_balance: { score: 0, status: '', story: '', metrics: {} },
+      heart_rate_load: { score: 0, status: '', story: '', metrics: {} }
+    }
+  };
+
+  // 1. Heart-Rhythm Strength (25 points)
+  let heartRhythmPts = 0;
+  let heartRhythmMetrics = 0;
+  const heartRhythmValues: any = {};
+
+  if (data.hrv_index !== undefined) {
+    heartRhythmMetrics++;
+    heartRhythmValues.hrv_index = data.hrv_index;
+    if (data.hrv_index >= 13.0) heartRhythmPts += 6.25;
+    else if (data.hrv_index >= 10.0) heartRhythmPts += 4.69;
+    else if (data.hrv_index >= 6.0) heartRhythmPts += 3.13;
+    else heartRhythmPts += 1.56;
+  }
+
+  if (data.sdnn_ms !== undefined) {
+    heartRhythmMetrics++;
+    heartRhythmValues.sdnn_ms = data.sdnn_ms;
+    if (data.sdnn_ms >= 50) heartRhythmPts += 6.25;
+    else if (data.sdnn_ms >= 45) heartRhythmPts += 4.69;
+    else if (data.sdnn_ms >= 30) heartRhythmPts += 3.13;
+    else heartRhythmPts += 1.56;
+  }
+
+  if (data.total_power !== undefined) {
+    heartRhythmMetrics++;
+    heartRhythmValues.total_power = data.total_power;
+    if (data.total_power >= 1000) heartRhythmPts += 6.25;
+    else if (data.total_power >= 750) heartRhythmPts += 4.69;
+    else if (data.total_power >= 500) heartRhythmPts += 3.13;
+    else heartRhythmPts += 1.56;
+  }
+
+  if (data.rr_intervals !== undefined) {
+    heartRhythmMetrics++;
+    heartRhythmValues.rr_intervals = data.rr_intervals;
+    if (data.rr_intervals >= 60) heartRhythmPts += 6.25;
+    else if (data.rr_intervals >= 50) heartRhythmPts += 4.69;
+    else if (data.rr_intervals >= 40) heartRhythmPts += 3.13;
+    else heartRhythmPts += 1.56;
+  }
+
+  const heartRhythmScore = heartRhythmMetrics > 0 ? (heartRhythmPts * 100) / 25 : 0;
+  const heartRhythmStatus = getStatusLabel(heartRhythmScore);
+  const heartRhythmStory = generateHeartRhythmStory(heartRhythmValues, heartRhythmStatus);
+
+  result.stories.heart_rhythm_strength = {
+    score: heartRhythmScore,
+    status: heartRhythmStatus,
+    story: heartRhythmStory,
+    metrics: heartRhythmValues
+  };
+
+  // 2. Autonomic Balance (25 points)
+  let autonomicPts = 0;
+  let autonomicMetrics = 0;
+  const autonomicValues: any = {};
+
+  if (data.lf !== undefined) {
+    autonomicMetrics++;
+    autonomicValues.lf = data.lf;
+    if (data.lf >= 6.0) autonomicPts += 8.33;
+    else if (data.lf >= 3.59) autonomicPts += 6.25;
+    else if (data.lf >= 2.0) autonomicPts += 4.17;
+    else autonomicPts += 2.08;
+  }
+
+  if (data.lf_power !== undefined) {
+    autonomicMetrics++;
+    autonomicValues.lf_power = data.lf_power;
+    if (data.lf_power >= 300 && data.lf_power <= 1170) autonomicPts += 8.33;
+    else if ((data.lf_power >= 200 && data.lf_power < 300) || (data.lf_power > 1170 && data.lf_power <= 2000)) autonomicPts += 6.25;
+    else if ((data.lf_power >= 100 && data.lf_power < 200) || (data.lf_power > 2000)) autonomicPts += 4.17;
+    else autonomicPts += 2.08;
+  }
+
+  if (data.vlf_power !== undefined) {
+    autonomicMetrics++;
+    autonomicValues.vlf_power = data.vlf_power;
+    if (data.vlf_power >= 100 && data.vlf_power <= 500) autonomicPts += 8.33;
+    else if ((data.vlf_power >= 50 && data.vlf_power < 100) || (data.vlf_power > 500 && data.vlf_power <= 1000)) autonomicPts += 6.25;
+    else if ((data.vlf_power >= 20 && data.vlf_power < 50) || (data.vlf_power > 1000 && data.vlf_power <= 2000)) autonomicPts += 4.17;
+    else autonomicPts += 2.08;
+  }
+
+  const autonomicScore = autonomicMetrics > 0 ? (autonomicPts * 100) / 25 : 0;
+  const autonomicStatus = getStatusLabel(autonomicScore);
+  const autonomicStory = generateAutonomicStory(autonomicValues, autonomicStatus);
+
+  result.stories.autonomic_balance = {
+    score: autonomicScore,
+    status: autonomicStatus,
+    story: autonomicStory,
+    metrics: autonomicValues
+  };
+
+  // 3. Heart-Rate Load (25 points)
+  let heartRatePts = 0;
+  let heartRateMetrics = 0;
+  const heartRateValues: any = {};
+
+  if (data.mean_hr_bpm !== undefined) {
+    heartRateMetrics++;
+    heartRateValues.mean_hr_bpm = data.mean_hr_bpm;
+    if (data.mean_hr_bpm >= 60 && data.mean_hr_bpm <= 100) heartRatePts += 12.5;
+    else if ((data.mean_hr_bpm >= 50 && data.mean_hr_bpm < 60) || (data.mean_hr_bpm > 100 && data.mean_hr_bpm <= 120)) heartRatePts += 9.38;
+    else if ((data.mean_hr_bpm >= 40 && data.mean_hr_bpm < 50) || (data.mean_hr_bpm > 120)) heartRatePts += 6.25;
+    else heartRatePts += 3.13;
+  }
+
+  if (data.mean_ibi_ms !== undefined) {
+    heartRateMetrics++;
+    heartRateValues.mean_ibi_ms = data.mean_ibi_ms;
+    if (data.mean_ibi_ms >= 600 && data.mean_ibi_ms <= 1000) heartRatePts += 12.5;
+    else if ((data.mean_ibi_ms >= 500 && data.mean_ibi_ms < 600) || (data.mean_ibi_ms > 1000 && data.mean_ibi_ms <= 1500)) heartRatePts += 9.38;
+    else if ((data.mean_ibi_ms >= 400 && data.mean_ibi_ms < 500) || (data.mean_ibi_ms > 1500)) heartRatePts += 6.25;
+    else heartRatePts += 3.13;
+  }
+
+  const heartRateScore = heartRateMetrics > 0 ? (heartRatePts * 100) / 25 : 0;
+  const heartRateStatus = getStatusLabel(heartRateScore);
+  const heartRateStory = generateHeartRateStory(heartRateValues, heartRateStatus);
+
+  result.stories.heart_rate_load = {
+    score: heartRateScore,
+    status: heartRateStatus,
+    story: heartRateStory,
+    metrics: heartRateValues
+  };
+
+  // Calculate overall circulation score
+  const totalScore = (heartRhythmScore + autonomicScore + heartRateScore) / 3;
+  result.bands.circulation_score = { score: totalScore };
+  result.radar = { circulation: totalScore };
+  result.bucket = { circulation: totalScore };
+
+  return result;
+}
+
+function getStatusLabel(score: number): string {
+  if (score >= 80) return '<span style="color: #10b981; font-weight: bold;">Optimal Zone</span>';
+  if (score >= 60) return '<span style="color: #f59e0b; font-weight: bold;">Mild Strain</span>';
+  if (score >= 40) return '<span style="color: #f97316; font-weight: bold;">Moderate Load</span>';
+  return '<span style="color: #ef4444; font-weight: bold;">High Strain</span>';
+}
+
+function generateHeartRhythmStory(values: any, status: string): string {
+  return `Heart-rate variability (HRV) is the tiny beat-to-beat wiggle room your heart keeps in reserve. The bigger the wiggle, the more relaxed and adaptable your nervous system is—like suspension on a mountain bike that soaks up bumps.
+
+Your Heart-Rhythm Strength is in the ${status} range.`;
+}
+
+function generateAutonomicStory(values: any, status: string): string {
+  return `These numbers show how your "gas pedal" (sympathetic) and "brake pedal" (parasympathetic) share the driving. A smooth hand-off means your body can rev up for action and coast down for recovery without grinding the gears.
+
+Your Autonomic Balance is in the ${status} zone.`;
+}
+
+function generateHeartRateStory(values: any, status: string): string {
+  return `Your resting heart rate is the engine's idle speed. Lower but steady idling saves wear-and-tear and leaves horsepower for when you need it.
+
+Your Heart-Rate Load is in the ${status} range.`;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   5.  Original Scorer — combines OmniFit PPG + HeartMath
    ──────────────────────────────────────────────────────────── */
 export function scoreCirculation(data: CirculationInput) {
   const result: any = { bands: {} };
@@ -79,193 +255,144 @@ export function scoreCirculation(data: CirculationInput) {
   // OmniFit PPG Scoring
   if (data.hrv_index !== undefined) {
     metric_count++;
-    let hrv_pts = 0;
-    if (data.hrv_index < 5.0) hrv_pts = 8; // Danger
-    else if (data.hrv_index < 6.0) hrv_pts = 6; // Warning
-    else if (data.hrv_index < 10.0) hrv_pts = 4; // Normal
-    else if (data.hrv_index < 13.0) hrv_pts = 2; // Good
-    else hrv_pts = 0; // Very Good
+    let hrv_pts = 1;
+    if (data.hrv_index >= 13.0) hrv_pts = 4;
+    else if (data.hrv_index >= 10.0) hrv_pts = 3;
+    else if (data.hrv_index >= 6.0) hrv_pts = 2;
+    else hrv_pts = 1;
+    result.bands.hrv_index = { ...bandColor(hrv_pts), score: (hrv_pts * 100) / 4 };
     total_pts += hrv_pts;
-    result.bands.hrv_index = { score: 100 - (hrv_pts * 100 / 8) };
-  }
-
-  if (data.stress !== undefined) {
-    metric_count++;
-    let stress_pts = 0;
-    if (data.stress >= 80) stress_pts = 8; // Very High
-    else if (data.stress >= 60) stress_pts = 6; // High
-    else if (data.stress >= 40) stress_pts = 4; // Average
-    else if (data.stress >= 20) stress_pts = 2; // Low
-    else stress_pts = 0; // Very Low
-    total_pts += stress_pts;
-    result.bands.stress = { score: 100 - (stress_pts * 100 / 8) };
-  }
-
-  if (data.ans_health !== undefined) {
-    metric_count++;
-    let ans_pts = 0;
-    if (data.ans_health < 3) ans_pts = 8; // Danger
-    else if (data.ans_health < 5) ans_pts = 6; // Warning
-    else if (data.ans_health < 7) ans_pts = 4; // Normal
-    else if (data.ans_health < 9) ans_pts = 2; // Good
-    else ans_pts = 0; // Very Good
-    total_pts += ans_pts;
-    result.bands.ans_health = { score: 100 - (ans_pts * 100 / 8) };
-  }
-
-  if (data.ans_age !== undefined) {
-    metric_count++;
-    let age_pts = 0;
-    if (data.ans_age > 9) age_pts = 8; // Danger
-    else if (data.ans_age > 4) age_pts = 6; // Warning
-    else if (data.ans_age > -5) age_pts = 4; // Normal
-    else if (data.ans_age > -10) age_pts = 2; // Good
-    else age_pts = 0; // Excellent
-    total_pts += age_pts;
-    result.bands.ans_age = { score: 100 - (age_pts * 100 / 8) };
   }
 
   if (data.lf !== undefined) {
     metric_count++;
-    let lf_pts = 0;
-    if (data.lf < 2.0) lf_pts = 8; // Very Low
-    else if (data.lf < 3.59) lf_pts = 6; // Low
-    else if (data.lf < 6.0) lf_pts = 4; // Normal
-    else if (data.lf < 10.0) lf_pts = 2; // High
-    else lf_pts = 0; // Very High
+    let lf_pts = 1;
+    if (data.lf >= 6.0) lf_pts = 4;
+    else if (data.lf >= 3.59) lf_pts = 3;
+    else if (data.lf >= 2.0) lf_pts = 2;
+    else lf_pts = 1;
+    result.bands.lf = { ...bandColor(lf_pts), score: (lf_pts * 100) / 4 };
     total_pts += lf_pts;
-    result.bands.lf = { score: 100 - (lf_pts * 100 / 8) };
-  }
-
-  if (data.hf !== undefined) {
-    metric_count++;
-    let hf_pts = 0;
-    if (data.hf < 2.0) hf_pts = 8; // Very Low
-    else if (data.hf < 4.0) hf_pts = 6; // Low
-    else if (data.hf < 6.0) hf_pts = 4; // Normal
-    else if (data.hf < 10.0) hf_pts = 2; // High
-    else hf_pts = 0; // Very High
-    total_pts += hf_pts;
-    result.bands.hf = { score: 100 - (hf_pts * 100 / 8) };
   }
 
   // HeartMath Scoring
-  if (data.sdnn_ms !== undefined) {
+  if (data.mean_hr_bpm !== undefined) {
     metric_count++;
-    let sdnn_pts = 0;
-    if (data.sdnn_ms < 30) sdnn_pts = 8; // Red
-    else if (data.sdnn_ms < 45) sdnn_pts = 6; // Orange
-    else if (data.sdnn_ms < 50) sdnn_pts = 4; // Yellow
-    else sdnn_pts = 0; // Green
-    total_pts += sdnn_pts;
-    result.bands.sdnn_ms = { score: 100 - (sdnn_pts * 100 / 8) };
+    let mean_hr_pts = 1;
+    if (data.mean_hr_bpm >= 60 && data.mean_hr_bpm <= 100) mean_hr_pts = 4;
+    else if ((data.mean_hr_bpm >= 50 && data.mean_hr_bpm < 60) || (data.mean_hr_bpm > 100 && data.mean_hr_bpm <= 120)) mean_hr_pts = 3;
+    else if ((data.mean_hr_bpm >= 40 && data.mean_hr_bpm < 50) || (data.mean_hr_bpm > 120)) mean_hr_pts = 2;
+    else mean_hr_pts = 1;
+    result.bands.mean_hr_bpm = { ...bandColor(mean_hr_pts), score: (mean_hr_pts * 100) / 4 };
+    total_pts += mean_hr_pts;
   }
 
-  if (data.rmssd_ms !== undefined) {
+  if (data.mean_ibi_ms !== undefined) {
     metric_count++;
-    let rmssd_pts = 0;
-    if (data.rmssd_ms < 20) rmssd_pts = 8; // Red
-    else if (data.rmssd_ms < 35) rmssd_pts = 6; // Orange
-    else if (data.rmssd_ms < 40) rmssd_pts = 4; // Yellow
-    else rmssd_pts = 0; // Green
-    total_pts += rmssd_pts;
-    result.bands.rmssd_ms = { score: 100 - (rmssd_pts * 100 / 8) };
+    let mean_ibi_pts = 1;
+    if (data.mean_ibi_ms >= 600 && data.mean_ibi_ms <= 1000) mean_ibi_pts = 4;
+    else if ((data.mean_ibi_ms >= 500 && data.mean_ibi_ms < 600) || (data.mean_ibi_ms > 1000 && data.mean_ibi_ms <= 1500)) mean_ibi_pts = 3;
+    else if ((data.mean_ibi_ms >= 400 && data.mean_ibi_ms < 500) || (data.mean_ibi_ms > 1500)) mean_ibi_pts = 2;
+    else mean_ibi_pts = 1;
+    result.bands.mean_ibi_ms = { ...bandColor(mean_ibi_pts), score: (mean_ibi_pts * 100) / 4 };
+    total_pts += mean_ibi_pts;
+  }
+
+  if (data.sdnn_ms !== undefined) {
+    metric_count++;
+    let sdnn_pts = 1;
+    if (data.sdnn_ms >= 50) sdnn_pts = 4;
+    else if (data.sdnn_ms >= 45) sdnn_pts = 3;
+    else if (data.sdnn_ms >= 30) sdnn_pts = 2;
+    else sdnn_pts = 1;
+    result.bands.sdnn_ms = { ...bandColor(sdnn_pts), score: (sdnn_pts * 100) / 4 };
+    total_pts += sdnn_pts;
   }
 
   if (data.total_power !== undefined) {
     metric_count++;
-    let tp_pts = 0;
-    if (data.total_power < 500) tp_pts = 8; // Red
-    else if (data.total_power < 750) tp_pts = 6; // Orange
-    else if (data.total_power < 1000) tp_pts = 4; // Yellow
-    else tp_pts = 0; // Green
+    let tp_pts = 1;
+    if (data.total_power >= 1000) tp_pts = 4;
+    else if (data.total_power >= 750) tp_pts = 3;
+    else if (data.total_power >= 500) tp_pts = 2;
+    else tp_pts = 1;
+    result.bands.total_power = { ...bandColor(tp_pts), score: (tp_pts * 100) / 4 };
     total_pts += tp_pts;
-    result.bands.total_power = { score: 100 - (tp_pts * 100 / 8) };
+  }
+
+  if (data.vlf_power !== undefined) {
+    metric_count++;
+    let vlf_power_pts = 1;
+    if (data.vlf_power >= 100 && data.vlf_power <= 500) vlf_power_pts = 4;
+    else if ((data.vlf_power >= 50 && data.vlf_power < 100) || (data.vlf_power > 500 && data.vlf_power <= 1000)) vlf_power_pts = 3;
+    else if ((data.vlf_power >= 20 && data.vlf_power < 50) || (data.vlf_power > 1000 && data.vlf_power <= 2000)) vlf_power_pts = 2;
+    else vlf_power_pts = 1;
+    result.bands.vlf_power = { ...bandColor(vlf_power_pts), score: (vlf_power_pts * 100) / 4 };
+    total_pts += vlf_power_pts;
   }
 
   if (data.lf_power !== undefined) {
     metric_count++;
-    let lf_power_pts = 0;
-    if (data.lf_power < 100) lf_power_pts = 8; // Red
-    else if (data.lf_power < 200) lf_power_pts = 6; // Orange
-    else if (data.lf_power < 300) lf_power_pts = 4; // Yellow
-    else if (data.lf_power > 1170) lf_power_pts = 6; // Orange (too high)
-    else lf_power_pts = 0; // Green
+    let lf_power_pts = 1;
+    if (data.lf_power >= 300 && data.lf_power <= 1170) lf_power_pts = 4;
+    else if ((data.lf_power >= 200 && data.lf_power < 300) || (data.lf_power > 1170 && data.lf_power <= 2000)) lf_power_pts = 3;
+    else if ((data.lf_power >= 100 && data.lf_power < 200) || (data.lf_power > 2000)) lf_power_pts = 2;
+    else lf_power_pts = 1;
+    result.bands.lf_power = { ...bandColor(lf_power_pts), score: (lf_power_pts * 100) / 4 };
     total_pts += lf_power_pts;
-    result.bands.lf_power = { score: 100 - (lf_power_pts * 100 / 8) };
   }
 
-  if (data.hf_power !== undefined) {
+  if (data.rr_intervals !== undefined) {
     metric_count++;
-    let hf_power_pts = 0;
-    if (data.hf_power < 100) hf_power_pts = 8; // Red
-    else if (data.hf_power < 200) hf_power_pts = 6; // Orange
-    else if (data.hf_power < 300) hf_power_pts = 4; // Yellow
-    else if (data.hf_power > 975) hf_power_pts = 6; // Orange (too high)
-    else hf_power_pts = 0; // Green
-    total_pts += hf_power_pts;
-    result.bands.hf_power = { score: 100 - (hf_power_pts * 100 / 8) };
-  }
-
-  if (data.lf_hf_ratio !== undefined) {
-    metric_count++;
-    let lfhf_pts = 0;
-    if (data.lf_hf_ratio < 0.20 || data.lf_hf_ratio > 4.0) lfhf_pts = 8; // Red
-    else if ((data.lf_hf_ratio >= 0.21 && data.lf_hf_ratio < 0.79) || (data.lf_hf_ratio > 2.01 && data.lf_hf_ratio <= 4.0)) lfhf_pts = 6; // Orange
-    else if ((data.lf_hf_ratio >= 0.8 && data.lf_hf_ratio < 0.99) || (data.lf_hf_ratio > 1.01 && data.lf_hf_ratio <= 1.25)) lfhf_pts = 4; // Yellow
-    else lfhf_pts = 0; // Green
-    total_pts += lfhf_pts;
-    result.bands.lf_hf_ratio = { score: 100 - (lfhf_pts * 100 / 8) };
+    let rr_intervals_pts = 1;
+    if (data.rr_intervals >= 60) rr_intervals_pts = 4;
+    else if (data.rr_intervals >= 50) rr_intervals_pts = 3;
+    else if (data.rr_intervals >= 40) rr_intervals_pts = 2;
+    else rr_intervals_pts = 1;
+    result.bands.rr_intervals = { ...bandColor(rr_intervals_pts), score: (rr_intervals_pts * 100) / 4 };
+    total_pts += rr_intervals_pts;
   }
 
   if (data.normalized_coherence_pct !== undefined) {
     metric_count++;
-    let coh_pts = 0;
-    if (data.normalized_coherence_pct < 30) coh_pts = 8; // Red
-    else if (data.normalized_coherence_pct < 50) coh_pts = 6; // Orange
-    else if (data.normalized_coherence_pct < 60) coh_pts = 4; // Yellow
-    else coh_pts = 0; // Green
+    let coh_pts = 1;
+    if (data.normalized_coherence_pct >= 60) coh_pts = 4;
+    else if (data.normalized_coherence_pct >= 50) coh_pts = 3;
+    else if (data.normalized_coherence_pct >= 30) coh_pts = 2;
+    else coh_pts = 1;
+    result.bands.normalized_coherence_pct = { ...bandColor(coh_pts), score: (coh_pts * 100) / 4 };
     total_pts += coh_pts;
-    result.bands.normalized_coherence_pct = { score: 100 - (coh_pts * 100 / 8) };
   }
 
   // Calculate Total Circulation Score
-  const max_possible_pts = metric_count * 8;
-  const Circulation_Score = max_possible_pts > 0 ? 100 - (total_pts * 100 / max_possible_pts) : 100;
-
-  // Add total Circulation Score with color banding
-  result.bands.circulation_score = circulationColorBand(Circulation_Score);
-  result.bands.circulation_score.score = Circulation_Score;
-
+  const Circulation_Score = metric_count > 0 ? (total_pts * 100) / (metric_count * 4) : 100;
+  result.bands.circulation_score = { ...circulationColorBand(Circulation_Score), score: Circulation_Score };
   result.radar = { circulation: Circulation_Score };
   result.bucket = { circulation: Circulation_Score };
   return result;
 }
 
 /* ──────────────────────────────────────────────────────────────
-   4.  Form configuration — for staff data entry (legacy)
+   6.  Form configuration — for staff data entry (legacy)
    ──────────────────────────────────────────────────────────── */
 export const FORM = [
   // OmniFit PPG fields
   ['hrv_index', 'HRV Index (OmniFit)', 0.1, 1, 20],
-  ['stress', 'Stress Level (0-100)', 1, 0, 100],
-  ['ans_health', 'ANS Health Score', 0.01, 1, 15],
-  ['ans_age', 'ANS Age (years)', 1, 10, 80],
   ['lf', 'LF Power (log ms²)', 0.01, 0.1, 50],
-  ['hf', 'HF Power (log ms²)', 0.01, 0.1, 50],
   
   // HeartMath fields
+  ['mean_hr_bpm', 'Mean Heart Rate (bpm)', 0.1, 40, 100],
+  ['mean_ibi_ms', 'Mean Inter-Beat Interval (ms)', 0.1, 50, 200],
   ['sdnn_ms', 'SDNN (ms)', 0.1, 10, 100],
-  ['rmssd_ms', 'RMSSD (ms)', 0.1, 10, 100],
   ['total_power', 'Total Power (ms²)', 0.1, 100, 5000],
+  ['vlf_power', 'VLF Power (ms²)', 0.1, 20, 500],
   ['lf_power', 'LF Power (ms²)', 0.1, 50, 2000],
-  ['hf_power', 'HF Power (ms²)', 0.1, 50, 2000],
-  ['lf_hf_ratio', 'LF/HF Ratio', 0.01, 0.1, 10],
+  ['rr_intervals', 'R-R Intervals (count)', 1, 40, 100],
   ['normalized_coherence_pct', 'Normalized Coherence (%)', 0.1, 0, 100],
 ] as const;
 
 /* ──────────────────────────────────────────────────────────────
-   5.  Registry export
+   7.  Registry export
    ──────────────────────────────────────────────────────────── */
 export const circulationModule = {
   slug: 'circulation',

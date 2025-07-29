@@ -154,6 +154,82 @@ Example output:
 }
 `,
 
+  exbody_rom: `You are an expert at extracting ROM (Range of Motion) data from ExBody Articular Joint System reports.
+
+The following upload is a client's ROM examination sheet.
+Please locate the main "ROM Examination" table (usually page 1) and
+return a JSON object with these exact keys and values:
+
+{
+  "neck_flexion_left": L,
+  "neck_lateral_flexion_left": L,
+  "neck_lateral_flexion_right": R,
+  "shoulder_abduction_left": L,
+  "shoulder_abduction_right": R,
+  "shoulder_flexion_left": L,
+  "shoulder_flexion_right": R,
+  "shoulder_extension_left": L,
+  "shoulder_extension_right": R,
+  "trunk_lateral_flexion_left": L,
+  "trunk_lateral_flexion_right": R,
+  "hip_abduction_left": L,
+  "hip_abduction_right": R,
+  "hip_flexion_left": L,
+  "hip_flexion_right": R,
+  "hip_extension_left": L,
+  "hip_extension_right": R
+}
+
+IMPORTANT RULES:
+1. Neck Flexion only has a LEFT value (no right value) - do NOT include "neck_flexion_right"
+2. All other ROM measurements have BOTH left and right values
+3. Replace L and R with the numeric degree values you see (e.g. 38.1)
+4. If a cell is empty or the angle isn't present, write \`null\`
+5. Do **not** include the "Normal range" numbers in the output
+6. Return *only* the JSON—no commentary, no extra keys, no units
+
+Example output:
+{
+  "neck_flexion_left": 38.1,
+  "neck_lateral_flexion_left": 21.7,
+  "neck_lateral_flexion_right": 29.5,
+  "shoulder_abduction_left": 139.7,
+  "shoulder_abduction_right": 144.7,
+  "shoulder_flexion_left": 149.5,
+  "shoulder_flexion_right": 130.5,
+  "shoulder_extension_left": 30.8,
+  "shoulder_extension_right": 35.3,
+  "trunk_lateral_flexion_left": 12.1,
+  "trunk_lateral_flexion_right": 0.6,
+  "hip_abduction_left": 38.7,
+  "hip_abduction_right": 34.5,
+  "hip_flexion_left": 80.9,
+  "hip_flexion_right": 59.6,
+  "hip_extension_left": 32.8,
+  "hip_extension_right": 33.4
+}`,
+
+  omnifit_ppg: `You are an expert at extracting structured data from OmniFit Stress Check reports (PPG section only).
+
+This page is titled "Stress check result (PPG)". Extract the following metrics:
+- hrv_index: Value next to "HRV-index"
+- stress: Value next to "Stress"
+- ans_health: Value next to "ANS Health"
+- ans_age: Value next to "ANS age"
+- lf: Value next to "LF"
+- hf: Value next to "HF"
+
+If a value is missing, use null. Output only the JSON object with these keys:
+{
+  "hrv_index": 10.6,
+  "stress": 39,
+  "ans_health": 8.94,
+  "ans_age": 19,
+  "lf": 7.06,
+  "hf": 7.29
+}
+Output ONLY the JSON object, nothing else.`,
+
   omnifit: `You are an expert at extracting structured data from OmniFit Stress Check reports (PPG section only).
 
 This page is titled "Stress check result (PPG)". Extract the following metrics:
@@ -247,7 +323,7 @@ Look for ANY mention of "InBody", "Body Composition", "Total Body Water", "Skele
 }
 
 STEP 2: SEARCH FOR AURACOM
-Look for ANY mention of "Auracom", "Ava-Aura", "Ava Score", "Vigor", "Stability", "Activity", "Five Elements", "Wood", "Fire", "Earth", "Metal", "Water". If found, extract:
+Look for ANY mention of "Auracom", "Ava-Aura", "Ava Score", "Vigor", "Stability", "Activity", "Five Elements", "Wood", "Fire", "Earth", "Metal", "Water", "Overall Balance". If found, extract:
 {
   "auracom": {
     "ava_score": number,        // Big red-label "Ava:###"
@@ -258,7 +334,8 @@ Look for ANY mention of "Auracom", "Ava-Aura", "Ava Score", "Vigor", "Stability"
     "fire": number,             // Five-element bar "B"
     "earth": number,            // Five-element bar "C"
     "metal": number,            // Five-element bar "D"
-    "water": number             // Five-element bar "E"
+    "water": number,            // Five-element bar "E"
+    "overall_balance_score": number // Overall Elemental Balance Score (0-100)
   }
 }
 
