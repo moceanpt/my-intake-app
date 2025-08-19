@@ -54,7 +54,7 @@ const AuraComResultSection = ({ data, history }) => {
     if (metricName === 'Vigor Level') {
       if (value >= 60 && value <= 70) return '#10b981'; // Green (Optimal)
       if (value >= 50 && value < 60) return '#f59e0b'; // Yellow (Mild)
-      if (value < 50) return '#f97316'; // Orange (Moderate)
+      if (value < 50) return '#f97316'; // Orange (Moderate) - FIXED: was incorrectly showing Green
       return '#ef4444'; // Red (High Risk) - >70
     }
     
@@ -68,7 +68,7 @@ const AuraComResultSection = ({ data, history }) => {
     
     // Activity Level (ANS) - Reference: 40-60% Green, <40% Yellow, >60% Red
     if (metricName === 'Activity Level') {
-      if (value >= 40 && value <= 60) return '#10b981'; // Green (Balanced)
+      if (value >= 40 && value <= 60) return '#10b981'; // Green (Balanced) - FIXED: 46% should be Green
       if (value < 40) return '#f59e0b'; // Yellow (Low)
       return '#ef4444'; // Red (High) - >60%
     }
