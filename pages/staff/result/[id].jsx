@@ -95,18 +95,64 @@ export async function getServerSideProps({ params }) {
 
   // Prepare organized objective data from all stored metrics
   const objectiveData = assessmentMetrics.length > 0 ? {
-    // InBody data
-    inbodyData: getDeviceData('inbody') || {
-      vfa: metricsMap.vfa || null,
-      phase_angle: metricsMap.phase_angle || null,
-      rmssd: metricsMap.rmssd || null,
-      ecw_tbw: metricsMap.ecw_tbw || null,
-      smm_pct: metricsMap.smm_pct || null,
-      hydration: metricsMap.hydration || null,
-      body_fat_pct: metricsMap.body_fat_pct || null,
-      weight: metricsMap.weight || null,
-      tbw: metricsMap.tbw || null,
-    },
+    // InBody data - map extracted field names to expected scoring function field names
+    inbodyData: (() => {
+      const deviceData = getDeviceData('inbody') || {};
+      
+      // Calculate SMM percentage from SMM mass and Weight
+      const smm_pct = (() => {
+        const smm = deviceData.smm_lb || metricsMap.smm_lb;
+        const weight = deviceData.weight_lb || metricsMap.weight_lb || metricsMap.weight;
+        console.log('🔍 DEBUG: SMM calculation - smm:', smm, 'weight:', weight);
+        if (smm && weight && weight > 0 && !isNaN(smm) && !isNaN(weight)) {
+          const result = (smm / weight) * 100;
+          console.log('🔍 DEBUG: SMM calculation result:', result);
+          // Round to 1 decimal place for display
+          return isNaN(result) ? null : Math.round(result * 10) / 10;
+        }
+        console.log('🔍 DEBUG: SMM calculation failed - missing or invalid data');
+        return null;
+      })();
+      
+      // Calculate hydration percentage from TBW and Weight
+      const hydration = (() => {
+        const tbw = deviceData.tbw_lb || metricsMap.tbw_lb || metricsMap.tbw;
+        const weight = deviceData.weight_lb || metricsMap.weight_lb || metricsMap.weight;
+        console.log('🔍 DEBUG: Hydration calculation - tbw:', tbw, 'weight:', weight);
+        if (tbw && weight && weight > 0 && !isNaN(tbw) && !isNaN(weight)) {
+          const result = (tbw / weight) * 100;
+          console.log('🔍 DEBUG: Hydration calculation result:', result);
+          // Round to 1 decimal place for display
+          return isNaN(result) ? null : Math.round(result * 10) / 10;
+        }
+        console.log('🔍 DEBUG: Hydration calculation failed - missing or invalid data');
+        return null;
+      })();
+      
+      return {
+        // Map extracted field names to expected scoring function field names
+        vfa: deviceData.vfa_cm2 || metricsMap.vfa_cm2 || metricsMap.vfa || null,
+        phase_angle: deviceData.phase_angle_deg || metricsMap.phase_angle_deg || metricsMap.phase_angle || null,
+        rmssd: deviceData.rmssd || metricsMap.rmssd || null,
+        ecw_tbw: deviceData.ecw_tbw || metricsMap.ecw_tbw || null,
+        // Include calculated fields
+        smm_pct,
+        hydration,
+        body_fat_pct: deviceData.pbf_pct || metricsMap.pbf_pct || metricsMap.body_fat_pct || null,
+        weight: deviceData.weight_lb || metricsMap.weight_lb || metricsMap.weight || null,
+        tbw: deviceData.tbw_lb || metricsMap.tbw_lb || metricsMap.tbw || null,
+        // Add missing fields that the scoring function expects
+        smm: deviceData.smm_lb || metricsMap.smm_lb || null,
+        body_fat_lb: deviceData.body_fat_lb || metricsMap.body_fat_lb || null,
+        // Ensure all required fields are present with fallbacks
+        vfa_cm2: deviceData.vfa_cm2 || metricsMap.vfa_cm2 || metricsMap.vfa || null,
+        phase_angle_deg: deviceData.phase_angle_deg || metricsMap.phase_angle_deg || metricsMap.phase_angle || null,
+        pbf_pct: deviceData.pbf_pct || metricsMap.pbf_pct || metricsMap.body_fat_pct || null,
+        tbw_lb: deviceData.tbw_lb || metricsMap.tbw_lb || metricsMap.tbw || null,
+        weight_lb: deviceData.weight_lb || metricsMap.weight_lb || metricsMap.weight || null,
+        smm_lb: deviceData.smm_lb || metricsMap.smm_lb || null,
+      };
+    })(),
     
     // ExBody data
     exbodyData: getDeviceData('exbody') || {
@@ -203,40 +249,108 @@ export async function getServerSideProps({ params }) {
       return hasRomData ? transformedRomData : null;
     })(),
     
-    // OmniFit data (PPG and EEG combined)
-    omnifitData: getDeviceData('omnifit_ppg') || getDeviceData('omnifit_eeg') || getDeviceData('omnifit') || {
-      // PPG metrics
-      hrv_index: metricsMap.hrv_index || null,
-      stress: metricsMap.stress || null,
-      ans_health: metricsMap.ans_health || null,
-      ans_age: metricsMap.ans_age || null,
-      lf: metricsMap.lf || null,
-      hf: metricsMap.hf || null,
-      // EEG metrics
-      brain_score: metricsMap.brain_score || null,
-      mental_stress: metricsMap.mental_stress || null,
-      intrinsic_eeg_pf: metricsMap.intrinsic_eeg_pf || null,
-      brain_workload: metricsMap.brain_workload || null,
-    },
+    // OmniFit data (PPG and EEG combined) - map extracted field names correctly
+    omnifitData: (() => {
+      const deviceData = getDeviceData('omnifit_ppg') || getDeviceData('omnifit_eeg') || getDeviceData('omnifit') || {};
+      
+      console.log('🔍 DEBUG: OmniFit metricsMap keys:', Object.keys(metricsMap).filter(k => k.includes('brain') || k.includes('mental') || k.includes('eeg') || k.includes('omnifit')));
+      console.log('🔍 DEBUG: OmniFit metricsMap values:', {
+        brain_score: metricsMap.brain_score,
+        mental_stress: metricsMap.mental_stress,
+        intrinsic_eeg_pf: metricsMap.intrinsic_eeg_pf,
+        brain_workload: metricsMap.brain_workload
+      });
+      
+      return {
+        // PPG metrics - map from extracted data structure
+        hrv_index: deviceData.hrv_index || metricsMap.hrv_index || null,
+        stress: deviceData.stress || metricsMap.stress || null,
+        ans_health: deviceData.ans_health || metricsMap.ans_health || null,
+        ans_age: deviceData.ans_age || metricsMap.ans_age || null,
+        lf: deviceData.lf || metricsMap.lf || null,
+        hf: deviceData.hf || metricsMap.hf || null,
+        // EEG metrics - map from extracted data structure
+        brain_score: deviceData.brain_score || metricsMap.brain_score || null,
+        mental_stress: deviceData.mental_stress || metricsMap.mental_stress || null,
+        intrinsic_eeg_pf: deviceData.intrinsic_eeg_pf || metricsMap.intrinsic_eeg_pf || null,
+        brain_workload: deviceData.brain_workload || metricsMap.brain_workload || null,
+        // Additional metrics needed by NervousSystemResultSection
+        normalized_coherence: deviceData.normalized_coherence_pct || metricsMap.normalized_coherence_pct || null,
+        hf_power: deviceData.hf_power || metricsMap.hf_power || null,
+        rmssd_ms: deviceData.rmssd_ms || deviceData.rmssd || metricsMap.rmssd_ms || metricsMap.rmssd || null,
+        lf_hf_ratio: deviceData.lf_hf_ratio || metricsMap.lf_hf_ratio || null,
+        // Additional metrics that might be in the extracted data
+        mental_stress_level: deviceData.mental_stress_level || metricsMap.mental_stress_level || null,
+        brain_workload_index: deviceData.brain_workload_index || metricsMap.brain_workload_index || null,
+        intrinsic_eeg_performance_factor: deviceData.intrinsic_eeg_performance_factor || metricsMap.intrinsic_eeg_performance_factor || null,
+        overall_brain_function_score: deviceData.overall_brain_function_score || metricsMap.overall_brain_function_score || null,
+      };
+    })(),
     
-    // HeartMath data
-    heartmathData: getDeviceData('heartmath') || {
-      sdnn: metricsMap.sdnn || null,
-      rmssd: metricsMap.rmssd || null, // Note: rmssd might be in InBody too
-      lf_hf_ratio: metricsMap.lf_hf_ratio || null,
-      total_power: metricsMap.total_power || null,
-      lf_power: metricsMap.lf_power || null,
-      hf_power: metricsMap.hf_power || null,
-      coherence: metricsMap.coherence || null,
-    },
+    // HeartMath data - map extracted field names correctly
+    heartmathData: (() => {
+      const deviceData = getDeviceData('heartmath') || {};
+      
+      return {
+        // Map extracted field names to expected scoring function field names
+        rr_intervals: deviceData.rr_intervals || metricsMap.rr_intervals || null,
+        mean_hr_bpm: deviceData.mean_hr_bpm || metricsMap.mean_hr_bpm || null,
+        mean_ibi_ms: deviceData.mean_ibi_ms || metricsMap.mean_ibi_ms || null,
+        sdnn: deviceData.sdnn_ms || deviceData.sdnn || metricsMap.sdnn_ms || metricsMap.sdnn || null,
+        rmssd: deviceData.rmssd_ms || deviceData.rmssd || metricsMap.rmssd_ms || metricsMap.rmssd || null, // Note: rmssd might be in InBody too
+        lf_hf_ratio: deviceData.lf_hf_ratio || metricsMap.lf_hf_ratio || null,
+        total_power: deviceData.total_power || metricsMap.total_power || null,
+        lf_power: deviceData.lf_power || metricsMap.lf_power || null,
+        hf_power: deviceData.hf_power || metricsMap.hf_power || null,
+        vlf_power: deviceData.vlf_power || metricsMap.vlf_power || null,
+        normalized_coherence_pct: deviceData.normalized_coherence_pct || metricsMap.normalized_coherence_pct || null,
+      };
+    })(),
     
-    // Auracom data
+    // Circulation data - combined OmniFit + HeartMath for CirculationResultSection
+    circulationData: (() => {
+      const omnifitData = getDeviceData('omnifit_ppg') || getDeviceData('omnifit_eeg') || getDeviceData('omnifit') || {};
+      const heartmathData = getDeviceData('heartmath') || {};
+      
+      return {
+        // OmniFit PPG metrics (from circulationSchema)
+        hrv_index: omnifitData.hrv_index || metricsMap.hrv_index || null,
+        stress: omnifitData.stress || metricsMap.stress || null,
+        ans_health: omnifitData.ans_health || metricsMap.ans_health || null,
+        ans_age: omnifitData.ans_age || metricsMap.ans_age || null,
+        lf: omnifitData.lf || metricsMap.lf || null,
+        hf: omnifitData.hf || metricsMap.hf || null,
+        
+        // HeartMath metrics (from circulationSchema)
+        sdnn_ms: heartmathData.sdnn_ms || metricsMap.sdnn_ms || null,
+        rmssd_ms: heartmathData.rmssd_ms || metricsMap.rmssd_ms || null,
+        total_power: heartmathData.total_power || metricsMap.total_power || null,
+        lf_power: heartmathData.lf_power || metricsMap.lf_power || null,
+        hf_power: heartmathData.hf_power || metricsMap.hf_power || null,
+        lf_hf_ratio: heartmathData.lf_hf_ratio || metricsMap.lf_hf_ratio || null,
+        normalized_coherence_pct: heartmathData.normalized_coherence_pct || metricsMap.normalized_coherence_pct || null,
+        
+        // Additional fields needed by CirculationResultSection display
+        rr_intervals: heartmathData.rr_intervals || metricsMap.rr_intervals || null,
+        mean_hr_bpm: heartmathData.mean_hr_bpm || metricsMap.mean_hr_bpm || null,
+        mean_ibi_ms: heartmathData.mean_ibi_ms || metricsMap.mean_ibi_ms || null,
+        vlf_power: heartmathData.vlf_power || metricsMap.vlf_power || null,
+      };
+    })(),
+    
+    // AuraCom data - map extracted field names correctly
     auracomData: getDeviceData('auracom') || {
-      energy_score: metricsMap.energy_score || null,
+      // Map extracted field names to expected scoring function field names
+      ava_score: metricsMap.ava_score || null,
       vigor: metricsMap.vigor || null,
       stability: metricsMap.stability || null,
       activity_percent: metricsMap.activity_percent || null,
-      elemental_balance: metricsMap.elemental_balance || null,
+      wood: metricsMap.wood || null,
+      fire: metricsMap.fire || null,
+      earth: metricsMap.earth || null,
+      metal: metricsMap.metal || null,
+      water: metricsMap.water || null,
+      overall_balance_score: metricsMap.overall_balance_score || null,
     },
     
     // History tracking - group metrics by collection date
@@ -285,7 +399,29 @@ export default function ClientResultPage({
         ...(objectiveData.heartmathData || {}),
       };
       
-      return scoreObjective(allMetrics);
+      // Debug: Log the combined metrics being sent to scoring functions
+      console.log('🔍 DEBUG: Combined metrics sent to scoreObjective:', allMetrics);
+      console.log('🔍 DEBUG: InBody data:', objectiveData.inbodyData);
+      console.log('🔍 DEBUG: ExBody data:', objectiveData.exbodyData);
+      console.log('🔍 DEBUG: ROM data:', objectiveData.romData);
+      console.log('🔍 DEBUG: AuraCom data:', objectiveData.auracomData);
+      console.log('🔍 DEBUG: OmniFit data:', objectiveData.omnifitData);
+      console.log('🔍 DEBUG: HeartMath data:', objectiveData.heartmathData);
+      
+      // Validate that required fields are present for each scoring function
+      console.log('🔍 DEBUG: InBody validation - hydration:', allMetrics.hydration, 'smm_pct:', allMetrics.smm_pct, 'body_fat_pct:', allMetrics.body_fat_pct);
+      console.log('🔍 DEBUG: AuraCom validation - vigor:', allMetrics.vigor, 'stability:', allMetrics.stability);
+      console.log('🔍 DEBUG: HeartMath validation - sdnn:', allMetrics.sdnn, 'rmssd:', allMetrics.rmssd);
+      
+      try {
+        const scores = scoreObjective(allMetrics);
+        console.log('🔍 DEBUG: Scoring function returned:', scores);
+        return scores;
+      } catch (scoringError) {
+        console.error('❌ ERROR: Scoring function failed:', scoringError);
+        console.error('❌ ERROR: Data that caused failure:', allMetrics);
+        return null;
+      }
     } catch (error) {
       console.error('Error calculating objective scores:', error);
       return null;
@@ -354,6 +490,53 @@ export default function ClientResultPage({
         </div>
       </div>
 
+      {/* Data Verification Section - Debug Info */}
+      {hasObjectiveData && objectiveData && (
+        <div style={{ 
+          background: '#f8fafc', 
+          borderRadius: '8px', 
+          padding: '1rem', 
+          marginBottom: '1.5rem', 
+          border: '1px solid #e2e8f0',
+          fontSize: '0.875rem'
+        }}>
+          <h4 style={{ margin: '0 0 0.5rem 0', color: '#475569' }}>🔍 Data Verification</h4>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            <div>
+              <strong>InBody:</strong> {objectiveData.inbodyData ? `${Object.keys(objectiveData.inbodyData).filter(k => objectiveData.inbodyData[k] !== null).length} fields` : 'No data'}
+            </div>
+            <div>
+              <strong>ExBody:</strong> {objectiveData.exbodyData ? `${Object.keys(objectiveData.exbodyData).filter(k => objectiveData.exbodyData[k] !== null).length} fields` : 'No data'}
+            </div>
+            <div>
+              <strong>ROM:</strong> {objectiveData.romData ? `${Object.keys(objectiveData.romData).filter(k => objectiveData.romData[k] !== null).length} fields` : 'No data'}
+            </div>
+            <div>
+              <strong>AuraCom:</strong> {objectiveData.auracomData ? `${Object.keys(objectiveData.auracomData).filter(k => objectiveData.auracomData[k] !== null).length} fields` : 'No data'}
+            </div>
+            <div>
+              <strong>OmniFit:</strong> {objectiveData.omnifitData ? `${Object.keys(objectiveData.omnifitData).filter(k => objectiveData.omnifitData[k] !== null).length} fields` : 'No data'}
+            </div>
+            <div>
+              <strong>HeartMath:</strong> {objectiveData.heartmathData ? `${Object.keys(objectiveData.heartmathData).filter(k => objectiveData.heartmathData[k] !== null).length} fields` : 'No data'}
+            </div>
+          </div>
+          <details style={{ marginTop: '0.5rem' }}>
+            <summary style={{ cursor: 'pointer', color: '#3b82f6' }}>View Raw Data</summary>
+            <pre style={{ 
+              background: 'white', 
+              padding: '0.5rem', 
+              borderRadius: '4px', 
+              overflow: 'auto', 
+              fontSize: '0.75rem',
+              marginTop: '0.5rem'
+            }}>
+              {JSON.stringify(objectiveData, null, 2)}
+            </pre>
+          </details>
+        </div>
+      )}
+
       {/* Objective Results Sections */}
       {hasObjectiveData && objectiveData && (
         <>
@@ -371,7 +554,7 @@ export default function ClientResultPage({
           
           <ErrorBoundary>
             <SuspenseWrapper loadingText="Loading circulation data...">
-              <CirculationResultSection data={objectiveData.heartmathData} history={objectiveData.heartmathHistory} />
+              <CirculationResultSection data={objectiveData.circulationData} history={objectiveData.heartmathHistory} />
             </SuspenseWrapper>
           </ErrorBoundary>
           
@@ -392,6 +575,35 @@ export default function ClientResultPage({
               <NervousSystemResultSection data={objectiveData.omnifitData} history={objectiveData.omnifitHistory} />
             </SuspenseWrapper>
           </ErrorBoundary>
+          
+          {/* Debug: Show what data is being passed to each component */}
+          <div style={{ 
+            background: '#f0f9ff', 
+            borderRadius: '8px', 
+            padding: '1rem', 
+            marginBottom: '1.5rem', 
+            border: '1px solid #0ea5e9',
+            fontSize: '0.875rem'
+          }}>
+            <h4 style={{ margin: '0 0 0.5rem 0', color: '#0369a1' }}>🔍 Component Data Debug</h4>
+            <details>
+              <summary style={{ cursor: 'pointer', color: '#0ea5e9' }}>View Data Passed to Components</summary>
+              <div style={{ marginTop: '0.5rem' }}>
+                <strong>OmniFit Data (Nervous System):</strong>
+                <pre style={{ background: 'white', padding: '0.5rem', borderRadius: '4px', fontSize: '0.75rem' }}>
+                  {JSON.stringify(objectiveData.omnifitData, null, 2)}
+                </pre>
+                <strong>HeartMath Data (Circulation):</strong>
+                <pre style={{ background: 'white', padding: '0.5rem', borderRadius: '4px', fontSize: '0.75rem' }}>
+                  {JSON.stringify(objectiveData.heartmathData, null, 2)}
+                </pre>
+                <strong>AuraCom Data (Energy):</strong>
+                <pre style={{ background: 'white', padding: '0.5rem', borderRadius: '4px', fontSize: '0.75rem' }}>
+                  {JSON.stringify(objectiveData.auracomData, null, 2)}
+                </pre>
+              </div>
+            </details>
+          </div>
         </>
       )}
 
