@@ -49,9 +49,9 @@ export default function Card({
         ${shadowClasses[shadow]}
         ${borderClasses}
         font-sans
+        text-secondary-900
         ${className}
       `}
-      style={{ color: 'var(--color-secondary-900)' }}
       {...props}
     >
       {children}
@@ -63,8 +63,7 @@ export default function Card({
 Card.Header = function CardHeader({ children, className = '', ...props }) {
   return (
     <div 
-      className={`card-header font-semibold text-lg mb-2 ${className}`} 
-      style={{ color: 'var(--color-primary-700)' }}
+      className={`card-header font-semibold text-lg mb-2 text-primary-700 ${className}`} 
       {...props}
     >
       {children}

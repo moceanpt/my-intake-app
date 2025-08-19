@@ -9,6 +9,7 @@ import { scoreExBody, exBodyKeys } from './exbody';
 import { scoreOmniFit, omniFitKeys } from './omnifit';
 import { scoreHeartMath, heartMathKeys } from './heartmath';
 import { scoreCirculation, circulationKeys } from './circulation';
+import { scoreROM } from './rom';
 import type { MetricSchema } from '../metrics/types';
 
 /* ──────────────────────────────────────────────────────────────
@@ -61,12 +62,13 @@ import type { MetricSchema } from '../metrics/types';
     ──────────────────────────────────────────────────────────── */
  
  /* Form blueprints ------------------------------------------------ */
- import * as inbody  from './inbody';
- import * as auracom from './auracom';
- import * as exbody   from './exbody';
- import * as omnifit  from './omnifit';
- import * as heartmath from './heartmath';
- import * as circulation from './circulation';
+import * as inbody  from './inbody';
+import * as auracom from './auracom';
+import * as exbody   from './exbody';
+import * as omnifit  from './omnifit';
+import * as heartmath from './heartmath';
+import * as circulation from './circulation';
+import * as rom from './rom';
  
  /** Helper: all FORM constants share the same tuple-array shape */
  type DeviceForm = readonly (readonly [string, string, number, number, number])[];
@@ -90,6 +92,8 @@ export const OBJECTIVE_SCHEMAS: Record<string, MetricSchema> = {
   inbody: inbody.inbodyMetricSchema,
   auracom: auracom.auracomMetricSchema,
   exbody: exbody.exbodyMetricSchema,
+  exbody_rom: exbody.exbodyROMMetricSchema,
+  rom: rom.romMetricSchema,
   omnifit: omnifit.omnifitMetricSchema,
   heartmath: heartmath.heartmathMetricSchema,
   circulation: circulation.circulationMetricSchema,

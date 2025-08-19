@@ -27,8 +27,7 @@ export default function Button({
     >
       {loading ? (
         <span 
-          className="animate-spin mr-2 w-4 h-4 border-2 border-t-transparent rounded-full inline-block align-middle"
-          style={{ borderColor: 'var(--color-primary-600)' }}
+          className="animate-spin mr-2 w-4 h-4 border-2 border-t-transparent rounded-full inline-block align-middle border-primary-600"
         ></span>
       ) : null}
       {children}

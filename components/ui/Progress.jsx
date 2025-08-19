@@ -18,7 +18,7 @@ export default function Progress({ step, total }) {
       {/* Progress Bar */}
       <div className="progress-container h-2 mb-4">
         <div 
-          className="progress-bar"
+          className={`progress-bar`}
           style={{ width: `${progressPercentage}%` }}
           role="progressbar"
           aria-valuenow={currentStep}

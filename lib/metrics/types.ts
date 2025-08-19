@@ -38,7 +38,15 @@ export type MetricFieldDef =
   | (Shared & { widget: 'checkbox-LR' })
 
   /* NEW – single checkbox (spine rows) ---------------------- */
-  | (Shared & { widget: 'checkbox-single' });
+  | (Shared & { widget: 'checkbox-single' })
+
+  /* NEW – table widgets ------------------------------------- */
+  | (Shared & { widget: 'rom-table'; romType: string; reference?: string })
+  | (Shared & { widget: 'exbody-table'; tableType: string })
+  | (Shared & { widget: 'inbody-table'; tableType: string })
+  | (Shared & { widget: 'omnifit-table'; tableType: string })
+  | (Shared & { widget: 'auracom-table'; tableType: string })
+  | (Shared & { widget: 'heartmath-table'; tableType: string });
 
 /* ──────────────────────────────────────────────────────────────
    MetricSchema
@@ -46,7 +54,12 @@ export type MetricFieldDef =
 export type MetricSchema = {
   slug : string;                // e.g. "exbodyArticular"
   title: string;                // human-readable section title
-  fields: MetricFieldDef[];
+  fields?: MetricFieldDef[];    // for simple schemas
+  groups?: {                    // for grouped schemas
+    section: string;
+    title: string;
+    fields: MetricFieldDef[];
+  }[];
 
   /** optional transform for complex widgets */
   toPayload?: (raw: Record<string, any>) => unknown;

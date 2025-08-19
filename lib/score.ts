@@ -3,6 +3,8 @@
 ------------------------------------------------------------------- */
 import questionSchema from '@/components/questions/questionSchema';
 import { generatePlan } from '@/lib/generatePlan';
+import { calculateWeightedSymptomScore } from './symptomScoring';
+import { mapChipCodes, PILLAR_TO_AREA_MAPPING } from './chipMapping';
 
 /* ================================================================
  *  SECTION 0 · LIFESTYLE
@@ -167,17 +169,62 @@ export function pillarScore(
   );
 }
 
-/** Build full 6-spoke subjective radar (whole ints) */
+/** Build full 6-spoke subjective radar using slider-based clinical assessment */
 export function buildSubjectiveRadar(
   hc: Record<Pillar,string[]> = {} as any,
   sliders: Record<Pillar,{ main:number }> = PILLAR_KEYS.reduce((acc, key) => { acc[key] = { main: 10 }; return acc; }, {} as Record<Pillar, { main: number }>),
 ){
   const out = {} as Record<Pillar,number>;
+  
   for (const p of PILLAR_KEYS){
-    const s = sliders[p]?.main ?? 10;
-    const c = hc[p]?.length ?? 0;
-    out[p] = pillarScore(s,c,MAX_CHIPS[p]);
+    const sliderValue = sliders[p]?.main ?? 10;
+    
+    // Use slider value directly for clinical severity assessment
+    // Convert slider score (0-10 where 10 is worst) to health score (0-10 where 10 is best)
+    out[p] = Math.round(Math.max(0, 10 - sliderValue));
   }
+  
+  return out;
+}
+
+/** Calculate symptom complexity for treatment planning (separate from clinical severity) */
+export function calculateSymptomComplexity(
+  hc: Record<Pillar,string[]> = {} as any
+): Record<Pillar, { score: number; symptoms: Array<{code: string; label: string; weight: number; priority: string}> }> {
+  const { calculateWeightedSymptomScore } = require('./symptomScoring');
+  const { mapChipCodes, PILLAR_TO_AREA_MAPPING } = require('./chipMapping');
+  
+  const out = {} as Record<Pillar, { score: number; symptoms: Array<{code: string; label: string; weight: number; priority: string}> }>;
+  
+  for (const p of PILLAR_KEYS){
+    const rawChips = hc[p] || [];
+    const mappedChips = mapChipCodes(rawChips);
+    const areaName = PILLAR_TO_AREA_MAPPING[p] || p;
+    
+    try {
+      // Calculate symptom complexity without slider influence
+      const weightedResult = calculateWeightedSymptomScore(0, mappedChips, areaName);
+      
+      const symptoms = weightedResult.breakdown.weightedSymptoms.map(symptom => ({
+        code: symptom.code,
+        label: symptom.label,
+        weight: symptom.weight,
+        priority: symptom.weight >= 2.0 ? 'High Priority' : symptom.weight >= 1.5 ? 'Medium Priority' : 'Low Priority'
+      }));
+      
+      out[p] = {
+        score: weightedResult.totalScore,
+        symptoms
+      };
+    } catch (error) {
+      console.warn(`[calculateSymptomComplexity] Failed for ${p}:`, error);
+      out[p] = {
+        score: 0,
+        symptoms: []
+      };
+    }
+  }
+  
   return out;
 }
 

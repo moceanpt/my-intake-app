@@ -274,4 +274,37 @@ export const circulationModule = {
   scorer: scoreCirculation,
 } as const;
 
+export function scoreCirculationStories(data: CirculationInput) {
+  // Calculate the circulation score using the main scoring function
+  const scoreResult = scoreCirculation(data);
+  const circulationScore = scoreResult.bands.circulation_score?.score || 75; // Fallback to 75 if not available
+  
+  // Create stories structure that matches what the component expects
+  const stories = [
+    {
+      title: 'Cardiovascular Health',
+      score: circulationScore,
+      status: circulationScore >= 80 ? 'Optimal Zone' : circulationScore >= 60 ? 'Mild Strain' : circulationScore >= 40 ? 'Moderate Load' : 'High Strain',
+      statusColor: circulationScore >= 80 ? 'text-green-600' : circulationScore >= 60 ? 'text-yellow-600' : circulationScore >= 40 ? 'text-orange-600' : 'text-red-600',
+      whyItMatters: 'Heart rate variability and autonomic balance are key indicators of cardiovascular health and stress resilience. Higher HRV and balanced LF/HF ratios indicate better cardiovascular fitness and recovery capacity.',
+      metrics: [
+        { name: 'HRV Index', value: data.hrv_index || 0, unit: '' },
+        { name: 'RMSSD', value: data.rmssd_ms || 0, unit: 'ms' },
+        { name: 'LF/HF Ratio', value: data.lf_hf_ratio || 0, unit: '' }
+      ]
+    }
+  ];
+  
+  return {
+    bands: {
+      circulation_score: {
+        score: circulationScore,
+        color: circulationScore >= 80 ? 'dark-green' : circulationScore >= 60 ? 'yellow' : circulationScore >= 40 ? 'orange' : 'red',
+        label: circulationScore >= 80 ? 'Optimal' : circulationScore >= 60 ? 'Mild imbalance' : circulationScore >= 40 ? 'High-risk imbalance' : 'Critical'
+      }
+    },
+    stories: stories
+  };
+}
+
 export default circulationModule; 

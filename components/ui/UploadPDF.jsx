@@ -30,7 +30,7 @@ export default function UploadPDF({ data, setResult }) {
       <label className="block border-2 border-dashed rounded p-6 text-center cursor-pointer">
         <input
           type="file"
-          multiple                                     {/* ← allow many */}
+          multiple
           accept="application/pdf"
           className="hidden"
           onChange={handleChoose}
