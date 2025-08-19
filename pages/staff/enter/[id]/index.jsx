@@ -296,7 +296,32 @@ export default function ChooseDevice({ submissionId }) {
                   });
                 }
                 if (Object.keys(tableData).length > 0) {
-                  methods.setValue('heartmath_table', tableData);
+                  // Map the extracted data to the correct HeartMath field structure
+                  const basicData = {};
+                  const spectrumData = {};
+                  
+                  // Basic HRV metrics
+                  if (tableData.rr_intervals !== undefined) basicData.rr_intervals = tableData.rr_intervals;
+                  if (tableData.mean_hr_bpm !== undefined) basicData.mean_hr_bpm = tableData.mean_hr_bpm;
+                  if (tableData.mean_ibi_ms !== undefined) basicData.mean_ibi_ms = tableData.mean_ibi_ms;
+                  if (tableData.sdnn_ms !== undefined) basicData.sdnn_ms = tableData.sdnn_ms;
+                  if (tableData.rmssd_ms !== undefined) basicData.rmssd_ms = tableData.rmssd_ms;
+                  
+                  // Power Spectrum & Coherence metrics
+                  if (tableData.total_power !== undefined) spectrumData.total_power = tableData.total_power;
+                  if (tableData.vlf_power !== undefined) spectrumData.vlf_power = tableData.vlf_power;
+                  if (tableData.lf_power !== undefined) spectrumData.lf_power = tableData.lf_power;
+                  if (tableData.hf_power !== undefined) spectrumData.hf_power = tableData.hf_power;
+                  if (tableData.lf_hf_ratio !== undefined) spectrumData.lf_hf_ratio = tableData.lf_hf_ratio;
+                  if (tableData.normalized_coherence_pct !== undefined) spectrumData.normalized_coherence_pct = tableData.normalized_coherence_pct;
+                  
+                  // Set the values for both HeartMath table sections
+                  if (Object.keys(basicData).length > 0) {
+                    methods.setValue('heartmath_basic', basicData);
+                  }
+                  if (Object.keys(spectrumData).length > 0) {
+                    methods.setValue('heartmath_spectrum', spectrumData);
+                  }
                 }
               } else {
                 // Regular field mapping for other devices
@@ -374,9 +399,11 @@ export default function ChooseDevice({ submissionId }) {
                   deviceValues[key] = value;
                 });
               } else if (field.widget === 'heartmath-table' && values[field.name]) {
-                // Flatten the table data back to individual fields
+                // Flatten the HeartMath table data back to individual fields
                 Object.entries(values[field.name]).forEach(([key, value]) => {
-                  deviceValues[key] = value;
+                  if (value !== null && value !== undefined && value !== '') {
+                    deviceValues[key] = value;
+                  }
                 });
               } else {
                 deviceValues[field.name] = values[field.name];
@@ -650,7 +677,11 @@ export default function ChooseDevice({ submissionId }) {
                           src={fileData.fileUrl}
                           alt="Scanned result preview"
                           className="w-full h-auto rounded-lg shadow"
-                          style={{ maxHeight: '95vh', minWidth: '600px' }}
+                          style={{ 
+                            maxHeight: '95vh', 
+                            maxWidth: '100%',
+                            objectFit: 'contain'
+                          }}
                         />
                       </div>
                     )}
