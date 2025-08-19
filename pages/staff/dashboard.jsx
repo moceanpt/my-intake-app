@@ -1,10 +1,19 @@
 /* ------------------------------------------------------------------
    pages/staff/dashboard.jsx - Redesigned with Design System
 ------------------------------------------------------------------- */
+import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import Link   from 'next/link';
 import prisma from '@/lib/prisma';   // ✅ default export
 import Card   from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+
+// Dynamic imports for heavy components
+const AIDocumentUpload = dynamic(() => import('@/components/ui/AIDocumentUpload'), {
+  loading: () => <div className="p-4 text-center">Loading AI upload component...</div>,
+  ssr: false
+});
 
 /* ---------- 1.  Server-side data --------------------------------- */
 export async function getServerSideProps() {
@@ -55,40 +64,60 @@ const getStatusLabel = (status) => {
 };
 
 const nextLink = ({ id, status }) => {
-  switch (status) {
-    case 'intake_submitted':
-      return (
-        <Link href={`/staff/review/${id}`}>
-          <Button variant="primary" size="sm">
-            Review Intake →
+  const primaryAction = () => {
+    switch (status) {
+      case 'intake_submitted':
+        return (
+          <Link href={`/staff/review/${id}`}>
+            <Button variant="primary" size="sm">
+              Review Intake →
+            </Button>
+          </Link>
+        );
+
+      case 'intake_reviewed':
+      case 'assessments_pending':
+        return (
+          <Link href={`/staff/enter/${id}`}>
+            <Button variant="primary" size="sm">
+              Enter Metrics →
+            </Button>
+          </Link>
+        );
+
+      case 'metrics_entered':
+      case 'plan_generated':
+      case 'plan_sent':
+        return (
+          <Link href={`/staff/plan/${id}?stage=final`}>
+            <Button variant="secondary" size="sm">
+              View Plan →
+            </Button>
+          </Link>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  // Show "View Results" button for any submission that has been reviewed (has subjective data)
+  const showResultsButton = ['intake_reviewed', 'assessments_pending', 'metrics_entered', 'plan_generated', 'plan_sent'].includes(status);
+
+  if (showResultsButton) {
+    return (
+      <div className="flex gap-2">
+        {primaryAction()}
+        <Link href={`/staff/result/${id}`}>
+          <Button variant="outline" size="sm">
+            📊 Results
           </Button>
         </Link>
-      );
-
-    case 'intake_reviewed':
-    case 'assessments_pending':
-      return (
-        <Link href={`/staff/enter/${id}`}>
-          <Button variant="primary" size="sm">
-            Enter Metrics →
-          </Button>
-        </Link>
-      );
-
-    case 'metrics_entered':
-    case 'plan_generated':
-    case 'plan_sent':
-      return (
-        <Link href={`/staff/plan/${id}?stage=final`}>
-          <Button variant="secondary" size="sm">
-            View Plan →
-          </Button>
-        </Link>
-      );
-
-    default:
-      return null;
+      </div>
+    );
   }
+
+  return primaryAction();
 };
 
 /* ---------- 3.  Page component ---------------------------------- */
@@ -98,16 +127,21 @@ export default function Dashboard({ subs }) {
       <div className="container py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-secondary-900)' }}>
+          <h1 className="text-3xl font-bold mb-2 text-secondary-900">
             Therapist Dashboard
           </h1>
-          <p style={{ color: 'var(--color-secondary-600)' }}>
+          <p className="text-secondary-600">
             Manage client intakes and health assessments
           </p>
-          <div className="mt-4">
+          <div className="mt-4 flex gap-4">
             <Link href="/ai-demo">
               <Button variant="secondary">
                 🧠 Test AI Document Upload
+              </Button>
+            </Link>
+            <Link href="/staff/documents">
+              <Button variant="secondary">
+                📋 Document Viewer
               </Button>
             </Link>
           </div>
@@ -117,37 +151,37 @@ export default function Dashboard({ subs }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <Card.Body className="text-center">
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-primary-600)' }}>
+              <div className="text-2xl font-bold text-primary-600">
                 {subs.length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-secondary-600)' }}>Total Submissions</div>
+              <div className="text-sm text-secondary-600">Total Submissions</div>
             </Card.Body>
           </Card>
           
           <Card>
             <Card.Body className="text-center">
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-warning-600)' }}>
+              <div className="text-2xl font-bold text-warning-600">
                 {subs.filter(s => s.status === 'intake_submitted').length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-secondary-600)' }}>Pending Review</div>
+              <div className="text-sm text-secondary-600">Pending Review</div>
             </Card.Body>
           </Card>
           
           <Card>
             <Card.Body className="text-center">
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-success-600)' }}>
+              <div className="text-2xl font-bold text-success-600">
                 {subs.filter(s => s.status === 'plan_sent').length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-secondary-600)' }}>Plans Sent</div>
+              <div className="text-sm text-secondary-600">Plans Sent</div>
             </Card.Body>
           </Card>
           
           <Card>
             <Card.Body className="text-center">
-              <div className="text-2xl font-bold" style={{ color: 'var(--color-secondary-600)' }}>
+              <div className="text-2xl font-bold text-secondary-600">
                 {subs.filter(s => s.planResults.some(p => p.stage === 'final')).length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-secondary-600)' }}>Final Plans</div>
+              <div className="text-sm text-secondary-600">Final Plans</div>
             </Card.Body>
           </Card>
         </div>
@@ -155,10 +189,10 @@ export default function Dashboard({ subs }) {
         {/* Submissions Table */}
         <Card>
           <Card.Header>
-            <h2 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+            <h2 className="text-xl font-semibold text-secondary-900">
               Client Submissions
             </h2>
-            <p className="mt-1" style={{ color: 'var(--color-secondary-600)' }}>
+            <p className="mt-1 text-secondary-600">
               Recent intake submissions and their current status
             </p>
           </Card.Header>
@@ -166,12 +200,12 @@ export default function Dashboard({ subs }) {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b" style={{ borderColor: 'var(--color-secondary-200)' }}>
-                    <th className="text-left py-3 px-4 font-semibold" style={{ color: 'var(--color-secondary-700)' }}>ID</th>
-                    <th className="text-left py-3 px-4 font-semibold" style={{ color: 'var(--color-secondary-700)' }}>Client</th>
-                    <th className="text-left py-3 px-4 font-semibold" style={{ color: 'var(--color-secondary-700)' }}>Status</th>
-                    <th className="text-center py-3 px-4 font-semibold" style={{ color: 'var(--color-secondary-700)' }}>Plan</th>
-                    <th className="text-right py-3 px-4 font-semibold" style={{ color: 'var(--color-secondary-700)' }}>Actions</th>
+                  <tr className="border-b border-secondary-200">
+                    <th className="text-left py-3 px-4 font-semibold text-secondary-700">ID</th>
+                    <th className="text-left py-3 px-4 font-semibold text-secondary-700">Client</th>
+                    <th className="text-left py-3 px-4 font-semibold text-secondary-700">Status</th>
+                    <th className="text-center py-3 px-4 font-semibold text-secondary-700">Plan</th>
+                    <th className="text-right py-3 px-4 font-semibold text-secondary-700">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -180,17 +214,13 @@ export default function Dashboard({ subs }) {
                     return (
                       <tr 
                         key={s.id} 
-                        className="border-b"
-                        style={{ 
-                          borderColor: 'var(--color-secondary-100)',
-                          backgroundColor: index % 2 === 0 ? 'white' : 'var(--color-secondary-50)'
-                        }}
+                        className={`border-b border-secondary-100 ${index % 2 === 0 ? 'bg-white' : 'bg-secondary-50'}`}
                       >
-                        <td className="py-3 px-4 font-mono text-sm" style={{ color: 'var(--color-secondary-600)' }}>
+                        <td className="py-3 px-4 font-mono text-sm text-secondary-600">
                           {s.id.slice(0, 8)}
                         </td>
                         <td className="py-3 px-4">
-                          <span className="font-medium" style={{ color: 'var(--color-secondary-900)' }}>
+                          <span className="font-medium text-secondary-900">
                             {s.clientId || 'Anonymous'}
                           </span>
                         </td>
@@ -222,8 +252,8 @@ export default function Dashboard({ subs }) {
 
             {subs.length === 0 && (
               <div className="text-center py-12">
-                <div className="text-lg mb-2" style={{ color: 'var(--color-secondary-400)' }}>No submissions yet</div>
-                <p style={{ color: 'var(--color-secondary-500)' }}>Client intakes will appear here once submitted</p>
+                              <div className="text-lg mb-2 text-secondary-400">No submissions yet</div>
+              <p className="text-secondary-500">Client intakes will appear here once submitted</p>
               </div>
             )}
           </Card.Body>

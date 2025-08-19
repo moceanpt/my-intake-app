@@ -10,15 +10,23 @@ import { omnifitPPGMetricSchema, omnifitEEGMetricSchema } from '@/lib/objective/
 import { heartmathMetricSchema } from '@/lib/objective/heartmath';
 import { auracomMetricSchema } from '@/lib/objective/auracom';
 import MetricField from '@/components/ui/MetricField';
+import MetricFieldWithCorrection from '@/components/ui/MetricFieldWithCorrection';
 import CheckboxLR from '@/components/ui/CheckboxLR';
 import SingleCheckbox from '@/components/ui/SingleCheckbox';
 import ROMTable from '@/components/ui/ROMTable';
+import ROMTableWithCorrection from '@/components/ui/ROMTableWithCorrection';
 import ExBodyTable from '@/components/ui/ExBodyTable';
+import ExBodyTableWithCorrection from '@/components/ui/ExBodyTableWithCorrection';
 import InBodyTable from '@/components/ui/InBodyTable';
+import InBodyTableWithCorrection from '@/components/ui/InBodyTableWithCorrection';
 import OmniFitTable from '@/components/ui/OmniFitTable';
+import OmniFitTableWithCorrection from '@/components/ui/OmniFitTableWithCorrection';
 import AuraComTable from '@/components/ui/AuraComTable';
+import AuraComTableWithCorrection from '@/components/ui/AuraComTableWithCorrection';
 import HeartMathTable from '@/components/ui/HeartMathTable';
+import HeartMathTableWithCorrection from '@/components/ui/HeartMathTableWithCorrection';
 import Card from '@/components/ui/Card';
+import DocumentViewer from '@/components/ui/DocumentViewer.jsx';
 
 export async function getServerSideProps({ params }) {
   const sub = await prisma.intakeSubmission.findUnique({
@@ -65,6 +73,10 @@ export default function ChooseDevice({ submissionId }) {
   const [uploadedFiles, setUploadedFiles] = useState({});
   const [fileLoading, setFileLoading] = useState(false);
   const [hasMetricsData, setHasMetricsData] = useState(false);
+  const [dataSourceTracking, setDataSourceTracking] = useState({});
+  const [showDocumentComparison, setShowDocumentComparison] = useState(false);
+  const [selectedDeviceType, setSelectedDeviceType] = useState('');
+  
   const methods = useForm({
     defaultValues: {
       // ExBody Posture & Musculoskeletal Analysis - Mock values showing different color states
@@ -358,6 +370,18 @@ export default function ChooseDevice({ submissionId }) {
     return () => subscription.unsubscribe();
   }, [methods]);
 
+  // Function to track data source changes
+  const updateDataSourceTracking = (fieldName, source) => {
+    setDataSourceTracking(prev => ({
+      ...prev,
+      [fieldName]: {
+        source,
+        timestamp: new Date().toISOString(),
+        originalValue: source === 'ai' ? uploadedFiles[fieldName]?.extractedData?.[fieldName] : null
+      }
+    }));
+  };
+
   const saveAll = async (values) => {
     setSaving(true);
     try {
@@ -434,7 +458,7 @@ export default function ChooseDevice({ submissionId }) {
   };
 
   return (
-    <main className="max-w-4xl mx-auto p-6 space-y-4">
+    <main className="max-w-7xl mx-auto p-6 space-y-4">
       <h1 className="text-2xl font-bold mb-4">
         Enter and Review All Device Metrics
       </h1>
@@ -446,6 +470,92 @@ export default function ChooseDevice({ submissionId }) {
         {uploading && <div className="text-blue-600 mt-2">Uploading and processing...</div>}
         {uploadSuccess && <div className="text-green-600 mt-2">Upload and extraction complete!</div>}
         {uploadError && <div className="text-red-600 mt-2">{uploadError}</div>}
+      </div>
+
+      {/* Document Comparison & Data Source Summary */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-blue-800">
+            📊 Data Source & Manual Correction Summary
+          </h3>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                console.log('View Documents button clicked!');
+                setSelectedDeviceType('');
+                setShowDocumentComparison(true);
+              }}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              📋 View Documents
+            </button>
+            <span className="text-sm text-blue-600">
+              {Object.keys(dataSourceTracking).length} fields tracked
+            </span>
+          </div>
+        </div>
+
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* AI Extracted Data Summary */}
+          <div className="bg-green-50 border border-green-200 rounded p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-green-600">🤖</span>
+              <span className="font-medium text-green-800">AI Extracted</span>
+            </div>
+            <div className="text-sm text-green-700">
+              {Object.values(dataSourceTracking).filter(track => track.source === 'ai').length} fields
+            </div>
+          </div>
+          
+          {/* Manually Corrected Data Summary */}
+          <div className="bg-yellow-50 border border-yellow-200 rounded p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-yellow-600">✏️</span>
+              <span className="font-medium text-yellow-800">Manually Corrected</span>
+            </div>
+            <div className="text-sm text-yellow-700">
+              {Object.values(dataSourceTracking).filter(track => track.source === 'manual').length} fields
+            </div>
+          </div>
+          
+          {/* Data Quality Indicator */}
+          <div className="bg-blue-50 border border-blue-200 rounded p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-blue-600">📋</span>
+              <span className="font-medium text-blue-800">Data Quality</span>
+            </div>
+            <div className="text-sm text-blue-700">
+              {(() => {
+                const totalFields = Object.keys(dataSourceTracking).length;
+                const aiFields = Object.values(dataSourceTracking).filter(track => track.source === 'ai').length;
+                if (totalFields === 0) return 'No data';
+                const percentage = Math.round((aiFields / totalFields) * 100);
+                return `${percentage}% AI accuracy`;
+              })()}
+            </div>
+          </div>
+        </div>
+        
+        {/* Manual Correction Details */}
+        {Object.values(dataSourceTracking).filter(track => track.source === 'manual').length > 0 && (
+          <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
+            <h4 className="font-medium text-yellow-800 mb-2">Manual Corrections Made:</h4>
+            <div className="text-sm text-yellow-700 space-y-1">
+              {Object.entries(dataSourceTracking)
+                .filter(([_, track]) => track.source === 'manual')
+                .map(([fieldName, track]) => (
+                  <div key={fieldName} className="flex items-center justify-between">
+                    <span>{fieldName}</span>
+                    <span className="text-xs">
+                      {track.timestamp ? new Date(track.timestamp).toISOString() : 'Unknown time'}
+                    </span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Show all metrics and scanned images after upload */}
@@ -469,11 +579,24 @@ export default function ChooseDevice({ submissionId }) {
                     <h2 className="text-xl font-semibold text-secondary-900">
                       {schema.title}
                     </h2>
-                    {fileData && (
-                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
-                        ✓ Data Extracted
-                      </span>
-                    )}
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          console.log('Device View button clicked for:', device.id);
+                          setSelectedDeviceType(device.id);
+                          setShowDocumentComparison(true);
+                        }}
+                        className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-xs font-medium hover:bg-gray-200 transition-colors"
+                      >
+                        📋 View
+                      </button>
+                      {fileData && (
+                        <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
+                          ✓ Data Extracted
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </Card.Header>
                 <Card.Body>
@@ -559,60 +682,162 @@ export default function ChooseDevice({ submissionId }) {
                                         </div>
                                       );
                                     }
-                                    return (
-                                      <MetricField
-                                        key={f.name}
-                                        name={f.name}
-                                        label={f.label}
-                                        step={f.step}
-                                        register={methods.register}
-                                      />
-                                    );
+                                    // Check if we have AI-extracted data for this field
+                                    const aiExtractedValue = uploadedFiles[device.id]?.extractedData?.[f.name];
+                                    const hasAIValue = aiExtractedValue !== undefined && aiExtractedValue !== null;
+                                    
+                                    if (hasAIValue) {
+                                      // Use enhanced field with manual correction capability
+                                      return (
+                                        <MetricFieldWithCorrection
+                                          key={f.name}
+                                          name={f.name}
+                                          label={f.label}
+                                          step={f.step}
+                                          register={methods.register}
+                                          aiExtractedValue={aiExtractedValue}
+                                          referenceRange={f.reference || 'N/A'}
+                                          unit={f.unit || ''}
+                                        />
+                                      );
+                                    } else {
+                                      // Use regular field for non-AI data
+                                      return (
+                                        <MetricField
+                                          key={f.name}
+                                          name={f.name}
+                                          label={f.label}
+                                          step={f.step}
+                                          register={methods.register}
+                                        />
+                                      );
+                                    }
                                   })}
                                   
                                   {/* Render ROM table if there are ROM fields */}
                                   {romFields.length > 0 && (
                                     <div className="rom-fields-section">
-                                      <ROMTable 
-                                        fields={romFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || { left: '', right: '', leftPain: false, rightPain: false },
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          romType: f.romType,
-                                          reference: f.reference || 'N/A'
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted ROM data */}
+                                      {(() => {
+                                        const hasAIRomData = romFields.some(f => 
+                                          uploadedFiles[device.id]?.extractedData?.[f.name]
+                                        );
+                                        
+                                        if (hasAIRomData) {
+                                          // Use enhanced ROM table with manual correction
+                                          return (
+                                            <ROMTableWithCorrection 
+                                              fields={romFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || { left: '', right: '', leftPain: false, rightPain: false },
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                romType: f.romType,
+                                                reference: f.reference || 'N/A',
+                                                aiExtractedValue: uploadedFiles[device.id]?.extractedData?.[f.name]
+                                              }))}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular ROM table
+                                          return (
+                                            <ROMTable 
+                                              fields={romFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || { left: '', right: '', leftPain: false, rightPain: false },
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                romType: f.romType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
                                   
                                   {/* Render ExBody table if there are ExBody fields */}
                                   {exbodyFields.length > 0 && (
                                     <div className="exbody-fields-section">
-                                      <ExBodyTable 
-                                        fields={exbodyFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || '',
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          tableType: f.tableType
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted ExBody data */}
+                                      {(() => {
+                                        const hasAIExBodyData = exbodyFields.some(f => 
+                                          uploadedFiles[device.id]?.extractedData?.[f.name]
+                                        );
+                                        
+                                        if (hasAIExBodyData) {
+                                          // Use enhanced ExBody table with manual correction
+                                          return (
+                                            <ExBodyTableWithCorrection 
+                                              fields={exbodyFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || '',
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                              aiExtractedData={uploadedFiles[device.id]?.extractedData || {}}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular ExBody table
+                                          return (
+                                            <ExBodyTable 
+                                              fields={exbodyFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || '',
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
                                   
                                   {/* Render InBody table if there are InBody fields */}
                                   {inbodyFields.length > 0 && (
                                     <div className="inbody-fields-section">
-                                      <InBodyTable 
-                                        fields={inbodyFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || '',
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          tableType: f.tableType
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted InBody data */}
+                                      {(() => {
+                                        const hasAIInBodyData = inbodyFields.some(f => 
+                                          uploadedFiles[device.id]?.extractedData?.[f.name]
+                                        );
+                                        
+                                        if (hasAIInBodyData) {
+                                          // Use enhanced InBody table with manual correction
+                                          return (
+                                            <InBodyTableWithCorrection 
+                                              fields={inbodyFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || '',
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                              aiExtractedData={uploadedFiles[device.id]?.extractedData || {}}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular InBody table
+                                          return (
+                                            <InBodyTable 
+                                              fields={inbodyFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || '',
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
                                   
@@ -621,45 +846,140 @@ export default function ChooseDevice({ submissionId }) {
                                     <div className="omnifit-fields-section">
                                       {console.log(`OmniFit field value for ${omnifitFields[0].name}:`, methods.watch(omnifitFields[0].name))}
                                       {console.log(`All form values:`, methods.getValues())}
-                                      <OmniFitTable 
-                                        fields={omnifitFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || {},
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          tableType: f.tableType
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted OmniFit data */}
+                                      {(() => {
+                                        // For OmniFit, check if the table field has data (it's a single field containing an object)
+                                        const tableFieldName = omnifitFields[0].name; // e.g., 'omnifit_ppg_table'
+                                        const tableData = methods.watch(tableFieldName);
+                                        const hasAIOmniFitData = tableData && typeof tableData === 'object' && Object.keys(tableData).length > 0;
+                                        
+                                        if (hasAIOmniFitData) {
+                                          // Use enhanced OmniFit table with manual correction
+                                          return (
+                                            <OmniFitTableWithCorrection 
+                                              fields={omnifitFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                              aiExtractedData={tableData || {}}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular OmniFit table
+                                          return (
+                                            <OmniFitTable 
+                                              fields={omnifitFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
 
                                   {/* Render Auracom table if there are Auracom fields */}
                                   {auracomFields.length > 0 && (
                                     <div className="auracom-fields-section">
-                                      <AuraComTable 
-                                        fields={auracomFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || {},
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          tableType: f.tableType
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted AuraCom data */}
+                                      {(() => {
+                                        // For AuraCom, check if the table field has data (it's a single field containing an object)
+                                        const tableFieldName = auracomFields[0].name; // e.g., 'auracom_table'
+                                        const tableData = methods.watch(tableFieldName);
+                                        const hasAIAuraComData = tableData && typeof tableData === 'object' && Object.keys(tableData).length > 0;
+                                        
+                                        if (hasAIAuraComData) {
+                                          // Use enhanced AuraCom table with manual correction
+                                          return (
+                                            <AuraComTableWithCorrection 
+                                              fields={auracomFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                              aiExtractedData={tableData || {}}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular AuraCom table
+                                          return (
+                                            <AuraComTable 
+                                              fields={auracomFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
 
                                   {/* Render HeartMath table if there are HeartMath fields */}
                                   {heartmathFields.length > 0 && (
                                     <div className="heartmath-fields-section">
-                                      <HeartMathTable 
-                                        fields={heartmathFields.map(f => ({
-                                          name: f.name,
-                                          label: f.label,
-                                          value: methods.watch(f.name) || {},
-                                          onChange: (value) => methods.setValue(f.name, value),
-                                          tableType: f.tableType
-                                        }))}
-                                      />
+                                      {/* Check if we have AI-extracted HeartMath data */}
+                                      {(() => {
+                                        // For HeartMath, check if any of the table fields have data (heartmath_basic or heartmath_spectrum)
+                                        const hasAIHeartMathData = heartmathFields.some(f => {
+                                          const tableData = methods.watch(f.name);
+                                          return tableData && typeof tableData === 'object' && Object.keys(tableData).length > 0;
+                                        });
+                                        
+                                        if (hasAIHeartMathData) {
+                                          // Use enhanced HeartMath table with manual correction
+                                          return (
+                                            <HeartMathTableWithCorrection 
+                                              fields={heartmathFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType,
+                                                reference: f.reference || 'N/A'
+                                              }))}
+                                              aiExtractedData={(() => {
+                                                // Combine all HeartMath table data
+                                                const allData = {};
+                                                heartmathFields.forEach(f => {
+                                                  const tableData = methods.watch(f.name);
+                                                  if (tableData && typeof tableData === 'object') {
+                                                    Object.assign(allData, tableData);
+                                                  }
+                                                });
+                                                return allData;
+                                              })()}
+                                            />
+                                          );
+                                        } else {
+                                          // Use regular HeartMath table
+                                          return (
+                                            <HeartMathTable 
+                                              fields={heartmathFields.map(f => ({
+                                                name: f.name,
+                                                label: f.label,
+                                                value: methods.watch(f.name) || {},
+                                                onChange: (value) => methods.setValue(f.name, value),
+                                                tableType: f.tableType
+                                              }))}
+                                            />
+                                          );
+                                        }
+                                      })()}
                                     </div>
                                   )}
                                 </>
@@ -671,7 +991,7 @@ export default function ChooseDevice({ submissionId }) {
                     </div>
                     {/* Scanned Image Preview */}
                     {fileData && fileData.fileUrl && (
-                      <div className="w-[700px] max-w-full flex-shrink-0 border-l pl-4 flex flex-col items-center">
+                      <div className="w-[900px] max-w-full flex-shrink-0 border-l pl-4 flex flex-col items-center">
                         <div className="font-semibold mb-2">Scanned Result</div>
                         <img
                           src={fileData.fileUrl}
@@ -680,7 +1000,8 @@ export default function ChooseDevice({ submissionId }) {
                           style={{ 
                             maxHeight: '95vh', 
                             maxWidth: '100%',
-                            objectFit: 'contain'
+                            objectFit: 'contain',
+                            minWidth: '800px'
                           }}
                         />
                       </div>
@@ -739,6 +1060,29 @@ export default function ChooseDevice({ submissionId }) {
       >
         ← Back to dashboard
       </Link>
+
+      {/* Document Viewer Modal */}
+      {showDocumentComparison && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg w-full max-w-4xl h-full max-h-[80vh] flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-2xl font-bold text-gray-900">Document Viewer Test</h2>
+              <button
+                onClick={() => setShowDocumentComparison(false)}
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </div>
+            <div className="flex-1 p-6 overflow-y-auto">
+              <p className="text-gray-600 mb-4">Client ID: {submissionId}</p>
+              <p className="text-gray-600 mb-4">Device Type: {selectedDeviceType || 'All'}</p>
+              <p className="text-green-600 font-medium">✅ Modal is working! The button click is successful.</p>
+              <p className="text-gray-600 mt-4">This is a test modal. The DocumentViewer component should be working now.</p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
