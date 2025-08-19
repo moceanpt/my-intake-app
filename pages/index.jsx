@@ -27,10 +27,10 @@ export default function Home() {
       <div className="min-h-screen bg-secondary-50 flex items-center justify-center p-6">
         <Card className="max-w-md w-full text-center">
           <Card.Header>
-            <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-secondary-900)' }}>
+            <h1 className="text-3xl font-bold mb-2 text-secondary-900">
               Welcome to MOCEAN
             </h1>
-            <p className="text-lg" style={{ color: 'var(--color-secondary-600)' }}>
+            <p className="text-lg text-secondary-600">
               Holistic Health & Wellness
             </p>
           </Card.Header>
@@ -41,20 +41,18 @@ export default function Home() {
             </div>
             
             <div className="space-y-4">
-              <p style={{ color: 'var(--color-secondary-700)' }}>
+              <p className="text-secondary-700">
                 Redirecting you to the intake form...
               </p>
               <div className="flex justify-center">
                 <div 
-                  className="animate-spin rounded-full h-8 w-8 border-b-2"
-                  style={{ borderColor: 'var(--color-primary-600)' }}
+                  className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"
                 ></div>
               </div>
-              <p className="text-sm" style={{ color: 'var(--color-secondary-500)' }}>
+              <p className="text-sm text-secondary-500">
                 <a 
                   href="/intake" 
-                  className="underline hover:opacity-80 transition-opacity"
-                  style={{ color: 'var(--color-primary-600)' }}
+                  className="underline hover:opacity-80 transition-opacity text-primary-600"
                 >
                   Click here if you're not redirected automatically
                 </a>
@@ -65,8 +63,7 @@ export default function Home() {
           <Card.Footer>
             <a 
               href="/staff/dashboard" 
-              className="text-sm hover:opacity-80 transition-opacity"
-              style={{ color: 'var(--color-secondary-400)' }}
+              className="text-sm hover:opacity-80 transition-opacity text-secondary-400"
             >
               Staff Dashboard →
             </a>

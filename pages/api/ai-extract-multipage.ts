@@ -13,7 +13,8 @@ console.log('ai-extract-multipage loaded. AWS_ACCESS_KEY_ID:', process.env.AWS_A
 export const config = { api: { bodyParser: false } };
 
 const DEVICE_ORDER = [
-  { id: 'exbody', name: 'ExBody' },
+  { id: 'exbody', name: 'ExBody Posture' },
+  { id: 'exbody_rom', name: 'ExBody ROM' },
   { id: 'inbody', name: 'InBody' },
   { id: 'omnifit', name: 'OmniFit PPG' },
   { id: 'omnifit_eeg', name: 'OmniFit EEG' },
@@ -162,7 +163,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           console.log(`Finished device omnifit (EEG)`);
         } else {
           // Extract data for other devices as before
-          const { extractedData, lastError } = await extractDeviceData(deviceType, base64Image, 'image/png');
+          // For exbody_rom, use the ROM-specific extraction
+          const extractionDeviceType = deviceType === 'exbody_rom' ? 'exbody_rom' : deviceType;
+          const { extractedData, lastError } = await extractDeviceData(extractionDeviceType, base64Image, 'image/png');
           await prisma.uploadedFile.create({
             data: {
               submissionId,

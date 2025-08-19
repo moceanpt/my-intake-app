@@ -5,32 +5,32 @@
 // 3. Optional <Head> block gives all pages a shared meta title
 // ------------------------------
 
-import "../styles/globals.css";
-import Head from "next/head";
+import '@/styles/globals.css';
+import '@/styles/design-system.css';
+import { useEffect } from 'react';
+import GlobalErrorBoundary from '@/components/ui/GlobalErrorBoundary';
 
+export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    // Only initialize performance monitoring on client side
+    if (typeof window !== 'undefined') {
+      const { globalPerformanceMonitor } = require('@/lib/performance/monitor');
+      
+      // Initialize performance monitoring
+      console.log('🚀 Performance monitoring initialized');
+      
+      // Track page load time
+      const pageLoadTime = performance.now();
+      globalPerformanceMonitor.trackCustomMetric('page_load_time', pageLoadTime);
+      
+      // Track initial render
+      globalPerformanceMonitor.trackComponentRender('App', pageLoadTime);
+    }
+  }, []);
 
-
-export default function MyApp({ Component, pageProps }) {
   return (
-    <div className="design-concept design-modern-medical">
-      {/* Shared page metadata (you can adjust) */}
-      <Head>
-        <title>MOCEAN • Holistic Health Intake</title>
-        <meta
-          name="description"
-          content="Fast-Track intake form to help MOCEAN personalize your care."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      
-      
-      </Head>
-
-       {/* 👇 JIT "seed" – invisible but forces Tailwind to emit the classes */}
-       <div className="hidden bg-coast-50 text-coast-500" />
-
-      {/* Render the actual page component */}
+    <GlobalErrorBoundary>
       <Component {...pageProps} />
-    </div>
+    </GlobalErrorBoundary>
   );
-  
 }

@@ -29,10 +29,10 @@ export default function AIDemo() {
       <div className="container py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-secondary-900)' }}>
+          <h1 className="text-3xl font-bold mb-2 text-secondary-900">
             AI Document Upload Demo
           </h1>
-          <p style={{ color: 'var(--color-secondary-600)' }}>
+          <p className="text-secondary-600">
             Test the AI-powered document analysis for automated metric extraction
           </p>
         </div>
@@ -41,10 +41,10 @@ export default function AIDemo() {
         <div className="mb-8">
           <Card>
             <Card.Header>
-              <h2 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+              <h2 className="text-xl font-semibold text-secondary-900">
                 Select Device Type
               </h2>
-              <p style={{ color: 'var(--color-secondary-600)' }}>
+              <p className="text-secondary-600">
                 Choose the type of assessment report you want to analyze
               </p>
             </Card.Header>
@@ -108,10 +108,10 @@ export default function AIDemo() {
         {extractedData && (
           <Card>
             <Card.Header>
-              <h2 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+              <h2 className="text-xl font-semibold text-secondary-900">
                 Extracted Data
               </h2>
-              <p style={{ color: 'var(--color-secondary-600)' }}>
+              <p className="text-secondary-600">
                 Raw JSON data returned by the AI analysis
               </p>
             </Card.Header>
@@ -134,36 +134,36 @@ export default function AIDemo() {
         {/* Instructions */}
         <Card>
           <Card.Header>
-            <h2 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
-              How to Use
-            </h2>
+                          <h2 className="text-xl font-semibold text-secondary-900">
+                How to Use
+              </h2>
           </Card.Header>
           <Card.Body>
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--color-secondary-900)' }}>1. Select Device Type</h3>
-                <p style={{ color: 'var(--color-secondary-600)' }}>
+                <h3 className="font-semibold mb-2 text-secondary-900">1. Select Device Type</h3>
+                <p className="text-secondary-600">
                   Choose the type of assessment report you want to analyze (InBody, Auracom, HeartMath, Exbody, or OmniFit).
                 </p>
               </div>
               
               <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--color-secondary-900)' }}>2. Upload Document</h3>
-                <p style={{ color: 'var(--color-secondary-600)' }}>
+                <h3 className="font-semibold mb-2 text-secondary-900">2. Upload Document</h3>
+                <p className="text-secondary-600">
                   Drag and drop or click to upload a scanned report (PNG, JPG, PDF, TIFF).
                 </p>
               </div>
               
               <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--color-secondary-900)' }}>3. AI Analysis</h3>
-                <p style={{ color: 'var(--color-secondary-600)' }}>
+                <h3 className="font-semibold mb-2 text-secondary-900">3. AI Analysis</h3>
+                <p className="text-secondary-600">
                   The AI will analyze the document and extract relevant metrics using GPT-4 Vision.
                 </p>
               </div>
               
               <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--color-secondary-900)' }}>4. Review Results</h3>
-                <p style={{ color: 'var(--color-secondary-600)' }}>
+                <h3 className="font-semibold mb-2 text-secondary-900">4. Review Results</h3>
+                <p className="text-secondary-600">
                   Review the extracted data and use it to populate forms in the main application.
                 </p>
               </div>

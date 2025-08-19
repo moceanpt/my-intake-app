@@ -78,7 +78,7 @@ export default function DesignDemo() {
               {/* Progress Bar */}
               <div className="mb-6">
                 <div className="progress">
-                  <div className="progress-bar" style={{ width: '33%' }}></div>
+                  <div className="progress-bar w-1/3"></div>
                 </div>
                 <p className="text-sm mt-2">Step 1 of 3: Goals & Reasons</p>
               </div>
@@ -203,7 +203,7 @@ export default function DesignDemo() {
                       <span>4/5 days</span>
                     </div>
                     <div className="progress">
-                      <div className="progress-bar" style={{ width: '80%' }}></div>
+                      <div className="progress-bar w-4/5"></div>
                     </div>
                   </div>
                 </div>
@@ -216,7 +216,7 @@ export default function DesignDemo() {
                       <span>6/8 glasses</span>
                     </div>
                     <div className="progress">
-                      <div className="progress-bar" style={{ width: '75%' }}></div>
+                      <div className="progress-bar w-3/4"></div>
                     </div>
                   </div>
                 </div>

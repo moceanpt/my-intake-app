@@ -9,9 +9,9 @@ export default function ThankYouStep({ onEdit }) {
     <Card>
       <Card.Body>
         <div className="space-y-6 text-center">
-          <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-primary-700)' }}>🎉 All set – thank you!</h2>
-          <p style={{ color: 'var(--color-secondary-700)' }}>Your answers have been saved.</p>
-          <p style={{ color: 'var(--color-secondary-600)' }}>
+                <h2 className="text-2xl font-semibold text-primary-700">🎉 All set – thank you!</h2>
+      <p className="text-secondary-700">Your answers have been saved.</p>
+      <p className="text-secondary-600">
             Your MOCEAN therapist will review them with you<br />
             during your visit.
           </p>

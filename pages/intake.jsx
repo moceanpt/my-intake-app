@@ -1,17 +1,54 @@
 /* ------------------------------------------------------------------
    pages/intake.jsx  (client wizard) - Redesigned with Design System
 ------------------------------------------------------------------- */
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Head          from 'next/head';
 import Progress      from '@/components/ui/Progress';
 import Card          from '@/components/ui/Card';
 import Button        from '@/components/ui/Button';
+import { usePerformanceTracking } from '@/lib/performance/monitor';
 
-import ReasonsStep      from '@/components/steps/ReasonsStep';
-import HistoryStep      from '@/components/steps/HistoryStep';
-import HealthCheckStep  from '@/components/steps/HealthCheckStep';
-import LifestyleStep    from '@/components/steps/LifestyleStep';
-import ThankYouStep     from '@/components/steps/ThankYouStep';
+// Dynamic imports for heavy step components
+const ReasonsStep = dynamic(() => import('@/components/steps/ReasonsStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const DiscomfortStep = dynamic(() => import('@/components/steps/DiscomfortStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const HistoryStep = dynamic(() => import('@/components/steps/HistoryStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const HealthCheckStep = dynamic(() => import('@/components/steps/HealthCheckStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const LifestyleStep = dynamic(() => import('@/components/steps/LifestyleStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const SnapshotStep = dynamic(() => import('@/components/steps/SnapshotStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const UploadStep = dynamic(() => import('@/components/steps/UploadStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
+
+const ThankYouStep = dynamic(() => import('@/components/steps/ThankYouStep'), {
+  loading: () => <div className="p-4 text-center">Loading step...</div>,
+  ssr: false
+});
 
 /* ──────────────────────────────────────────────────────────
    Lifestyle template (used when the client opts-in)
@@ -212,8 +249,8 @@ const toggle = (path, value) =>
       return (
         <Card>
           <Card.Header>
-            <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>Optional Lifestyle Survey</h2>
-            <p className="mt-2" style={{ color: 'var(--color-secondary-600)' }}>
+                          <h2 className="text-2xl font-semibold text-secondary-900">Optional Lifestyle Survey</h2>
+              <p className="mt-2 text-secondary-600">
               These extra questions take about 5 minutes and help us tailor your plan. 
               Would you like to fill them in?
             </p>
@@ -255,6 +292,23 @@ const toggle = (path, value) =>
  /* ---------- wizard pages ---------- */
  const [step, setStep] = useState(0);
  const [busy, setBusy] = useState(false);
+ const { trackComponentRender, trackCustomMetric } = usePerformanceTracking();
+
+ useEffect(() => {
+   // Track component render time
+   const endTracking = trackComponentRender('IntakeWizard');
+   return endTracking;
+ }, [trackComponentRender]);
+
+ const nextStep = () => {
+   trackCustomMetric('step_transition_time', performance.now());
+   setStep(step + 1);
+ };
+
+ const prevStep = () => {
+   trackCustomMetric('step_transition_time', performance.now());
+   setStep(step - 1);
+ };
 
  const steps = [
    /* 0 */ <ReasonsStep key={0} data={data} setVal={setVal} toggle={toggle} />,
@@ -302,23 +356,23 @@ const submit = async () => {
 };
 
 /* ──────────────── UI ──────────────── */
-return (
-  <div className="min-h-screen bg-white text-secondary-900" style={{ background: 'var(--color-secondary-50)', color: 'var(--color-secondary-900)' }}>
-    <Head>
-      <title>MOCEAN Intake</title>
-      <meta name="description" content="Complete your health intake assessment" />
-    </Head>
+  return (
+    <div className="page-container">
+      <Head>
+        <title>MOCEAN Intake</title>
+        <meta name="description" content="Complete your health intake assessment" />
+      </Head>
 
-    <main className="container py-8">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-secondary-900)' }}>
-          MOCEAN Health Intake
-        </h1>
-        <p style={{ color: 'var(--color-secondary-600)' }}>
-          Let's personalize your health journey
-        </p>
-      </div>
+      <main className="container py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2 text-secondary-900">
+            MOCEAN Health Intake
+          </h1>
+          <p className="text-secondary-600">
+            Let's personalize your health journey
+          </p>
+        </div>
 
       {/* Progress Indicator */}
       <div className="mb-8">

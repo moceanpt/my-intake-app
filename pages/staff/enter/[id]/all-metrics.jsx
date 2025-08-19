@@ -22,11 +22,12 @@ export async function getServerSideProps({ params }) {
 }
 
 const DEVICES = [
+  { id: 'exbody', name: 'ExBody Posture' },
+  { id: 'exbody_rom', name: 'ExBody ROM' },
   { id: 'inbody', name: 'InBody' },
-  { id: 'exbody', name: 'ExBody' },
-  { id: 'auracom', name: 'Auracom' },
   { id: 'omnifit_ppg', name: 'OmniFit PPG' },
   { id: 'omnifit_eeg', name: 'OmniFit EEG' },
+  { id: 'auracom', name: 'Auracom' },
   { id: 'heartmath', name: 'HeartMath' },
 ];
 
@@ -168,7 +169,7 @@ export default function AllMetrics({ submissionId }) {
   };
 
   return (
-    <div className="min-h-screen bg-white text-secondary-900" style={{ background: 'var(--color-secondary-50)', color: 'var(--color-secondary-900)' }}>
+    <div className="page-container">
       <div className="container py-8">
         {/* Header */}
         <div className="mb-8">

@@ -43,10 +43,10 @@ export default function ReasonsStep({ data, setVal, toggle }) {
       {/* Main Reasons Card */}
       <Card>
         <Card.Header>
-          <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+          <h2 className="text-2xl font-semibold text-secondary-900">
             What brings you to MOCEAN?
           </h2>
-          <p className="mt-2" style={{ color: 'var(--color-secondary-600)' }}>
+          <p className="mt-2 text-secondary-600">
             Select all that apply to help us understand your goals
           </p>
         </Card.Header>
@@ -88,10 +88,10 @@ export default function ReasonsStep({ data, setVal, toggle }) {
       {reasons.includes('Pain relief / injury care') && (
         <Card>
           <Card.Header>
-            <h3 className="text-xl font-semibold" style={{ color: 'var(--color-secondary-900)' }}>
+            <h3 className="text-xl font-semibold text-secondary-900">
               Pain Assessment
             </h3>
-            <p className="mt-1" style={{ color: 'var(--color-secondary-600)' }}>
+            <p className="mt-1 text-secondary-600">
               Help us understand your pain better
             </p>
           </Card.Header>

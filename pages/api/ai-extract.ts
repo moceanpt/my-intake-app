@@ -154,6 +154,61 @@ Example output:
 }
 `,
 
+  exbody_rom: `You are an expert at extracting structured data from ExBody Range of Motion (ROM) reports.
+
+This document may contain multiple device reports. Your task is to extract data **only from the ExBody Range of Motion section** or any section containing joint mobility/ROM measurements.
+
+Look for measurements of joint angles in degrees (°) for the following specific movements:
+
+**Neck movements:**
+- neck_flexion: Neck forward flexion (degrees)
+- neck_lateral_flexion_left: Neck left lateral flexion (degrees) 
+- neck_lateral_flexion_right: Neck right lateral flexion (degrees)
+
+**Shoulder movements (bilateral):**
+- shoulder_abduction_left: Left shoulder abduction (degrees)
+- shoulder_abduction_right: Right shoulder abduction (degrees)
+- shoulder_flexion_left: Left shoulder flexion (degrees)
+- shoulder_flexion_right: Right shoulder flexion (degrees)  
+- shoulder_extension_left: Left shoulder extension (degrees)
+- shoulder_extension_right: Right shoulder extension (degrees)
+
+**Trunk movements (bilateral):**
+- trunk_lateral_flexion_left: Left trunk lateral flexion (degrees)
+- trunk_lateral_flexion_right: Right trunk lateral flexion (degrees)
+
+**Hip movements (bilateral):**
+- hip_abduction_left: Left hip abduction (degrees)
+- hip_abduction_right: Right hip abduction (degrees)
+- hip_flexion_left: Left hip flexion (degrees)
+- hip_flexion_right: Right hip flexion (degrees)
+- hip_extension_left: Left hip extension (degrees)
+- hip_extension_right: Right hip extension (degrees)
+
+Extract ONLY the numeric values (no units). If a measurement is not found, use null.
+
+Return exactly this JSON structure:
+{
+  "neck_flexion": 42,
+  "neck_lateral_flexion_left": 20,
+  "neck_lateral_flexion_right": 21,
+  "shoulder_abduction_left": 168,
+  "shoulder_abduction_right": 170,
+  "shoulder_flexion_left": 163,
+  "shoulder_flexion_right": 165,
+  "shoulder_extension_left": 42,
+  "shoulder_extension_right": 44,
+  "trunk_lateral_flexion_left": 32,
+  "trunk_lateral_flexion_right": 33,
+  "hip_abduction_left": 38,
+  "hip_abduction_right": 39,
+  "hip_flexion_left": 68,
+  "hip_flexion_right": 70,
+  "hip_extension_left": 18,
+  "hip_extension_right": 19
+}
+`,
+
   omnifit: `You are an expert at extracting structured data from OmniFit Stress Check reports (PPG section only).
 
 This page is titled "Stress check result (PPG)". Extract the following metrics:
